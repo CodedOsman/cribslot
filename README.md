@@ -1,11 +1,7 @@
 <h1> PORTFOLIO PROJECT </h1>
 <p><bold>Project Title:</bold> CribsLot</p>
 <p><bold>Development by:</bold> Osman Ibrahim</p>
-<p><bold>Project Description:</bold> A web application that serves as a platform for property owners to keep track of all their assets with ease.<br>
-<bold>Features:</bold><br>
-- Registration system<br>
-- Login system <br>
-- Media upload system<br>
+<p><bold>Project Description:</bold> A web application that serves as a platform for property owners to keep track of all their assets with ease.
 </p>
 
 <h1>Features:</h1>
