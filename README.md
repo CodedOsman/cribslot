@@ -14,7 +14,7 @@
 - Login system <br>
 - Media upload system<br>
 </p>
-<h1>Tech Stack:<h1>
+<h1>Tech Stack:</h1>
 <p>
 - PHP (Objecte Oriented)<br>
 - HTML & CSS <br>
