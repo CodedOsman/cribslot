@@ -6,10 +6,10 @@
 <div class="main">
 <?php include("includes/navbar.inc.php");?>
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="row border rounded-5 p-3 bg-white shadow"> <!-- Signup container -->
+    <div class="row border rounded-5 p-3 shadow"> <!-- Signup container -->
         <div class="col-md-6 rounded-5 d-flex justify-content-center align-items-center flex-column left-box" style="background:#103cbe;"><!-- left box starts -->
             <div class="featured-image mb-3">
-                <img src="<?php base_url('assets/images/login_image.jpg'); ?>" class="img-fluid" style="width:250px;"alt="featured image">
+                <img src="<?php base_url('assets/images/signup_image.png'); ?>" class="img-fluid" style="width:250px;"alt="featured image">
             </div>
             <p class="text-white fs-2">Be verified</p>
             <small class="text-white text-wrap text-center">Join the community of the future</small> 

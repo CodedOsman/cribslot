@@ -46,7 +46,7 @@ include("includes/header.inc.php");
                                         </div>
                                     </div> 
                                     <div class="col-6 align-self-end text-end">
-                                        <img src="assets/images/login_image.jpg" height=100vh class="img-fluid img-responsive illustration-img" alt="">
+                                        <img src="assets/images/dashboard_image.png" height=100vh class="img-fluid img-responsive illustration-img" alt="">
                                     </div>
                                 </div>
                             </div>
