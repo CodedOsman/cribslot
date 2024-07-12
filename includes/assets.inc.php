@@ -61,10 +61,10 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         
         //check if folders exist
-        if(!isdir($destination)){
+        if(!is_dir($destination)){
             mkdir($destination, 0777, true);
         }
-        if(!isdir($viddestination)){
+        if(!is_dir($viddestination)){
             mkdir($viddestination);
         }
 

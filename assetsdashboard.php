@@ -79,11 +79,29 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php
+                                            $assetsResult = $assets->fetchMainAssets($userid);
+                                            if($assetsResult === 0) {
+                                        ?>
                                         <tr>
-                                            <td>First Room</td>
-                                            <td>Residential</td>
+                                            <td colspan="4">
+                                                <button class="btn btn-primary">Upload your first asset</button>
+                                            </td>
+                                        </tr>
+                                        <?php } else { 
+                                            foreach($assetsResult as $asset) { ?>
+                                        <tr>
+                                            <td><?php echo $asset['asset_name']; ?></td>
                                             <td>
-                                                <span class="badge rounded-pill bg-secondary">0</span>
+                                                <?php if($asset['category_id'] == 1 ) : ?>
+                                                Commercial
+                                                <?php elseif ($asset['category_id'] == 2) : ?>
+                                                Residential
+                                                <?php endif; ?>
+                                            </td>
+                                            <td>
+                                                <?php $subsCount = $asset->fetchSubAssets($userid)->rowCount(); ?>
+                                                <span class="badge rounded-pill bg-secondary"><?php echo $subsCount; ?></span>
                                                 <a href="#">View all</a>
                                             </td>
                                             <td>
@@ -91,7 +109,9 @@
                                                 <button type="button" class="btn btn-secondary btn-sm">Unlist</button>
                                                 <button type="button" class="btn btn-danger btn-sm">X</button>
                                             </td>
+                                            
                                         </tr>
+                                        <?php }} ?>
                                     </tbody>
                                 </table>
                             </div>
@@ -102,12 +122,24 @@
                 <div class="col-12 col-md-12 d-flex border-0"><!-- Table card starts here -->
                     <div class="card border-0 flex-fill">
                         <div class="card-header">
-                            <h5 class="card-title">
-                                Assets
-                            </h5>
-                            <h6 class="card-subtitle text-muted">
-                                All your sub assets
-                            </h6>
+                            <div class="row">
+                                <div class="col-6 align-self-start">
+                                    <h5 class="card-title">
+                                        Assets
+                                    </h5>
+                                    <h6 class="card-subtitle text-muted">
+                                        All your sub assets
+                                    </h6>  
+                                </div>
+                                <div class="col-6 align-self-end text-end">
+                                    <button type="button" class="align-self-end ms-auto btn btn-secondary btn-sm">
+                                        <a href="dashboard.php?assets">Listed</a>
+                                    </button>
+                                    <button type="button" class="align-self-end ms-auto btn btn-secondary btn-sm">
+                                        <a href="dashboard.php?assets">Unlisted</a>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="table-responsive">
@@ -115,18 +147,34 @@
                                     <thead class="table-dark">
                                         <tr>
                                             <th>Asset Name</th>
-                                            <th>Asset Type</th>
-                                            <th>Main Asset</th>
+                                            <th>Asset Image</th>
+                                            <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php 
+                                            $assetsResult = $assets->fetchSubAssets($userid);
+                                            if($assetsResult === 0) {
+                                        ?>
                                         <tr>
-                                            <td>First Room</td>
-                                            <td>Residential</td>
+                                            <td colspan="4">
+                                                <button class="btn btn-primary">Upload your first asset</button>
+                                            </td>
+                                        </tr>
+                                        <?php } else { 
+                                            foreach($assetsResult as $asset) { ?>
+                                        <tr>
+                                            <td><?php echo $asset['sub_name']; ?></td>
+                                            <td>Asset Image here</td>
                                             <td>
-                                                <span class="badge rounded-pill bg-secondary">0</span>
-                                                <a href="#">View all</a>
+                                                <?php
+                                                    if($asset['listed'] == 'listed') {
+                                                        echo "Listed";
+                                                    } else {
+                                                        echo "Unlisted";
+                                                    }
+                                                ?>
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm">List</button>
@@ -134,6 +182,7 @@
                                                 <button type="button" class="btn btn-danger btn-sm">X</button>
                                             </td>
                                         </tr>
+                                        <?php }} ?>
                                     </tbody>
                                 </table>
                             </div>

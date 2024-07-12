@@ -15,7 +15,7 @@ function base_url($slug){
 function redirect($message,$page){
     $redirectTo = SITE_URL.$page;
     $_SESSION['message'] = "$message";
-    header("Location:$redirectTo");
+    header("location:$redirectTo");
     exit();
 }
 

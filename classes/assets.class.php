@@ -15,7 +15,7 @@ class Assets extends Dbh{
         //if data not found, redirect user to user dashboard
         if($stmt->rowCount() == 0){
             $stmt = null;
-            redirect("No asset(s) found! Upload assets to see them here", "dashboard.php?dashboard=");
+            return 0;
             exit();
         }
         // if the data is found reference to data
@@ -38,7 +38,7 @@ class Assets extends Dbh{
     }
     //method fetches sub assets referencing the main assets table using the main asset id
     protected function getSubAssetsInfo($userid){
-        $sql = "SELECT * FROM asset_subs WHERE user_id=?";
+        $sql = "SELECT * FROM asset_subs WHERE owner_id=?";
         $stmt = $this->connect()->prepare($sql);
 
         if(!$stmt->execute(array($userid))){
@@ -50,7 +50,7 @@ class Assets extends Dbh{
         //if data not found, redirect user to dashboard
         if($stmt->rowCount() == 0){
             $stmt = null;
-            redirect("No sub properties for this asset", "dashboard.php?dashboard=");
+            return 0;
             exit();
         }
         // if the data is found reference to data
@@ -63,7 +63,7 @@ class Assets extends Dbh{
         $sql = "INSERT INTO assets (asset_name, asset_category_id, asset_type_id, number_of_subs, asset_img, asset_video, asset_description, asset_country, date_added, asset_address, listed, number_of_rooms, number_of_floors, floor_area, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
         
-        if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $userid))){
+        if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $owner_id))){
             $stmt = null;
             redirect("Something went wrong! Please try again later.", "dashboard.php?dashboard=");
             exit();
@@ -71,11 +71,11 @@ class Assets extends Dbh{
     }
     
     //method adds new sub assets to the database
-    protected function setSubAsset($main_asset_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added){
+    protected function setSubAsset($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added){
         $sql = "INSERT INTO asset_subs (main_asset_id, floor, number_of_rooms, room_number, sub_asset_image, sub_asset_video, floor_size, listed, date_added) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
         
-        if(!$stmt->execute(array($main_asset_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added))){
+        if(!$stmt->execute(array($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added))){
             $stmt = null;
             redirect("Something went wrong! Please try again later.", "dashboard.php?dashboard=");
             exit();
@@ -96,7 +96,7 @@ class Assets extends Dbh{
         //if data not found, redirect user to dashboard
         if($stmt->rowCount() == 0){
             $stmt = null;
-            redirect("No category for this asset", "dashboard.php?dashboard=");
+            return 0;
             exit();
         }
         // if the data is found reference to data
@@ -119,7 +119,7 @@ class Assets extends Dbh{
         //if data not found, redirect user to dashboard
         if($stmt->rowCount() == 0){
             $stmt = null;
-            redirect("No types for this asset", "dashboard.php?dashboard=");
+            return 0;
             exit();
         }
         // if the data is found reference to data
@@ -141,7 +141,7 @@ class Assets extends Dbh{
         //if data not found, redirect user to dashboard
         if($stmt->rowCount() == 0){
             $stmt = null;
-            redirect("No types for this asset", "dashboard.php?dashboard=");
+            return 0;
             exit();
         }
         // if the data is found reference to data
@@ -163,7 +163,7 @@ class Assets extends Dbh{
         //if data not found, redirect user to dashboard
         if($stmt->rowCount() == 0){
             $stmt = null;
-            redirect("No types for this asset", "dashboard.php?dashboard=");
+            return 0;
             exit();
         }
         // if the data is found reference to data

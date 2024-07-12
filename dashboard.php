@@ -5,13 +5,15 @@ include("classes/userdash.class.php");
 include("classes/dashview.class.php");
 include("classes/assets.class.php");
 include("classes/assetsview.class.php");
+
 $profile_info = new DashView();
 $assets = new AssetView();
 $userid = $_SESSION['auth_user']['user_id'];
 $username = $profile_info->fetchUserName($userid);
 $dob = $profile_info->fetchDob($userid);
 $dp = $profile_info->fetchdp($userid);
-$profile_photo = 'profiles/'.$username.$userid.'/dps/'.$dp;
+$path = 'profiles/' . $username . $userid . '/dps';
+$profile_photo = $path . '/' . $dp;
 include("includes/header.inc.php");
 ?>
 <div class="wrapper">
@@ -37,7 +39,7 @@ include("includes/header.inc.php");
                         <div class="card flex-fill border-0 illustration">
                             <div class="card-body p-0 d-flex flex-fill">
                                 <div class="row g-0 w-100">
-                                    <div class="col-6">
+                                    <div class="col-6 align-self-start text-start">
                                         <div class="p-3 m-1">
                                             <h4>Welcome Back, <?php echo $profile_info->fetchName($userid); ?></h4>
                                             <p class="mb-0">User Dashboard, Cribslot</p>
@@ -130,19 +132,38 @@ include("includes/header.inc.php");
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            <?php
+                                                $assetsResult = $assets->fetchMainAssets($userid);
+                                                if($assetsResult === 0) {
+                                            ?>
                                             <tr>
-                                                <td>First Room</td>
-                                                <td>Residential</td>
+                                                <td colspan="4">
+                                                    <button class="btn btn-primary">Upload your first asset</button>
+                                                </td>
+                                            </tr>
+                                            <?php } else { 
+                                                foreach($assetsResult as $asset) { ?>
+                                            <tr>
+                                                <td><?php echo $asset['asset_name']; ?></td>
                                                 <td>
-                                                    <span class="badge rounded-pill bg-secondary">0</span>
+                                                    <?php if($asset['category_id'] == 1 ) : ?>
+                                                    Commercial
+                                                    <?php elseif ($asset['category_id'] == 2) : ?>
+                                                    Residential
+                                                    <?php endif; ?>
+                                                </td>
+                                                <td>
+                                                    <?php $subsCount = $asset->fetchSubAssets($userid)->rowCount(); ?>
+                                                    <span class="badge rounded-pill bg-secondary"><?php echo $subsCount; ?></span>
                                                     <a href="#">View all</a>
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-info btn-sm">List</button>
                                                     <button type="button" class="btn btn-secondary btn-sm">Unlist</button>
                                                     <button type="button" class="btn btn-danger btn-sm">X</button>
-                                                </td>
+                                                </td>    
                                             </tr>
+                                            <?php }} ?>
                                         </tbody>
                                     </table>
                                 </div>
