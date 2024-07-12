@@ -81,11 +81,8 @@ class UserDash extends Dbh{
 
     protected function setProfilePhoto($photo, $userid){
         $dp_column = $this->getProfileInfo($userid);
-        if($dp_column[0]['dp'] === NULL){
-            $sql = "INSERT INTO profiles(dp) VALUES(?) WHERE user_id=?";
-        }else{
-            $sql = "UPDATE profiles SET dp=? WHERE user_id=?";
-        }
+        
+        $sql = "UPDATE profiles SET dp=? WHERE user_id=?";
         $stmt = $this->connect()->prepare($sql);
 
         if(!$stmt->execute(array($photo, $userid))){

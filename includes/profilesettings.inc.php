@@ -4,7 +4,7 @@ include "../config/app.php";
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['save'])){
         $userid = $_SESSION['auth_user']['user_id'];
-        $username = $_SESSION['auth_user']['user_id'];
+        $username = $_SESSION['auth_user']['user_name'];
         $firstname = htmlspecialchars($_POST['firstname'], ENT_QUOTES, 'UTF-8');
         $lastname = htmlspecialchars($_POST['lastname'], ENT_QUOTES, 'UTF-8');
         $gender = htmlspecialchars($_POST['gender'], ENT_QUOTES, 'UTF-8');
@@ -40,7 +40,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['change_pass'])){
         #logic to change password
         $userid = $_SESSION['auth_user']['user_id'];
-        $username = $_SESSION['auth_user']['username'];
+        $username = $_SESSION['auth_user']['user_name'];
         $oldPwd = htmlspecialchars($_POST['oldPwd'], ENT_QUOTES, 'UTF-8');
         $newPwd = htmlspecialchars($_POST['newPwd'], ENT_QUOTES, 'UTF-8');
         $cnewPwd = htmlspecialchars($_POST['cnewPwd'], ENT_QUOTES, 'UTF-8');
@@ -59,15 +59,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
     if(isset($_FILES['img']['name'])){
         #logic to upload photo
-        $dp = $_FILES['img']['name'];
-        $tempName = $_FILES['img']['temp_name'];
-        $fileError = $_FILES['img']['error'];
-        $fileSize = $_FILES['img']['size'];
+        $file = $_FILES['img'];
+        $dp = $file['name'];
+        $tempName = $file['tmp_name'];
+        $fileError = $file['error'];
+        $fileSize = $file['size'];
         $fileExt = explode('.', $dp);
         $fileActualExt = strtolower(end($fileExt));
         $allowed = array('jpg', 'jpeg', 'png', 'gif');
         $userid = $_SESSION['auth_user']['user_id'];
-        $username = $_SESSION['auth_user']['username'];
+        $username = $_SESSION['auth_user']['user_name'];
 
         include '../classes/dbh.class.php';
         include '../classes/userdash.class.php';
@@ -78,8 +79,23 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
                 if($fileSize < 12000000){
-                    $image = 'profile_pic'.$fileActualExt;
-                    $destination = 'profiles/'.$username.$userid.'/dps';
+                    $image = 'profile_pic.' . $fileActualExt;
+                    $path = 'profiles/' . $username . $userid . '/dps';
+                    $destination = $path . '/' . $image;
+                    #check if path exists
+                    if(is_dir(dirname($path))){
+                        #check if file was moved
+                        if(move_uploaded_file($tempName, $destination)){
+                            #populate database with the uploaded image
+                            $update->updateProfilePhoto($image);
+                        }else{
+                            redirect("Could not update profile photo!", "dashboard.php?profile");
+                            exit();
+                        }
+                    }else{
+                        redirect("Could not locate path!", "dashboard.php?profile");
+                        exit();
+                    }
                 }
             }else{
                 redirect("File size too large!", "dashboard.php?profile");
@@ -88,18 +104,5 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }else{
             redirect("Invalid file type!", "dashboard.php?profile");
         }
-
-        #check if folder exists, if not create folder
-        if(!isdir($destination)){
-            if(mkdir($destination, 0775, true)){
-                mkdir('profiles/'.$username.$userid.'/assets');
-            }
-        }
-
-        #populate databse column
-        $update->updateProfilePhoto($tempName);
-        
-        #move photo to the directory
-        move_uploaded_file($tempName,$destination);
     }
 }

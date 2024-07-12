@@ -1,3 +1,4 @@
+// function to toggle side bar
 const sidebarToggle = document.querySelector("#sidebar-toggle");
 sidebarToggle.addEventListener("click", function(){
     document.querySelector("#sidebar").classList.toggle("collapsed");
@@ -7,7 +8,7 @@ document.querySelector(".theme-toggle").addEventListener("click", ()=>{
     toggleLocalStorage();
     toggleRootClass();
 });
-
+// function to enable themes
 function toggleRootClass(){
     const current = document.documentElement.getAttribute('data-bs-theme');
     const inverted = current == 'dark' ? 'light' : 'dark';
@@ -29,24 +30,17 @@ function isLight(){
 if(isLight()){
     toggleRootClass();
 }
-
-
-document.ready(function(){
-    $("#file").change(function(){
-        var reader = new FileReader();
-        reader.onload = function(image) {
-            $(".imageUploadedOrNot").show(0);
-            $("#blankImg").attr('src', image.target.result);
+// jquery function to upload profile photo
+$(document).ready(function() {
+    $('#image').on('change', function() {
+        if (this.files.length > 0) {
+            $('#form').submit();
+            console.log('form submitted');
+        }else{
+            console.log('Input field is empty');
         }
-
-        reader.readAsDataURL(this.files[0]);
     });
 });
 
 
-$(document).ready(function(){
-    $('#img').change(function(){
-        $('#form').submit();
-    });
-});
 

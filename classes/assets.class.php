@@ -11,6 +11,7 @@ class Assets extends Dbh{
             redirect("Could not fetch assets! Please try again later.", "dashboard.php?dashboard=");
             exit();
         }
+
         //if data not found, redirect user to user dashboard
         if($stmt->rowCount() == 0){
             $stmt = null;
@@ -22,12 +23,25 @@ class Assets extends Dbh{
 
         return $assetData;
     }
+    //method to fetch main asset id
+    protected function getMainAssetID($assetname, $userid){
+        $sql = "SELECT asset_id FROM assets WHERE asset_name=? AND owner_id=?";
+        $stmt = $this->connect()->prepare($sql);
+        if(!$stmt->execute(array($assetname, $userid))){
+            $stmt = null;
+            redirect("Something went wrong! Please try again", "dashboard.php?dashboard");
+            exit();
+        }
+
+        $main_asset_id = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $main_asset_id;
+    }
     //method fetches sub assets referencing the main assets table using the main asset id
-    protected function getSubAssetsInfo($userid, $asset_id){
-        $sql = "SELECT * FROM asset_subs WHERE user_id=? AND main_asset_id=?";
+    protected function getSubAssetsInfo($userid){
+        $sql = "SELECT * FROM asset_subs WHERE user_id=?";
         $stmt = $this->connect()->prepare($sql);
 
-        if(!$stmt->execute(array($userid, $asset_id))){
+        if(!$stmt->execute(array($userid))){
             $stmt = null;
             redirect("Could not fetch assets! Try again later", "dashboard.php?dashboard=");
             exit();

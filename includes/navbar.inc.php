@@ -26,6 +26,7 @@
     <a href="<?php base_url('index.php'); ?>" class="navbar-brand">
       CribsLot
     </a>
+    <button id="sidebar-toggle" style="display:none;"></button>
     <?php if(isset($_SESSION['authenticated'])) : ?>
       <div class="navbar-collapse navbar">
       <ul class="navbar-nav">

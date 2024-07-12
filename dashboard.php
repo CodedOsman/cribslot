@@ -7,8 +7,11 @@ include("classes/assets.class.php");
 include("classes/assetsview.class.php");
 $profile_info = new DashView();
 $assets = new AssetView();
-$dob = $profile_info->fetchDob($_SESSION['auth_user']['user_id']);
-
+$userid = $_SESSION['auth_user']['user_id'];
+$username = $profile_info->fetchUserName($userid);
+$dob = $profile_info->fetchDob($userid);
+$dp = $profile_info->fetchdp($userid);
+$profile_photo = 'profiles/'.$username.$userid.'/dps/'.$dp;
 include("includes/header.inc.php");
 ?>
 <div class="wrapper">
@@ -28,7 +31,7 @@ include("includes/header.inc.php");
                     <?php endif; ?>
                 </div>
                 <?php if(isset($_GET['profile']) || isset($_GET['change_password'])) : ?>
-                    <?php include_once 'profile.php'; else : ?>
+                    <?php include_once 'profile.php'; elseif (isset($_GET['assets'])) : include_once 'assetsdashboard.php'; else : ?>
                 <div class="row">
                     <div class="col-12 col-md-6 d-flex">
                         <div class="card flex-fill border-0 illustration">
@@ -36,12 +39,12 @@ include("includes/header.inc.php");
                                 <div class="row g-0 w-100">
                                     <div class="col-6">
                                         <div class="p-3 m-1">
-                                            <h4>Welcome Back, <?php $profile_info->fetchName($_SESSION['auth_user']['user_id']); ?></h4>
+                                            <h4>Welcome Back, <?php echo $profile_info->fetchName($userid); ?></h4>
                                             <p class="mb-0">User Dashboard, Cribslot</p>
                                         </div>
                                     </div> 
                                     <div class="col-6 align-self-end text-end">
-                                        <img src="" class="img-fluid illustration-img" alt="">
+                                        <img src="assets/images/login_image.jpg" height=100vh class="img-fluid img-responsive illustration-img" alt="">
                                     </div>
                                 </div>
                             </div>
@@ -98,12 +101,22 @@ include("includes/header.inc.php");
                     <div class="col-12 col-md-8 d-flex border-0"><!-- Table cared starts here -->
                         <div class="card border-0 flex-fill">
                             <div class="card-header">
-                                <h5 class="card-title">
-                                    Assets
-                                </h5>
-                                <h6 class="card-subtitle text-muted">
-                                    All your assets
-                                </h6>
+                                <div class="row">
+                                    <div class="col-6 align-self-start">
+                                        <h5 class="card-title">
+                                            Assets
+                                        </h5>
+                                        <h6 class="card-subtitle text-muted">
+                                            All your assets
+                                        </h6>  
+                                    </div>
+                                    <div class="col-6 align-self-end text-end">
+                                        <button type="button" class="align-self-end ms-auto btn btn-secondary btn-sm">
+                                            <a href="dashboard.php?assets">Manage Assets</a>
+                                        </button>
+                                    </div>
+                                    
+                                </div> 
                             </div>
                             <div class="card-body">
                                 <div class="table-responsive">
@@ -139,12 +152,22 @@ include("includes/header.inc.php");
                     <div class="col-12 col-md-4 d-flex border-0 ms-auto"><!-- tenants card starts here -->
                         <div class="card border-0 flex-fill">
                             <div class="card-header">
-                                <h5 class="card-title">
-                                    Tenants
-                                </h5>
-                                <h6 class="card-subtitle text-muted">
-                                    Recent Tenants
-                                </h6>
+                                <div class="row">
+                                    <div class="col-6 align-self-start">
+                                        <h5 class="card-title">
+                                            Tenants
+                                        </h5>
+                                        <h6 class="card-subtitle text-muted">
+                                            Recent Tenants
+                                        </h6>  
+                                    </div>
+                                    <div class="col-6 align-self-end text-end">
+                                        <button type="button" class="align-self-end ms-auto btn btn-secondary btn-sm">
+                                            <a href="assetsdashboard.php?assets">Manage Tenants</a>
+                                        </button>
+                                    </div>
+                                    
+                                </div>
                             </div>
                             <div class="card-body">
                                 <h5>Tenant 1</h5>

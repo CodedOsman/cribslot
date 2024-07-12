@@ -8,6 +8,8 @@
         
         <link rel="stylesheet" href="assets/css/bootstrap.css">
         <link rel="stylesheet" href="assets/css/all.css">
+        <link rel="stylesheet" href="assets/css/fontawesome.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <script src="assets/js/jquery.js"></script>
     </head>
     <body>

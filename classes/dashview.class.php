@@ -5,7 +5,7 @@ class DashView extends UserDash{
     public function fetchName($userid){
         $profileinfo = $this->getProfileInfo($userid);
 
-        echo $profileinfo[0]['firstname']." ". $profileinfo[0]['lastname'];
+        return $profileinfo[0]['firstname']." ". $profileinfo[0]['lastname'];
     }
     
 

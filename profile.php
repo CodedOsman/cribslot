@@ -10,9 +10,13 @@
                 <div class="mb-3" style='text-align:center;'>
                     <form action="includes/profilesettings.inc.php" method="POST" id="form" enctype="multipart/form-data">
                         <div class="upload">
+                            <?php if($profile_info->fetchdp($userid) === NULL) : ?>
                             <img src="assets/images/profile_picture.png" wdith=125px height=125px class="img-responsive img-fluid rounded"/>
+                            <?php else : ?>
+                            <img src="<?php base_url($profile_photo); ?>" wdith=125px height=125px class="img-responsive img-fluid rounded"/>
+                            <?php endif; ?>
                             <div class="round">
-                                <input type="file" name="img" id="img" accept=".jpg, .jpeg, .png">
+                                <input type="file" name="img" id="image" accept=".jpg, .jpeg, .png">
                                 <i class="fa-solid fa-camera"></i>
                             </div>
                         </div>

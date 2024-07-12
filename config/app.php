@@ -6,7 +6,7 @@ define('DB_USER','root');
 define('DB_PASSWORD', '');
 define('DB_DATABASE', 'cribslotdb');
 
-define('SITE_URL', 'http://localhost/login_oop/');
+define('SITE_URL', 'http://localhost/cribslot/');
 
 function base_url($slug){
     echo SITE_URL.$slug;

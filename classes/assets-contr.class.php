@@ -7,6 +7,7 @@ class AssetContr extends Assets {
         $this->owner_id = $owner_id;
     }
 
+
     public function addAsset($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $owner_id){
         //check for errors then populate database 
         $this->setAssetInfo($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $this->owner_id);
@@ -27,7 +28,10 @@ class AssetContr extends Assets {
 
     }
 
-    public function fetchAssetID(){}
+    public function fetchAssetID(){
+        //method to fetch main asset id
+        $this->
+    }
 
     public function fetchCategoryID($category_name){
         $this->getCategoriesID($category_name);

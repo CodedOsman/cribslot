@@ -13,5 +13,9 @@ class AssetView extends Assets{
 
         return $typename;
     }
+
+    public function mainAssetID(){
+        $main_asset_id = $this->getAssetInfo();
+    }
     
 }

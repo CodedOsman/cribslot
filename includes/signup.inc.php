@@ -28,6 +28,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mkdir("../profiles/".$username.$userid, 0777);
     mkdir("../profiles/".$username.$userid."/dps", 0777);
     mkdir("../profiles/".$username.$userid."/assets", 0777);
+    mkdir("../profiles/".$username.$userid."/assets/photos", 0777);
+    mkdir("../profiles/".$username.$userid."/assets/videos", 0777);
 
     //heading to the front page
     redirect("Account created successfully!", "signup.php");
