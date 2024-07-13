@@ -19,33 +19,15 @@ class AssetContr extends Assets {
     }
 
 
-    public function addSubAsset($main_asset_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added){
+    public function addSubAsset($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added){
         //check for errors then populate database
-        $this->setSubAsset($main_asset_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added);
+        $this->setSubAsset($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added);
     }
 
     public function updateSubAsset(){
 
     }
 
-    public function fetchCategories(){
-        //method to fetch main asset id
-        $category_name = $this->getCategoriesName();
-
-        return $category_name;
-    }
-
-    public function fetchCategoryID($category_name){
-        $category_id = $this->getCategoriesID($category_name);
-
-        return $category_id;
-    }
-
-    public function fetchTypesID($type_name){
-        $type_id = $this->getTypesID($type_name);
-
-        return $type_id;
-    }
 
 
 } 
