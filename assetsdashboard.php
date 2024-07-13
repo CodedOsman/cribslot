@@ -44,6 +44,14 @@
                         </div>
                     </div>
                 </div><!-- row ends -->
+                <?php if(isset($_GET['assets']) == 'upload_main_asset') : ?>
+                <!-- Form to upload new main asset -->
+                <div class="col-12 col-md-12 d-flex">
+                    
+                </div>
+                <?php elseif(isset($_GET['assets']) == 'upload_sub_asset') :?>
+                <!-- Form to upload new sub asset -->
+                <?php else :?>
                 <!--Table Element -->
                 <div class="col-12 col-md-12 d-flex border-0"><!-- Table cared starts here -->
                     <div class="card border-0 flex-fill">
@@ -189,3 +197,4 @@
                         </div>
                     </div>
                 </div><!-- table card ends here -->
+                <?php endif; ?>

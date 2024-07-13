@@ -28,17 +28,23 @@ class AssetContr extends Assets {
 
     }
 
-    public function fetchAssetID(){
+    public function fetchCategories(){
         //method to fetch main asset id
-        $this->
+        $category_name = $this->getCategoriesName();
+
+        return $category_name;
     }
 
     public function fetchCategoryID($category_name){
-        $this->getCategoriesID($category_name);
+        $category_id = $this->getCategoriesID($category_name);
+
+        return $category_id;
     }
 
     public function fetchTypesID($type_name){
-        $this->getTypesID($type_name);
+        $type_id = $this->getTypesID($type_name);
+
+        return $type_id;
     }
 
 
