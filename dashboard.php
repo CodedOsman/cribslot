@@ -138,7 +138,9 @@ include("includes/header.inc.php");
                                             ?>
                                             <tr>
                                                 <td colspan="4">
-                                                    <button class="btn btn-primary">Upload your first asset</button>
+                                                    <button class="btn btn-primary">
+                                                        <a href="dashboard.php?assets=upload-main-asset">Upload Now</a>
+                                                    </button>
                                                 </td>
                                             </tr>
                                             <?php } else { 

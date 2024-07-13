@@ -32,15 +32,15 @@ class AssetView extends Assets{
         return $subAssetData;
     }
 
-    public function fetchCategories(){
+    public function fetchCategories($category_id){
         //method to fetch main asset id
-        $category_name = $this->getCategoriesName();
+        $category_name = $this->getCategoriesName($category_id);
 
         return $category_name;
     }
 
-    public function fetchTypes(){
-        $types = $this->getTypesName();
+    public function fetchTypes($type_id){
+        $types = $this->getTypesName($type_id);
 
         return $types;
     }

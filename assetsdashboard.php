@@ -29,7 +29,7 @@
                                         <div class="row">
                                             <div class="col-12 col-md-6 d-flex">
                                                 <button class="btn btn-secondary btn-sm mb-2 text-dark">
-                                                    <a href="#">Upload Main Asset</a>
+                                                    <a href="dashboard.php?assets=upload-main-asset">Upload Main Asset</a>
                                                 </button>
                                             </div>
                                             <div class="col-12 col-md-6 d-flex">
@@ -44,12 +44,80 @@
                         </div>
                     </div>
                 </div><!-- row ends -->
-                <?php if(isset($_GET['assets']) == 'upload_main_asset') : ?>
+                <?php if(isset($_GET['assets']) && $_GET['assets']  == 'upload-main-asset' ) : ?>
                 <!-- Form to upload new main asset -->
-                <div class="col-12 col-md-12 d-flex">
-                    
+                <div class="row col-12 col-md-12 d-flex bg-subtle shadow">
+                    <div class="header-text mb-3">
+                        <h5 class="text-center">Upload new asset</h5>
+                    </div>
+                    <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+                        <div class="input-group mb-3">
+                            <input type="text" name="assetname" placeholder="Name this asset" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group">Asset Category</span>
+                            <select name="category" class="form-control form-control-lg fs-6">
+                                <?php
+                                    $category = $assets->defaultCategories();
+                                    foreach($category as $cat){
+                                        $catN = $cat['category_name'];
+                                        $catid = $cat['category_id'];
+                                ?>
+                                <option value="<?php echo $catid; ?>"><?php echo $catN; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group">Asset Type</span>
+                            <select name="type" class="form-control form-control-lg fs-6">
+                                <?php 
+                                    $types = $assets->defaultTypes();
+                                    foreach($types as $type){
+                                        $typeN = $type['type_name'];
+                                        $typeid = $type['type_id'];
+                                ?>
+                                <option value="<?php echo $typeid; ?>"><?php echo $typeN; ?></option>
+                                <?php } ?>
+                            </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group"><small>How many sub assets will be under this asset? </small></span>
+                            <input type="text" name="subs" placeholder="Enter a number" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group"><small>Select an image for your asset</small></span>
+                            <input type="file" name="asset_image" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <span class="input-group"><small>Select a video not more than 20MB</small></span>
+                            <input type="file" name="asset_video" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" name="desc" placeholder="Describe your asset" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" name="country" placeholder="Country" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" name="address" placeholder="Address" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" name="rooms" placeholder="Number of rooms" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" name="floors" placeholder="Number of floors" class="form-control form-control-lg fs-6">
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" name="size" placeholder="Floor Size" class="form-control form-control-lg fs-6">
+                        </div>
+                        
+                        <div class="input-group mb-3">
+                            <button type="submit" name="upload" class="btn btn-lg btn-primary w-100 fs-6">Upload</button>
+                        </div>
+                        <div class="row"></div>
+                    </form><!-- upload form ends -->
                 </div>
-                <?php elseif(isset($_GET['assets']) == 'upload_sub_asset') :?>
+                <?php elseif(isset($_GET['assets']) && $_GET['assets'] == 'upload_sub_asset') : ?>
                 <!-- Form to upload new sub asset -->
                 <?php else :?>
                 <!--Table Element -->

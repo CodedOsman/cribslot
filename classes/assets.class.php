@@ -129,7 +129,7 @@ class Assets extends Dbh{
     }
 
     protected function getTypesName(){
-        $sql = "SELECT type_name FROM asset_types";
+        $sql = "SELECT * FROM asset_types";
         $stmt = $this->connect()->prepare($sql);
 
         if(!$stmt->execute(array())){
@@ -151,7 +151,7 @@ class Assets extends Dbh{
     }
 
     protected function getCategoriesName(){
-        $sql = "SELECT category_name FROM asset_categories";
+        $sql = "SELECT * FROM asset_categories";
         $stmt = $this->connect()->prepare($sql);
 
         if(!$stmt->execute(array())){

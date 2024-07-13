@@ -4,20 +4,20 @@ include_once("../config/app.php");
 
 if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['add_main'])){
-        $asset_name = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8'); 
-        $category = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8'); 
-        $type = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8'); 
-        $number_of_subs = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8'); 
+        $asset_name = htmlspecialchars($_POST['assetname'], ENT_QUOTES, 'UTF-8'); 
+        $category_id = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'); 
+        $type_id = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8'); 
+        $number_of_subs = htmlspecialchars($_POST['subs'], ENT_QUOTES, 'UTF-8'); 
         $asset_img = $_FILES['asset_img']['name'];
         $asset_video = $_FILES['asset_video']['name'];
-        $asset_description = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
-        $asset_country = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
+        $asset_description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
+        $asset_country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8');
         $date_added = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
-        $asset_address = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
+        $asset_address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
         $listed = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
-        $number_of_rooms = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
-        $number_of_floors = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
-        $floor_area = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
+        $number_of_rooms = htmlspecialchars($_POST['rooms'], ENT_QUOTES, 'UTF-8');
+        $number_of_floors = htmlspecialchars($_POST['floors'], ENT_QUOTES, 'UTF-8');
+        $floor_area = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
         $owner_id = $_SESSION['auth_user']['user_id'];
         //process the files received
         $tempName = $_FILES['asset_img']['temp_name'];
@@ -74,9 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cat = new AssetContr($owner_id);
 
         #adding asset to assets data table
-        $category_id = $cat->fetchCategoryID($category);
-        $type_id = $cat->fetchTypesID($type);
-        $cat->addAsset($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $tempName, $vidtempName, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $owner_id);
+        $cat->addAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $tempName, $vidtempName, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area);
         
     }
     
