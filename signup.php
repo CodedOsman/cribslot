@@ -22,16 +22,16 @@
                 </div>
                 <form action="includes/signup.inc.php" method="POST"><!-- sign up form starts -->
                     <div class="input-group mb-3">
-                        <input type="text" name="username" placeholder="Enter your preferred username" class="form-control form-control-lg bg-light fs-6">
+                        <input type="text" name="username" placeholder="Enter your preferred username" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="text" name="email" placeholder="Enter your email" class="form-control form-control-lg bg-light fs-6">
+                        <input type="text" name="email" placeholder="Enter your email" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-3">
-                        <input type="password" name="pwd" placeholder="Enter your password" class="form-control form-control-lg bg-light fs-6">
+                        <input type="password" name="pwd" placeholder="Enter your password" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-1">
-                        <input type="password" name="pwdRepeat" placeholder="Confirm your password" class="form-control form-control-lg bg-light fs-6">
+                        <input type="password" name="pwdRepeat" placeholder="Confirm your password" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-5 d-flex justify-content-between">
                         <div class="form-check">
@@ -47,7 +47,7 @@
                     <div class="row">
                         <small>
                             Already have an account?
-                            <a href="<?= base_url('signup.php')?>">Login</a> 
+                            <a href="<?= base_url('login.php'); ?>">Login</a> 
                         </small>
                     </div>
                 </form><!-- sign up form ends -->

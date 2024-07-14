@@ -167,7 +167,7 @@
                         <input type="file" name="asset_image" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-3">
-                        <span class="input-group"><small>Select a video not more than 20MB</small></span>
+                        <span class="input-group"><small>Select a video not more than 40MB</small></span>
                         <input type="file" name="asset_video" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-3">

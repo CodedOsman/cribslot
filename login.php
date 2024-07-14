@@ -27,10 +27,10 @@
                 </div>
                 <form action="includes/login.inc.php" method="POST"><!-- login form starts -->
                     <div class="input-group mb-3">
-                        <input type="text" name="email" placeholder="Enter your email" class="form-control form-control-lg bg-light fs-6">
+                        <input type="text" name="email" placeholder="Enter your email" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-1">
-                        <input type="password" name="pwd" placeholder="Enter your password" class="form-control form-control-lg bg-light fs-6">
+                        <input type="password" name="pwd" placeholder="Enter your password" class="form-control form-control-lg fs-6">
                     </div>
                     <div class="input-group mb-5 d-flex justify-content-between">
                         <div class="form-check">

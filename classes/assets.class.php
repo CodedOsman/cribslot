@@ -71,6 +71,20 @@ class Assets extends Dbh{
 
         $stmt = null;
     }
+
+    // method updates main assets
+    protected function updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms,$number_of_floors,$floor_size, $asset_id){
+        $sql = "UPDATE assets SET asset_name=?, asset_category_id=?, asset_type_id=?, number_of_subs=?, asset_img=?, asset_video=?, asset_description=?, asset_country=?, date_added=?, asset_address=?, listed=?, number_of_rooms=?,number_of_floors=?,floor_size=? WHERE asset_id=?";
+        $stmt = $this->connect()->prepare($sql);
+
+        if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms,$number_of_floors,$floor_size, $asset_id))){
+            $stmt = null;
+            redirect("Something went wrong!", "dashboard.php?assets=upadte-main-asset");
+            exit();
+        }
+
+        $stmt = null;
+    }
     
     //method adds new sub assets to the database
     protected function setSubAsset($asset_name, $type_id, $main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $sub_asset_image, $sub_asset_video, $floor_size){
