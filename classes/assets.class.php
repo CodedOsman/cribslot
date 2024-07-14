@@ -68,18 +68,22 @@ class Assets extends Dbh{
             redirect("Something went wrong! Please try again later.", "dashboard.php?dashboard=");
             exit();
         }
+
+        $stmt = null;
     }
     
     //method adds new sub assets to the database
-    protected function setSubAsset($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added){
-        $sql = "INSERT INTO asset_subs (main_asset_id, floor, number_of_rooms, room_number, sub_asset_image, sub_asset_video, floor_size, listed, date_added) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    protected function setSubAsset($asset_name, $type_id, $main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $sub_asset_image, $sub_asset_video, $floor_size){
+        $sql = "INSERT INTO asset_subs (sub_name, type_id, main_asset_id, owner_id, floor, number_of_rooms, room_number, sub_description, country, sub_address, asset_image, asset_video, floor_size) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
         
-        if(!$stmt->execute(array($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added))){
+        if(!$stmt->execute(array($asset_name, $type_id, $main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $sub_asset_image, $sub_asset_video, $floor_size))){
             $stmt = null;
             redirect("Something went wrong! Please try again later.", "dashboard.php?dashboard=");
             exit();
         }
+
+        $stmt = null;
     }
 
     // method fetchs categories

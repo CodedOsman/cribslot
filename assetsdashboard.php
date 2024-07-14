@@ -93,7 +93,7 @@
                             <input type="file" name="asset_video" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="desc" placeholder="Describe your asset" class="form-control form-control-lg fs-6">
+                            <textarea name="desc" placeholder="Describe your asset" class="form-control form-control-lg fs-6"></textarea>
                         </div>
                         <div class="input-group mb-3">
                             <input type="text" name="country" placeholder="Country" class="form-control form-control-lg fs-6">
@@ -112,13 +112,82 @@
                         </div>
                         
                         <div class="input-group mb-3">
-                            <button type="submit" name="upload" class="btn btn-lg btn-primary w-100 fs-6">Upload</button>
+                            <button type="submit" name="add_main" class="btn btn-lg btn-primary w-100 fs-6">Upload</button>
                         </div>
                         <div class="row"></div>
                     </form><!-- upload form ends -->
                 </div>
                 <?php elseif(isset($_GET['assets']) && $_GET['assets'] == 'upload_sub_asset') : ?>
                 <!-- Form to upload new sub asset -->
+                <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+                    <div class="input-group mb-3">
+                        <span class="input-group">Main Asset </span>
+                        <select name="main_asset" class="form-control form-control-lg fs-6">
+                            <?php
+                                $main_asset = $assets->fetchMainAssets($userid);
+                                foreach($main_asset as $main){
+                                    $mainN = $main['asset_name'];
+                                    $mainid = $main['asset_id'];
+                            ?>
+                            <option value="<?php echo $mainid; ?>"><?php echo $mainN; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="assetname" placeholder="Name this asset" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group">Asset Type</span>
+                        <select name="type" class="form-control form-control-lg fs-6">
+                            <?php 
+                                $types = $assets->defaultTypes();
+                                foreach($types as $type){
+                                    $typeN = $type['type_name'];
+                                    $typeid = $type['type_id'];
+                            ?>
+                            <option value="<?php echo $typeid; ?>"><?php echo $typeN; ?></option>
+                            <?php } ?>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group mb-3">
+                        <span class="input-group"><small>What floor is this asset? (if it is in a storey building) </small></span>
+                        <input type="text" name="floor" placeholder="Enter a number" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group"><small>Number of rooms or sections </small></span>
+                        <input type="text" name="rooms" placeholder="Enter a number" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group"><small>Room number / Section label </small></span>
+                        <input type="text" name="roomnum" placeholder="Enter a number" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group"><small>Select an image for your asset</small></span>
+                        <input type="file" name="asset_image" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <span class="input-group"><small>Select a video not more than 20MB</small></span>
+                        <input type="file" name="asset_video" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <textarea name="desc" placeholder="Describe your asset" class="form-control form-control-lg fs-6"></textarea>
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="country" placeholder="Country" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="address" placeholder="Address" class="form-control form-control-lg fs-6">
+                    </div>
+                    <div class="input-group mb-3">
+                        <input type="text" name="size" placeholder="Floor Size" class="form-control form-control-lg fs-6">
+                    </div>
+                        
+                    <div class="input-group mb-3">
+                        <button type="submit" name="add_sub" class="btn btn-lg btn-primary w-100 fs-6">Upload</button>
+                    </div>
+                    <div class="row"></div>
+                </form><!-- upload form ends -->
                 <?php else :?>
                 <!--Table Element -->
                 <div class="col-12 col-md-12 d-flex border-0"><!-- Table cared starts here -->

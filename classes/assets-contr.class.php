@@ -19,9 +19,9 @@ class AssetContr extends Assets {
     }
 
 
-    public function addSubAsset($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added){
+    public function addSubAsset($asset_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $sub_asset_image, $sub_asset_video, $floor_size){
         //check for errors then populate database
-        $this->setSubAsset($main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $sub_asset_image, $sub_asset_video, $floor_size, $listed, $date_added);
+        $this->setSubAsset($asset_name, $type_id, $main_asset_id, $this->owner_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $sub_asset_image, $sub_asset_video, $floor_size);
     }
 
     public function updateSubAsset(){
