@@ -3,7 +3,7 @@
 class AssetContr extends Assets {
     private $owner_id;
 
-    private function __construc($owner_id){
+    private function __construct($owner_id){
         $this->owner_id = $owner_id;
     }
 

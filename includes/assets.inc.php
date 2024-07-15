@@ -168,7 +168,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     
 
     if(isset($_POST['update_main'])){
-        $main_id = htmlspecialchars($_POST['main_id'], ENT_QUOTES, 'UTF-8');
+        $main_id = htmlspecialchars($_POST['asset_id'], ENT_QUOTES, 'UTF-8');
         $asset_name = htmlspecialchars($_POST['assetname'], ENT_QUOTES, 'UTF-8'); 
         $category_id = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'); 
         $type_id = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8'); 
@@ -252,6 +252,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
 
     if(isset($_POST['update_sub'])){
+        $asset_id = htmlspecialchars($_POST['asset_id'], ENT_QUOTES, 'UTF-8');
         $asset_name = htmlspecialchars($_POST['assetname'], ENT_QUOTES, 'UTF-8');
         $type_id = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8');
         $main_asset_id = htmlspecialchars($_POST['main_asset'], ENT_QUOTES, 'UTF-8');

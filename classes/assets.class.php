@@ -58,6 +58,29 @@ class Assets extends Dbh{
 
         return $subAssetData;
     }
+    //method to fetch a single asset from main asset table
+    protected function getAssetmain($assetid){
+        $sql = "SELECT * FROM assets WHERE asset_id=?";
+        $stmt = $this->connect()->prepare($sql);
+        //checking if user has assets in database
+        if(!$stmt->execute(array($assetid))){
+            $stmt = null;
+            redirect("Could not fetch assets! Please try again later.", "dashboard.php?dashboard=");
+            exit();
+        }
+
+        //if data not found, redirect user to user dashboard
+        if($stmt->rowCount() == 0){
+            $stmt = null;
+            return 0;
+            exit();
+        }
+        // if the data is found reference to data
+        $assetData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $assetData;
+    }
+
     // method adds new assets to the database
     protected function setAssetInfo($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $owner_id){
         $sql = "INSERT INTO assets (asset_name, asset_category_id, asset_type_id, number_of_subs, asset_img, asset_video, asset_description, asset_country, date_added, asset_address, listed, number_of_rooms, number_of_floors, floor_area, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
