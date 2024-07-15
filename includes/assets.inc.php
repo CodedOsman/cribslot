@@ -329,7 +329,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         #adding asset to assets data table
         
-        $cat->updateSubAsset($asset_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $image, $video, $floor_size);
+        $cat->updateSubAsset($asset_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $image, $video, $floor_size, $asset_id);
         
     }
 }

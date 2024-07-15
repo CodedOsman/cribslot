@@ -88,7 +88,7 @@ class Assets extends Dbh{
         
         if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $owner_id))){
             $stmt = null;
-            redirect("Something went wrong! Please try again later.", "dashboard.php?dashboard=");
+            redirect("Something went wrong! Please try again later.", "dashboard.php?assets=upload-main-asset");
             exit();
         }
 
@@ -116,7 +116,20 @@ class Assets extends Dbh{
         
         if(!$stmt->execute(array($asset_name, $type_id, $main_asset_id, $owner_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $sub_asset_image, $sub_asset_video, $floor_size))){
             $stmt = null;
-            redirect("Something went wrong! Please try again later.", "dashboard.php?dashboard=");
+            redirect("Something went wrong! Please try again later.", "dashboard.php?assets=upload-sub-asset");
+            exit();
+        }
+
+        $stmt = null;
+    }
+    //method upates sub assets
+    protected function updateSub($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_descrtiption, $country, $sub_address, $asset_image, $sset_video, $floor_size, $sub_id){
+        $sql = "UPDATE asset_subs SET sub_name=?, type_id=?, main_asset_id=?, floor=?, number_of_rooms=?, room_number=?, sub_descrtiption=?, country=?, sub_address=?, asset_image=?, asset_video=?, floor_size=? WHERE sub_id=?";
+        $stmt = $this->connect()->prepare($sql);
+
+        if(!$stmt->execute(array($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_descrtiption, $country, $sub_address, $asset_image, $sset_video, $floor_size, $sub_id))){
+            $stmt = null;
+            redirect("Something went wrong! Please try again later.", "dashboard.php?assets=update-sub-asset?id=".$sub_id);
             exit();
         }
 
