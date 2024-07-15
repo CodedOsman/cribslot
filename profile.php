@@ -88,10 +88,28 @@
                     </div>
                     <div class="form-group mb-3">
                         <label>Gender</label>
+                        
                         <select name="gender" class="form-control">
-                            <option value="Male">Male</option>
+                            <?php
+                                $gender = $profile_info->fetchGender($userid);
+                                if(!$gender == NULL){
+                                    echo '<option value="'.$gender.'">'.$gender.'</option>';
+                                }
+                            ?>
+                            <?php if($gender == 'Male') :?>
                             <option value="Female">Female</option>
                             <option value="Other">Other</option>
+                            <?php elseif($gender == 'Female') : ?>
+                            <option value="Male">Male</option>
+                            <option value="Other">Other</option>
+                            <?php elseif($gender == 'Other') : ?>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <?php else: ?>
+                            <option value="Female">Female</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <?php endif;?>
                         </select>
                     </div>
                     <div class="form-group mb-3">
