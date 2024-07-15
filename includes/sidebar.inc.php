@@ -15,18 +15,10 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="assetsdashboard.php?assets" class="sidebar-link collapsed" data-bs-target="#pages" data-bs-toggle="collapse" aria-expanded="false">
+                <a href="assetsdashboard.php?assets" class="sidebar-link collapsed">
                     <i class="fa-solid fa-building-user"></i>
                     Assets
                 </a>
-                <ul id="pages" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Listed</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Not Listed</a>
-                    </li>
-                </ul>
             </li>
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse" aria-expanded="false">
