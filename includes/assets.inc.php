@@ -35,8 +35,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
                 if($fileSize < 12000000){
-                    $image = $tempName.$fileActualExt;
-                    $destination = 'profiles/'.$username.$userid.'/assets/photos';
+                    $image = $tempName. uniqid("", true) . '.'.$fileActualExt;
+                    $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
+                    $destination = $ipath . $image;
                 }
             }else{
                 redirect("Image file size too large!", "dashboard.php?assets=upload-main-asset");
@@ -49,8 +50,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($vidActualExt, $allowed)){
             if($vidError === 0){
                 if($vidSize < 40000000){
-                    $image = $vidtempName.$fileActualExt;
-                    $viddestination = 'profiles/'.$username.$userid.'/assets/videos';
+                    $video = $vidtempName.uniqid("", true). '.'.$fileActualExt;
+                    $path = '../profiles/'.$username.$userid.'/assets/videos/';
+                    $viddestination = $path . $video;
                 }
             }else{
                 redirect("Video file size too large!", "dashboard.php?assets=upload-main-asset");
@@ -61,12 +63,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         
         //check if folders exist
-        if(!is_dir($destination)){
-            mkdir($destination, 0777, true);
-        }
-        if(!is_dir($viddestination)){
-            mkdir($viddestination);
-        }
 
         if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
@@ -81,7 +77,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cat = new AssetContr($owner_id);
 
         #adding asset to assets data table
-        $cat->addAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $tempName, $vidtempName, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area);
+        $cat->addAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area);
         
     }
     // Adding sub asset
@@ -116,8 +112,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
                 if($fileSize < 12000000){
-                    $image = $tempName.$fileActualExt;
-                    $destination = 'profiles/'.$username.$userid.'/assets/photos';
+                    $image = $tempName.uniqid("", true).'.'.$fileActualExt;
+                    $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
+                    $destination = $ipath . $image;
                 }
             }else{
                 redirect("Image file size too large!", "dashboard.php?assets=upload-sub-asset");
@@ -130,8 +127,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($vidActualExt, $allowed)){
             if($vidError === 0){
                 if($vidSize < 40000000){
-                    $video = $vidtempName.$fileActualExt;
-                    $viddestination = 'profiles/'.$username.$userid.'/assets/videos';
+                    $video = $vidtempName.uniqid("", true).'.'.$fileActualExt;
+                    $path = '../profiles/'.$username.$userid.'/assets/videos/';
+                    $viddestination = $path . $video;
                 }
             }else{
                 redirect("Video file size too large!", "dashboard.php?assets=upload-sub-asset");
@@ -142,12 +140,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         
         //check if folders exist
-        if(!is_dir($destination)){
-            mkdir($destination, 0777, true);
-        } 
-        if(!is_dir($viddestination)){
-            mkdir($viddestination);
-        }
+        
         if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
         }else{
@@ -200,8 +193,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
                 if($fileSize < 12000000){
-                    $image = $tempName.$fileActualExt;
-                    $destination = 'profiles/'.$username.$userid.'/assets/photos';
+                    $image = $tempName.uniqid("", true).'.'.$fileActualExt;
+                    $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
+                    $destination = $ipath . $image;
                 }
             }else{
                 redirect("Image file size too large!", "dashboard.php?assets=upload-main-asset");
@@ -214,8 +208,9 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($vidActualExt, $allowed)){
             if($vidError === 0){
                 if($vidSize < 40000000){
-                    $image = $vidtempName.$fileActualExt;
-                    $viddestination = 'profiles/'.$username.$userid.'/assets/videos';
+                    $video = $vidtempName.$fileActualExt;
+                    $path = '../profiles/'.$username.$userid.'/assets/videos/';
+                    $viddestination = $path . $video;
                 }
             }else{
                 redirect("Video file size too large!", "dashboard.php?assets=upload-main-asset");
@@ -246,7 +241,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cat = new AssetContr($owner_id);
 
         #adding asset to assets data table
-        $cat->updateMainAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $tempName, $vidtempName, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
+        $cat->updateMainAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
         
     }
 
@@ -284,7 +279,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($fileError === 0){
                 if($fileSize < 12000000){
                     $image = $tempName.$fileActualExt;
-                    $destination = 'profiles/'.$username.$userid.'/assets/photos';
+                    $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
+                    $destination = $ipath . $image;
                 }
             }else{
                 redirect("Image file size too large!", "dashboard.php?assets=upload-sub-asset");
@@ -298,7 +294,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             if($vidError === 0){
                 if($vidSize < 40000000){
                     $video = $vidtempName.$fileActualExt;
-                    $viddestination = 'profiles/'.$username.$userid.'/assets/videos';
+                    $path = '../profiles/'.$username.$userid.'/assets/videos';
+                    $viddestination = $path . $video;
                 }
             }else{
                 redirect("Video file size too large!", "dashboard.php?assets=upload-sub-asset");
