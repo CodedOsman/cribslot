@@ -178,11 +178,6 @@ include("includes/header.inc.php");
                                             Recent Tenants
                                         </h6>  
                                     </div>
-                                    <div class="col-6 align-self-end text-end">
-                                        <button type="button" class="align-self-end ms-auto btn btn-secondary btn-sm">
-                                            <a href="assetsdashboard.php?assets">Manage Tenants</a>
-                                        </button>
-                                    </div>
                                     
                                 </div>
                             </div>
