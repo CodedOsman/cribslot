@@ -5,9 +5,12 @@ include("classes/userdash.class.php");
 include("classes/dashview.class.php");
 include("classes/assets.class.php");
 include("classes/assetsview.class.php");
+include("classes/clients.class.php");
+include("classes/clientview.class.php");
 
 $profile_info = new DashView();
 $assets = new AssetView();
+$clients = new ClientView();
 $userid = $_SESSION['auth_user']['user_id'];
 $username = $profile_info->fetchUserName($userid);
 $dob = $profile_info->fetchDob($userid);

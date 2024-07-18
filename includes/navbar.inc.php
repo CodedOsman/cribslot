@@ -8,7 +8,7 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-            <img src="<?= base_url('assets/images/profile_picture.png'); ?>" class="avatar img-fluid rounded" alt="profile-photo"/>
+            <img src="<?= $profile_photo; ?>" class="avatar img-fluid rounded" alt="profile-photo"/>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <a href="<?= base_url('dashboard.php?dashboard'); ?>" class="dropdown-item">Dashboard</a>
@@ -32,7 +32,7 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
-            <img src="<?= base_url('assets/images/profile_picture.png'); ?>" class="avatar img-fluid rounded" alt="profile-photo"/>
+            <img src="<?= $profile_photo; ?>" class="avatar img-fluid rounded" alt="profile-photo"/>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <a href="<?= base_url('dashboard.php?dashboard'); ?>" class="dropdown-item">Dashboard</a>

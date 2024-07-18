@@ -1,5 +1,19 @@
 <?php
 include('config/app.php');
+if(isset($_SESSION['authenticated'])){
+    include("classes/dbh.class.php");
+    include("classes/userdash.class.php");
+    include("classes/dashview.class.php");
+
+    $profile_info = new DashView();
+    $userid = $_SESSION['auth_user']['user_id'];
+    $username = $profile_info->fetchUserName($userid);
+    $dob = $profile_info->fetchDob($userid);
+    $dp = $profile_info->fetchdp($userid);
+    $path = 'profiles/' . $username . $userid . '/dps';
+    $profile_photo = $path . '/' . $dp;
+}
+
 
 include("includes/header.inc.php");
 ?>

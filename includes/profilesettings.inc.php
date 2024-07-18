@@ -79,8 +79,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
                 if($fileSize < 12000000){
-                    $image = 'profile_pic.' . $fileActualExt;
-                    $path = 'profiles/' . $username . $userid . '/dps';
+                    $image = 'profile_pic.' . uniqid("", true) . '.' . $fileActualExt;
+                    $path = '../profiles/' . $username . $userid . '/dps';
                     $destination = $path . '/' . $image;
                     #check if path exists
                     if(is_dir(dirname($path))){
