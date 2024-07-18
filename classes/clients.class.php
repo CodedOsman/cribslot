@@ -18,11 +18,11 @@ class Clients extends Dbh{
     }
 
     //method updates client data
-    protected function updateClientInfo($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation){
+    protected function updateClientInfo($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id){
         $sql = "UPDATE clients SET client_type=?, first_name=?, last_name=?, client_photo=?, gender=?, email=?, contact=?, asset_id=?, client_status=?, occupation=? WHERE client_id=?";
         $stmt = $this->connect()->prepare($sql);
 
-        if(!$stmt->execute(array($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation))){
+        if(!$stmt->execute(array($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id))){
             $stmt = null;
             redirect("Something went wrong! Could not update client info", "dashboard.php?dashboard=");
             exit();

@@ -42,5 +42,58 @@ $(document).ready(function() {
     });
 });
 
+const ScrollRevealOption = {
+    distance: "50px;",
+    origin: "bottom",
+    duration: 1000,
+};
 
+ScrollReveal().reveal(".container__left h1",{
+    ...ScrollRevealOption,
+});
+ScrollReveal().reveal(".container__left .container__btn",{
+    ...ScrollRevealOption,
+    delay: 500,
+});
+
+ScrollReveal().reveal(".container__right h4",{
+    ...ScrollRevealOption,
+    delay: 2000,
+});
+
+ScrollReveal().reveal(".container__right h2",{
+    ...ScrollRevealOption,
+    delay: 2500,
+});
+
+ScrollReveal().reveal(".container__right h3",{
+    ...ScrollRevealOption,
+    delay: 3000,
+});
+
+ScrollReveal().reveal(".container__right p",{
+    ...ScrollRevealOption,
+    delay: 3500,
+});
+
+ScrollReveal().reveal(".container__right .tent-1",{
+    duration: 1000,
+    delay: 4000,
+});
+
+ScrollReveal().reveal(".container__right .tent-2",{
+    duration: 1000,
+    delay: 4500,
+});
+ScrollReveal().reveal(".location",{
+    ...ScrollRevealOption,
+    origin: "left",
+    delay:5000,
+});
+ScrollReveal().reveal(".socails span",{
+    ...ScrollRevealOption,
+    origin: "left",
+    delay: 5500,
+    interval: 500,
+});
 

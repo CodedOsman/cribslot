@@ -44,7 +44,9 @@
     <script src="assets/js/bootstrap.js"></script>
     <script src="assets/js/bootstrap.bundle.js"></script>
     <script src="assets/js/all.js"></script>
+    <script src="assets/js/scrollreveal.min.js"></script>
     <script src="assets/js/script.js"></script>
+    
     
 </body>
 </html>
