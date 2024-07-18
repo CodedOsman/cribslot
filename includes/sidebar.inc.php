@@ -15,28 +15,28 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse" aria-expanded="false">
-                    <i class="fa-solid fa-user"></i>
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#assets" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fa-solid fa-building-user"></i>
                     Assets
                 </a>
-                <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <ul id="assets" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="assetsdashboard.php?assets=upload-main-asset" class="sidebar-link">Upload Main Asset</a>
+                        <a href="dashboard.php?assets=upload-main-asset" class="sidebar-link">Upload Main Asset</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="assetsdashboard.php?assets=upload-sub-asset" class="sidebar-link">Upload Sub Asset</a>
+                        <a href="dashboard.php?assets=upload-sub-asset" class="sidebar-link">Upload Sub Asset</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="assetsdashboard.php?assets" class="sidebar-link">View All Asset</a>
+                        <a href="dashboard.php?assets" class="sidebar-link">View All Asset</a>
                     </li>
                 </ul>
             </li>
             <li class="sidebar-item">
-                <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse" aria-expanded="false">
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#clients" data-bs-toggle="collapse" aria-expanded="false">
                     <i class="fa-solid fa-user"></i>
                     Clients
                 </a>
-                <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                <ul id="clients" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
                         <a href="#" class="sidebar-link">Add Tenant</a>
                     </li>
