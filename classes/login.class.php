@@ -41,7 +41,7 @@ class Login extends Dbh{
             //getting queried results
             if($stmt->rowCount() == 0){
                 $stmt = null;
-                redirect("User does not exist! Create an account.", "login.php");
+                redirect("Check your email and activate before login", "login.php");
                 exit();
             }
 
