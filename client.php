@@ -145,37 +145,60 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
             <h5 class="text-center">Add Client</h5>
         </div>
         <form action="includes/clients.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+            <?php
+            $clientid = $_GET['id'];
+            $clientinfo = $clients->fetchClientInfo($clientid);
+            ?>
             <input type="text" class="form-control" value="<?php echo $userid ?>" name="ownerid" style="display:none;">
             <div class="input-group mb-3">
                 <select name="client_type" id="client_type" class="form-control form-control-lg fs-6">
-                    <option value="">Select Client Type</option>
-                    <option value="Individual">Individual</option>
-                    <option value="Company">Company</option>
+                    <?php
+                    if ($clientinfo['client_type'] == 'Individual') {
+                    ?>
+                        <option value="<?php echo $clientinfo['client_type']; ?>"><?php echo $clientinfo['client_type']; ?></option>
+                        <option value="Company">Company</option>
+                    <?php
+                    } elseif ($clientinfo['client_type'] == 'Company') { ?>
+                        <option value="<?php echo $clientinfo['client_type']; ?>"><?php echo $clientinfo['client_type']; ?></option>
+                        <option value="Individual">Individual</option>
+                    <?php }
+                    ?>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="firstname" placeholder="Enter client first name" class="form-control form-control-lg fs-6">
+                <input type="text" name="firstname" placeholder="Enter client first name" value="<?php echo $clientinfo['first_name']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="lastname" placeholder="Enter client last name" class="form-control form-control-lg fs-6">
+                <input type="text" name="lastname" placeholder="Enter client last name" value="<?php echo $clientinfo['last_name']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
                 <span class="input-group"><small>Add an image of your client</small></span>
-                <input type="file" name="client_image" class="form-control form-control-lg fs-6">
+                <input type="file" name="client_image" value="<?php echo $clientinfo['client_photo']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
                 <select name="gender" id="gender" class="form-control form-control-lg fs-6">
-                    <option value="">Select Gender</option>
-                    <option value="Female">Female</option>
-                    <option value="Male">Male</option>
-                    <option value="Other">Other</option>
+                    <?php $gender = $clientinfo['gender'] ?>
+                    <?php if ($gender == 'Male') : ?>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    <?php elseif ($gender == 'Female') : ?>
+                        <option value="Male">Male</option>
+                        <option value="Other">Other</option>
+                    <?php elseif ($gender == 'Other') : ?>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    <?php else : ?>
+                        <option value="Female">Female</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    <?php endif; ?>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="email" placeholder="Enter client email" class="form-control form-control-lg fs-6">
+                <input type="text" name="email" placeholder="Enter client email" value="<?php echo $clientinfo['email']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="contact" placeholder="Enter client contact" class="form-control form-control-lg fs-6">
+                <input type="text" name="contact" placeholder="Enter client contact" value="<?php echo $clientinfo['contact']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
                 <select name="main_asset" class="form-control form-control-lg fs-6">
@@ -192,13 +215,18 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
             </div>
             <div class="input-group mb-3">
                 <select name="client_status" id="client_status" class="form-control form-control-lg fs-6">
-                    <option value="">Select Client Status</option>
-                    <option value="tenant">Tenant</option>
+                    <?php $status = $clientinfo['client_status']; ?>
+                    <?php if($status == 'tenant') { ?>
+                    <option value="<?php echo $status; ?>">Tenant</option>
                     <option value="buyer">Buyer</option>
+                    <?php }if($status == 'buyer') {?>
+                    <option value="<?php echo $status; ?>">Buyer</option>
+                    <option value="tenant">Tenant</option>
+                    <?php } ?>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="occupation" placeholder="Client occupation" class="form-control form-control-lg fs-6">
+                <input type="text" name="occupation" placeholder="Client occupation" value="<?php echo $clientinfo['occupation']; ?>" class="form-control form-control-lg fs-6">
             </div>
 
             <div class="input-group mb-3">
