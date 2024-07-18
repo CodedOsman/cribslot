@@ -201,16 +201,25 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
                 <input type="text" name="contact" placeholder="Enter client contact" value="<?php echo $clientinfo['contact']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
-                <select name="main_asset" class="form-control form-control-lg fs-6">
+                <select name="asset_id" class="form-control form-control-lg fs-6">
                     <option value="">Select asset</option>
                     <?php
                     $main_asset = $assets->fetchMainAssets($userid);
+                    $sub_asset = $assets->fetchSubAssets($userid);
                     foreach ($main_asset as $main) {
                         $mainN = $main['asset_name'];
                         $mainid = $main['asset_id'];
                     ?>
                         <option value="<?php echo $mainid; ?>"><?php echo $mainN; ?></option>
-                    <?php } ?>
+                    <?php }
+                    foreach ($sub_asset as $sub){
+                        $subN = $sub['sub_name'];
+                        $subid = $sub['sub_id'];
+                    ?>
+                    <option value="<?php echo $subid; ?>"><?php echo $subN; ?></option>
+                    <?php
+                    }
+                    ?>
                 </select>
             </div>
             <div class="input-group mb-3">
