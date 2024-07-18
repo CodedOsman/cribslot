@@ -50,6 +50,7 @@
                     <div class="header-text mb-3">
                         <h5 class="text-center">Upload new asset</h5>
                     </div>
+                    <?php include 'message.php'; ?>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
                         <div class="input-group mb-3">
                             <input type="text" name="assetname" placeholder="Name this asset" class="form-control form-control-lg fs-6">
@@ -123,6 +124,7 @@
                     <div class="header-text mb-3">
                         <h5 class="text-center">Upload new asset</h5>
                     </div>
+                    <?php include 'message.php'; ?>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
                         <div class="input-group mb-3">
                             <span class="input-group">Main Asset </span>
@@ -198,6 +200,7 @@
                     <div class="header-text mb-3">
                         <h5 class="text-center">Upload new asset</h5>
                     </div>
+                    <?php include 'message.php'; ?>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit form starts -->
                         <?php
                             $asset_id = $_GET['id'];
@@ -285,6 +288,7 @@
                     <div class="header-text mb-3">
                         <h5 class="text-center">Upload new asset</h5>
                     </div>
+                    <?php include 'message.php'; ?>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit sub form starts -->
                         <?php
                             $asset_id = $_GET['id'];

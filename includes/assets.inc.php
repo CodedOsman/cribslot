@@ -8,8 +8,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $category_id = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'); 
         $type_id = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8'); 
         $number_of_subs = htmlspecialchars($_POST['subs'], ENT_QUOTES, 'UTF-8'); 
-        $asset_img = $_FILES['asset_img']['name'];
-        $asset_video = $_FILES['asset_video']['name'];
+        $asset_img = $_FILES['asset_img'];
+        $asset_video = $_FILES['asset_video'];
         $asset_description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $asset_country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8');
         $date_added = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
@@ -20,15 +20,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $floor_area = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
         $owner_id = $_SESSION['auth_user']['user_id'];
         //process the files received
-        $tempName = $_FILES['asset_img']['temp_name'];
-        $fileError = $_FILES['asset_img']['error'];
-        $imageSize = $_FILES['asset_img']['size'];
-        $fileExt = explode(".", $asset_img);
+        $asset = $asset_img['name'];
+        $tempName = $asset_img['temp_name'];
+        $fileError = $asset_img['error'];
+        $imageSize = $asset_img['size'];
+        $fileExt = explode(".", $asset);
         $fileActualExt = strtolower(end($fileExt));
-        $vidtempName = $_FILES['asset_video']['temp_name'];
-        $vidError = $_FILES['asset_video']['error'];
-        $vidSize = $_FILES['asset_video']['size'];
-        $vidExt = explode('.', 'asset_video');
+        $assetV = $asset_video['name'];
+        $vidtempName = $asset_video['temp_name'];
+        $vidError = $asset_video['error'];
+        $vidSize = $asset_video['size'];
+        $vidExt = explode('.', $assetV);
         $vidActualExt = strtolower(end($vidExt));
         $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
         //error handling of files
@@ -92,20 +94,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8'); 
         $address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
-        $sub_asset_img = $_FILES['asset_img']['name'];
-        $sub_asset_video = $_FILES['asset_video']['name']; 
+        $sub_asset_img = $_FILES['asset_img'];
+        $sub_asset_video = $_FILES['asset_video']; 
         $floor_size = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
 
         // Process the files recieved
-        $tempName = $_FILES['asset_img']['temp_name'];
-        $fileError = $_FILES['asset_img']['error'];
-        $imageSize = $_FILES['asset_img']['size'];
-        $fileExt = explode(".", $asset_img);
+        $sub_img = $sub_asset_img['name'];
+        $tempName = $sub_asset_img['temp_name'];
+        $fileError = $sub_asset_img['error'];
+        $imageSize = $sub_asset_img['size'];
+        $fileExt = explode(".", $sub_img);
         $fileActualExt = strtolower(end($fileExt));
-        $vidtempName = $_FILES['asset_video']['temp_name'];
-        $vidError = $_FILES['asset_video']['error'];
-        $vidSize = $_FILES['asset_video']['size'];
-        $vidExt = explode('.', 'asset_video');
+        $sub_vid = $sub_asset_video['name'];
+        $vidtempName = $sub_asset_video['temp_name'];
+        $vidError = $sub_asset_video['error'];
+        $vidSize = $sub_asset_video['size'];
+        $vidExt = explode('.', $sub_vid);
         $vidActualExt = strtolower(end($vidExt));
         $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
         //error handling of files
@@ -166,8 +170,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $category_id = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'); 
         $type_id = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8'); 
         $number_of_subs = htmlspecialchars($_POST['subs'], ENT_QUOTES, 'UTF-8'); 
-        $asset_img = $_FILES['asset_img']['name'];
-        $asset_video = $_FILES['asset_video']['name'];
+        $asset_img = $_FILES['asset_img'];
+        $asset_video = $_FILES['asset_video'];
         $asset_description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $asset_country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8');
         $date_added = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
@@ -178,15 +182,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $floor_area = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
         $owner_id = $_SESSION['auth_user']['user_id'];
         //process the files received
-        $tempName = $_FILES['asset_img']['temp_name'];
-        $fileError = $_FILES['asset_img']['error'];
-        $imageSize = $_FILES['asset_img']['size'];
-        $fileExt = explode(".", $asset_img);
+        $asset = $asset_img['name'];
+        $tempName = $asset_img['temp_name'];
+        $fileError = $asset_img['error'];
+        $imageSize = $asset_img['size'];
+        $fileExt = explode(".", $asset);
         $fileActualExt = strtolower(end($fileExt));
-        $vidtempName = $_FILES['asset_video']['temp_name'];
-        $vidError = $_FILES['asset_video']['error'];
-        $vidSize = $_FILES['asset_video']['size'];
-        $vidExt = explode('.', 'asset_video');
+        $assetV = $asset_video['name'];
+        $vidtempName = $asset_video['temp_name'];
+        $vidError = $asset_video['error'];
+        $vidSize = $asset_video['size'];
+        $vidExt = explode('.', $assetV);
         $vidActualExt = strtolower(end($vidExt));
         $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
         //error handling of files
@@ -221,12 +227,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         
         //check if folders exist
-        if(!is_dir($destination)){
-            mkdir($destination, 0777, true);
-        }
-        if(!is_dir($viddestination)){
-            mkdir($viddestination);
-        }
+
 
         if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
@@ -258,20 +259,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8'); 
         $address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
-        $sub_asset_img = $_FILES['asset_img']['name'];
-        $sub_asset_video = $_FILES['asset_video']['name']; 
+        $sub_asset_img = $_FILES['asset_img'];
+        $sub_asset_video = $_FILES['asset_video']; 
         $floor_size = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
 
         // Process the files recieved
-        $tempName = $_FILES['asset_img']['temp_name'];
-        $fileError = $_FILES['asset_img']['error'];
-        $imageSize = $_FILES['asset_img']['size'];
-        $fileExt = explode(".", $asset_img);
+        $sub_img = $sub_asset_img['name'];
+        $tempName = $sub_asset_img['temp_name'];
+        $fileError = $sub_asset_img['error'];
+        $imageSize = $sub_asset_img['size'];
+        $fileExt = explode(".", $sub_img);
         $fileActualExt = strtolower(end($fileExt));
-        $vidtempName = $_FILES['asset_video']['temp_name'];
-        $vidError = $_FILES['asset_video']['error'];
-        $vidSize = $_FILES['asset_video']['size'];
-        $vidExt = explode('.', 'asset_video');
+        $subV = $sub_asset_video['name'];
+        $vidtempName = $sub_asset_video['temp_name'];
+        $vidError = $sub_asset_video['error'];
+        $vidSize = $sub_asset_video['size'];
+        $vidExt = explode('.', $subV);
         $vidActualExt = strtolower(end($vidExt));
         $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
         //error handling of files
@@ -306,12 +309,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
         
         //check if folders exist
-        if(!is_dir($destination)){
-            mkdir($destination, 0777, true);
-        } 
-        if(!is_dir($viddestination)){
-            mkdir($viddestination);
-        }
+        
         if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
         }else{
