@@ -33,7 +33,7 @@ include("includes/header.inc.php");
                     <?php endif; ?>
                 </div>
                 <?php if(isset($_GET['profile']) || isset($_GET['change_password'])) : ?>
-                    <?php include_once 'profile.php'; elseif (isset($_GET['assets'])) : include_once 'assetsdashboard.php'; else : ?>
+                    <?php include_once 'profile.php'; elseif (isset($_GET['assets'])) : include_once 'assetsdashboard.php'; elseif (isset($_GET['clients'])) : include_once 'client.php'; else : ?>
                 <div class="row">
                     <div class="col-12 col-md-6 d-flex">
                         <div class="card flex-fill border-0 illustration">
@@ -112,11 +112,6 @@ include("includes/header.inc.php");
                                             All your assets
                                         </h6>  
                                     </div>
-                                    <div class="col-6 align-self-end text-end">
-                                        <button type="button" class="align-self-end ms-auto btn btn-secondary btn-sm">
-                                            <a href="dashboard.php?assets">Manage Assets</a>
-                                        </button>
-                                    </div>
                                     
                                 </div> 
                             </div>
@@ -138,9 +133,7 @@ include("includes/header.inc.php");
                                             ?>
                                             <tr>
                                                 <td colspan="4">
-                                                    <button class="btn btn-primary">
-                                                        <a href="dashboard.php?assets=upload-main-asset">Upload Now</a>
-                                                    </button>
+                                                    <h4 class="text-center text-muted">No assets to display!</h4>
                                                 </td>
                                             </tr>
                                             <?php } else { 
@@ -157,11 +150,9 @@ include("includes/header.inc.php");
                                                 <td>
                                                     <?php $subsCount = $asset->fetchSubAssets($userid)->rowCount(); ?>
                                                     <span class="badge rounded-pill bg-secondary"><?php echo $subsCount; ?></span>
-                                                    <a href="#">View all</a>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-info btn-sm">List</button>
-                                                    <button type="button" class="btn btn-secondary btn-sm">Unlist</button>
+                                                    <button type="button" class="btn btn-info btn-sm">Edit</button>
                                                     <button type="button" class="btn btn-danger btn-sm">X</button>
                                                 </td>    
                                             </tr>

@@ -1,4 +1,4 @@
-<?php if(isset($_GET["dashboard"]) || isset($_GET['profile']) || isset($_GET['change_password']) || isset($_GET['assets']) ) : ?>
+<?php if(isset($_GET["dashboard"]) || isset($_GET['profile']) || isset($_GET['change_password']) || isset($_GET['assets']) || isset($_GET['clients'])) : ?>
   <!-- navbar for dashboard starts -->
   <nav class="navbar navbar-expand px-3 border-bottom">
     <button class="btn" id="sidebar-toggle" type="button">

@@ -198,7 +198,7 @@
                     <div class="header-text mb-3">
                         <h5 class="text-center">Upload new asset</h5>
                     </div>
-                    <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+                    <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit form starts -->
                         <?php
                             $asset_id = $_GET['id'];
                             $assetData = $assets->fetchMainAsset($asset_id);
@@ -285,7 +285,7 @@
                     <div class="header-text mb-3">
                         <h5 class="text-center">Upload new asset</h5>
                     </div>
-                    <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+                    <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit sub form starts -->
                         <?php
                             $asset_id = $_GET['id'];
                             $assetData = $assets->fetchSubAsset($asset_id);
@@ -371,7 +371,7 @@
                 </div>
                 <?php else :?>
                 <!--Table Element -->
-                <div class="col-12 col-md-12 d-flex border-0"><!-- Table cared starts here -->
+                <div class="col-12 col-md-12 d-flex border-0"><!-- Table card starts here -->
                     <div class="card border-0 flex-fill">
                         <div class="card-header">
                             <div class="row">

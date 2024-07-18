@@ -38,13 +38,10 @@
                 </a>
                 <ul id="clients" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Add Tenant</a>
+                        <a href="dashboard.php?clients=add-tenant" class="sidebar-link">Add Client</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Add Buyer</a>
-                    </li>
-                    <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">View All Clients</a>
+                        <a href="dashboard.php?clients" class="sidebar-link">Manage Clients</a>
                     </li>
                 </ul>
             </li>
