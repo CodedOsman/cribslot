@@ -15,10 +15,21 @@
                 </a>
             </li>
             <li class="sidebar-item">
-                <a href="assetsdashboard.php?assets" class="sidebar-link collapsed">
-                    <i class="fa-solid fa-building-user"></i>
+                <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse" aria-expanded="false">
+                    <i class="fa-solid fa-user"></i>
                     Assets
                 </a>
+                <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
+                    <li class="sidebar-item">
+                        <a href="assetsdashboard.php?assets=upload-main-asset" class="sidebar-link">Upload Main Asset</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="assetsdashboard.php?assets=upload-sub-asset" class="sidebar-link">Upload Sub Asset</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="assetsdashboard.php?assets" class="sidebar-link">View All Asset</a>
+                    </li>
+                </ul>
             </li>
             <li class="sidebar-item">
                 <a href="#" class="sidebar-link collapsed" data-bs-target="#posts" data-bs-toggle="collapse" aria-expanded="false">
@@ -27,10 +38,13 @@
                 </a>
                 <ul id="posts" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Tenants</a>
+                        <a href="#" class="sidebar-link">Add Tenant</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link">Buyers</a>
+                        <a href="#" class="sidebar-link">Add Buyer</a>
+                    </li>
+                    <li class="sidebar-item">
+                        <a href="#" class="sidebar-link">View All Clients</a>
                     </li>
                 </ul>
             </li>
