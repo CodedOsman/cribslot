@@ -1,4 +1,5 @@
 <?php
+include '../config/app.php';
 
 if(isset($_SERVER['REQUEST_METHOD']) == 'POST'){
     if(isset($_POST['add_client'])){
@@ -13,19 +14,18 @@ if(isset($_SERVER['REQUEST_METHOD']) == 'POST'){
         $status = htmlspecialchars($_POST['client_status'], ENT_QUOTES, 'UTF-8');
         $occupation = htmlspecialchars($_POST['occupation'], ENT_QUOTES, 'UTF-8');
         $clientphoto = $_FILES['client_image'];
-        $photo = $_FILES['name'];
-        $tempName = $file['tmp_name'];
-        $fileError = $file['error'];
-        $fileSize = $file['size'];
-        $fileExt = explode('.', $dp);
+        $photo = $clientphoto['name'];
+        $tempName = $clientphoto['tmp_name'];
+        $fileError = $clientphoto['error'];
+        $fileSize = $clientphoto['size'];
+        $fileExt = explode('.', $photo);
         $fileActualExt = strtolower(end($fileExt));
         $allowed = array('jpg', 'jpeg', 'png', 'gif');
-        $userid = $_SESSION['auth_user']['user_id'];
         $username = $_SESSION['auth_user']['user_name'];
 
-        include '..classes/dbh.class.php';
-        include '..classes/clients.class.php';
-        include '..classes/clients-contr.class.php';
+        include '../classes/dbh.class.php';
+        include '../classes/clients.class.php';
+        include '../classes/client-contr.class.php';
 
         $client = new ClientContr($ownerid);
 
@@ -33,7 +33,7 @@ if(isset($_SERVER['REQUEST_METHOD']) == 'POST'){
             if($fileError === 0){
                 if($fileSize < 12000000){
                     $image = 'client' . uniqid("", true) . '.' . $fileActualExt;
-                    $path = '../profiles/' . $username . $userid . '/clients';
+                    $path = '../profiles/' . $username . $ownerid . '/clients';
                     $destination = $path . '/' . $image;
                     #check if path exists
                     if(is_dir(dirname($path))){

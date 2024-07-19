@@ -64,7 +64,7 @@
 </div><!-- header row ends here -->
 
 <?php
-if (isset($_GET['clients']) && $_GET['clients'] == 'add-tenant') :
+if (isset($_GET['clients']) && $_GET['clients'] == 'add-client') :
 ?>
     <!-- form for Client addition starts here-->
     <div class="row col-12 col-md-12 d-flex bg-subtle shadow">
@@ -105,7 +105,7 @@ if (isset($_GET['clients']) && $_GET['clients'] == 'add-tenant') :
                 <input type="text" name="contact" placeholder="Enter client contact" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
-                <select name="main_asset" class="form-control form-control-lg fs-6">
+                <select name="asset_id" class="form-control form-control-lg fs-6">
                     <option value="">Select asset</option>
                     <?php
                     $main_asset = $assets->fetchMainAssets($userid);

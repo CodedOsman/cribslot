@@ -24,7 +24,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $tempName = $asset_img['temp_name'];
         $fileError = $asset_img['error'];
         $imageSize = $asset_img['size'];
-        $fileExt = explode(".", $asset);
+        $fileExt = explode('.', $asset);
         $fileActualExt = strtolower(end($fileExt));
         $assetV = $asset_video['name'];
         $vidtempName = $asset_video['temp_name'];
@@ -32,7 +32,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $vidSize = $asset_video['size'];
         $vidExt = explode('.', $assetV);
         $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
+        $allowed = array('jpg', 'jpeg', 'png', 'gif', 'mp4', 'mov');
         //error handling of files
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
@@ -111,7 +111,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $vidSize = $sub_asset_video['size'];
         $vidExt = explode('.', $sub_vid);
         $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
+        $allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
         //error handling of files
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
@@ -194,7 +194,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $vidSize = $asset_video['size'];
         $vidExt = explode('.', $assetV);
         $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
+        $allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
         //error handling of files
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
@@ -276,7 +276,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $vidSize = $sub_asset_video['size'];
         $vidExt = explode('.', $subV);
         $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jepg', 'png', 'mp4', 'mov');
+        $allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
         //error handling of files
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){

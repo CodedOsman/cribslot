@@ -1,5 +1,6 @@
 <?php
 include("config/app.php");
+include('classes/auth.class.php');
 include("classes/dbh.class.php");
 include("classes/userdash.class.php");
 include("classes/dashview.class.php");

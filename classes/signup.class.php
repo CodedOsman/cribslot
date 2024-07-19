@@ -17,7 +17,7 @@ class Signup extends Dbh{
             exit();
         }
 
-        /*$mail = require  "../config/mailer.php";
+        $mail = require  "../config/mailer.php";
 
         $mail->setFrom("oselibas@gmail.com");
         $mail->addAddress($email);
@@ -33,7 +33,7 @@ class Signup extends Dbh{
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer error: {$mail->ErrorInfo}";
             exit();
-        }*/
+        }
 
         $stmt = null;
     }
