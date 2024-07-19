@@ -12,56 +12,83 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $asset_video = $_FILES['asset_video'];
         $asset_description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $asset_country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8');
-        $date_added = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
         $asset_address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
-        $listed = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
         $number_of_rooms = htmlspecialchars($_POST['rooms'], ENT_QUOTES, 'UTF-8');
         $number_of_floors = htmlspecialchars($_POST['floors'], ENT_QUOTES, 'UTF-8');
         $floor_area = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
         $owner_id = $_SESSION['auth_user']['user_id'];
         //process the files received
         $asset = $asset_img['name'];
-        $tempName = $asset_img['temp_name'];
+        $tempName = $asset_img['tmp_name'];
         $fileError = $asset_img['error'];
         $imageSize = $asset_img['size'];
         $fileExt = explode('.', $asset);
         $fileActualExt = strtolower(end($fileExt));
+        //process the video file
         $assetV = $asset_video['name'];
-        $vidtempName = $asset_video['temp_name'];
+        $vidtempName = $asset_video['tmp_name'];
         $vidError = $asset_video['error'];
         $vidSize = $asset_video['size'];
         $vidExt = explode('.', $assetV);
         $vidActualExt = strtolower(end($vidExt));
         $allowed = array('jpg', 'jpeg', 'png', 'gif', 'mp4', 'mov');
         //error handling of files
+        
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
                 if($fileSize < 12000000){
-                    $image = $tempName. uniqid("", true) . '.'.$fileActualExt;
+                    $image = uniqid("", true) . '.'.$fileActualExt;
                     $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
                     $destination = $ipath . $image;
+                }else{
+                    redirect("Image file size too large!", "dashboard.php?assets=upload-main-asset");
+                    exit();
                 }
             }else{
-                redirect("Image file size too large!", "dashboard.php?assets=upload-main-asset");
+                redirect("There was an error uploading your image!", "dashboard.php?assets=upload-main-asset");
                 exit();
             }
         }else{
-            redirect("Invalid file type!", "dashboard.php?assets=upload-main-asset");
+            redirect("Invalid image file type!", "dashboard.php?assets=upload-main-asset");
         }
+        //process the video and check for errors
 
+        if (in_array($vidActualExt, $allowed)) {
+            if ($vidError === 0) {
+                if ($vidSize < 40000000) {
+                    $video = uniqid('', true) . '.' . $vidActualExt;
+                    $path = '../profiles/'.$username.$userid.'/assets/videos/';
+                    $viddestination = $path . $video;
+                } else {
+                    redirect("Video file size too large!", "dashboard.php?assets=upload-main-asset");
+                    exit();
+                }
+            } else {
+                redirect("There was an error uploading your video!", "dashboard.php?assets=upload-main-asset");
+                exit();
+            }
+        } else {
+            redirect("Invalid video file type!", "dashboard.php?assets=upload-main-asset");
+            exit();
+        }
+        
         if(in_array($vidActualExt, $allowed)){
             if($vidError === 0){
                 if($vidSize < 40000000){
-                    $video = $vidtempName.uniqid("", true). '.'.$fileActualExt;
+                    $video = uniqid("", true). '.'.$fileActualExt;
                     $path = '../profiles/'.$username.$userid.'/assets/videos/';
                     $viddestination = $path . $video;
+                }else{
+                    redirect("Video file size too large!", "dashboard.php?assets=upload-main-asset");
+                    exit();
                 }
             }else{
-                redirect("Video file size too large!", "dashboard.php?assets=upload-main-asset");
+                redirect("There was an error uploading your video!", "dashboard.php?assets=upload-main-asset");
                 exit();
             }
         }else{
             redirect("Invalid video type!", "dashboard.php?assets=upload-main-asset");
+            exit();
         }
         
         //check if folders exist
@@ -69,7 +96,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
         }else{
-            redirect("Could not upload file", "dashboard.php?assets=upload-main-asset");
+            redirect("Could not upload files", "dashboard.php?assets=upload-main-asset");
             exit();
         }
 
@@ -100,13 +127,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         // Process the files recieved
         $sub_img = $sub_asset_img['name'];
-        $tempName = $sub_asset_img['temp_name'];
+        $tempName = $sub_asset_img['tmp_name'];
         $fileError = $sub_asset_img['error'];
         $imageSize = $sub_asset_img['size'];
         $fileExt = explode(".", $sub_img);
         $fileActualExt = strtolower(end($fileExt));
         $sub_vid = $sub_asset_video['name'];
-        $vidtempName = $sub_asset_video['temp_name'];
+        $vidtempName = $sub_asset_video['tmp_name'];
         $vidError = $sub_asset_video['error'];
         $vidSize = $sub_asset_video['size'];
         $vidExt = explode('.', $sub_vid);
@@ -174,22 +201,20 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $asset_video = $_FILES['asset_video'];
         $asset_description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $asset_country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8');
-        $date_added = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
         $asset_address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
-        $listed = htmlspecialchars($_POST[''], ENT_QUOTES, 'UTF-8');
         $number_of_rooms = htmlspecialchars($_POST['rooms'], ENT_QUOTES, 'UTF-8');
         $number_of_floors = htmlspecialchars($_POST['floors'], ENT_QUOTES, 'UTF-8');
         $floor_area = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
         $owner_id = $_SESSION['auth_user']['user_id'];
         //process the files received
         $asset = $asset_img['name'];
-        $tempName = $asset_img['temp_name'];
+        $tempName = $asset_img['tmp_name'];
         $fileError = $asset_img['error'];
         $imageSize = $asset_img['size'];
         $fileExt = explode(".", $asset);
         $fileActualExt = strtolower(end($fileExt));
         $assetV = $asset_video['name'];
-        $vidtempName = $asset_video['temp_name'];
+        $vidtempName = $asset_video['tmp_name'];
         $vidError = $asset_video['error'];
         $vidSize = $asset_video['size'];
         $vidExt = explode('.', $assetV);
@@ -265,13 +290,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         // Process the files recieved
         $sub_img = $sub_asset_img['name'];
-        $tempName = $sub_asset_img['temp_name'];
+        $tempName = $sub_asset_img['tmp_name'];
         $fileError = $sub_asset_img['error'];
         $imageSize = $sub_asset_img['size'];
         $fileExt = explode(".", $sub_img);
         $fileActualExt = strtolower(end($fileExt));
         $subV = $sub_asset_video['name'];
-        $vidtempName = $sub_asset_video['temp_name'];
+        $vidtempName = $sub_asset_video['tmp_name'];
         $vidError = $sub_asset_video['error'];
         $vidSize = $sub_asset_video['size'];
         $vidExt = explode('.', $subV);
