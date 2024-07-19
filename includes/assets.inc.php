@@ -79,7 +79,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cat = new AssetContr($owner_id);
 
         #adding asset to assets data table
-        $cat->addAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area);
+        $cat->addAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area);
         
     }
     // Adding sub asset
@@ -242,7 +242,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cat = new AssetContr($owner_id);
 
         #adding asset to assets data table
-        $cat->updateMainAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $date_added, $asset_address, $listed, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
+        $cat->updateMainAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
         
     }
 

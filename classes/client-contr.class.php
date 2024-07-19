@@ -51,8 +51,7 @@ class  ClientContr extends Clients{
         redirect("Client updated successfully!","dashboard.php?clients");
     }
 
-    public function emptyInput($input){
-        $result;
+    private function emptyInput($input){
         if(empty($input)){
             $result = false;
         }else{
@@ -63,7 +62,6 @@ class  ClientContr extends Clients{
 
     // Email validation error handler
     private function invalidEmail($email){
-        $result;
         if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
             $result = false;
         } 
