@@ -21,7 +21,6 @@ class LoginContr extends Login{
     }
     // Empty field error handler
     private function emptyInput(){
-        $result;
         if(empty($this->email) || empty($this->pwd)){
             $result = false;
         } 

@@ -46,7 +46,6 @@ class SignupContr extends Signup{
     }
     // Empty field error handler
     private function emptyInput(){
-        $result;
         if(empty($this->username) || empty($this->email) || empty($this->pwd) || empty($this->pwdRepeat)){
             $result = false;
         } 
@@ -57,7 +56,6 @@ class SignupContr extends Signup{
     }
     // Name Error handler
     private function invalidUsername(){
-        $result;
         if(!preg_match("/^[a-zA-Z0-9]*$/", $this->username)){
             $result = false;
         } 
@@ -68,7 +66,6 @@ class SignupContr extends Signup{
     }
     // Email validation error handler
     private function invalidEmail(){
-        $result;
         if(!filter_var($this->email, FILTER_VALIDATE_EMAIL)){
             $result = false;
         } 
@@ -79,7 +76,6 @@ class SignupContr extends Signup{
     }
     // Password match error handler
     private function pwdMatch(){
-        $result;
         if ($this->pwd !== $this->pwdRepeat){
             $result = false;
         }
@@ -90,7 +86,6 @@ class SignupContr extends Signup{
     }
     // Error handler for already existing username or email
     private function emailTaken(){
-        $result;
         if (!$this->checkUser($this->username, $this->email)){
             $result = false;
         }

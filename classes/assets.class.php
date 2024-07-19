@@ -83,7 +83,7 @@ class Assets extends Dbh{
 
     // method adds new assets to the database
     protected function setAssetInfo($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $owner_id){
-        $sql = "INSERT INTO assets (asset_name, asset_category_id, asset_type_id, number_of_subs, asset_img, asset_video, asset_description, asset_country, date_added, asset_address, listed, number_of_rooms, number_of_floors, floor_area, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $sql = "INSERT INTO assets (asset_name, asset_category_id, asset_type_id, number_of_subs, asset_img, asset_video, asset_description, asset_country, asset_address, number_of_rooms, number_of_floors, floor_area, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = $this->connect()->prepare($sql);
         
         if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $owner_id))){
@@ -97,7 +97,7 @@ class Assets extends Dbh{
 
     // method updates main assets
     protected function updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id){
-        $sql = "UPDATE assets SET asset_name=?, asset_category_id=?, asset_type_id=?, number_of_subs=?, asset_img=?, asset_video=?, asset_description=?, asset_country=?, date_added=?, asset_address=?, listed=?, number_of_rooms=?,number_of_floors=?,floor_size=? WHERE asset_id=?";
+        $sql = "UPDATE assets SET asset_name=?, asset_category_id=?, asset_type_id=?, number_of_subs=?, asset_img=?, asset_video=?, asset_description=?, asset_country=?, asset_address=?, number_of_rooms=?,number_of_floors=?,floor_size=? WHERE asset_id=?";
         $stmt = $this->connect()->prepare($sql);
 
         if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id))){

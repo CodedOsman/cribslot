@@ -49,9 +49,12 @@ if(isset($_SERVER['REQUEST_METHOD']) == 'POST'){
                         redirect("Could not locate path!", "dashboard.php?clients=add-client");
                         exit();
                     }
+                }else{
+                    redirect("File size too large!", "dashboard.php?clients=add-client");
+                    exit();
                 }
             }else{
-                redirect("File size too large!", "dashboard.php?clients=add-client");
+                redirect("There was an error uploading your image file!", "dashboard.php?clients=add-client");
                 exit();
             }
         }else{

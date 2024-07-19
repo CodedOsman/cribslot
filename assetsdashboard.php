@@ -52,6 +52,8 @@
                     </div>
                     <?php include 'message.php'; ?>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+                        <input type="text" name="userid" value="<?php echo $userid; ?>" style="display:none;">
+                        <input type="text" name="username" value="<?php echo $username;?>" style="display:none;">
                         <div class="input-group mb-3">
                             <input type="text" name="assetname" placeholder="Name this asset" class="form-control form-control-lg fs-6">
                         </div>
@@ -126,6 +128,8 @@
                     </div>
                     <?php include 'message.php'; ?>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+                        <input type="text" name="userid" value="<?php echo $userid; ?>" style="display:none;">
+                        <input type="text" name="username" value="<?php echo $username;?>" style="display:none;">
                         <div class="input-group mb-3">
                             <span class="input-group">Main Asset </span>
                             <select name="main_asset" class="form-control form-control-lg fs-6">
@@ -207,6 +211,8 @@
                             $assetData = $assets->fetchMainAsset($asset_id);
                             
                         ?>
+                        <input type="text" name="userid" value="<?php echo $userid; ?>" style="display:none;">
+                        <input type="text" name="username" value="<?php echo $username;?>" style="display:none;">
                         <input type="text" name="asset_id" style="display:none;" value="<?php echo $asset_id; ?>">
                         <div class="input-group mb-3">
                             <input type="text" name="assetname" placeholder="Name this asset" value="<?php echo $assetData['asset_name']; ?>" class="form-control form-control-lg fs-6">
@@ -295,6 +301,8 @@
                             $assetData = $assets->fetchSubAsset($asset_id);
                             
                         ?>
+                        <input type="text" name="userid" value="<?php echo $userid; ?>" style="display:none;">
+                        <input type="text" name="username" value="<?php echo $username;?>" style="display:none;">
                         <input type="text" name="asset_id" style="display:none;" value="<?php echo $asset_id; ?>">
                         <div class="input-group mb-3">
                             <span class="input-group">Main Asset </span>
