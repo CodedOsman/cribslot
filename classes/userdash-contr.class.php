@@ -46,7 +46,6 @@ class UserDashContr extends UserDash{
     }
 // error handlers
     private function empytInput($first_name, $last_name, $gender, $dob){
-        $result;
         if(empty($first_name) || empty($last_name) || empty($gender) || empty($dob)){
             $result = true;
         }
@@ -57,7 +56,6 @@ class UserDashContr extends UserDash{
     }
 
     private function pwdMatch($newPwd, $cnewPwd){
-        $result;
         if ($newPwd !== $cnewPwd){
             $result = false;
         }

@@ -28,6 +28,10 @@ class  ClientContr extends Clients{
             redirect("Occupation cannot be empty!", "dashboard.php?clients=add-client");
             exit();
         }
+        elseif($this->emptyInput($asset_id) == false){
+            redirect("No asset!", "dashboard.php?clients=add-client");
+            exit();
+        }
         $this->setClient($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $this->ownerid, $client_status, $occupation);
 
         redirect("Client added successfully!","dashboard.php?clients");
