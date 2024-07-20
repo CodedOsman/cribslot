@@ -29,30 +29,30 @@ class  ClientContr extends Clients{
             exit();
         }
         elseif($this->emptyInput($asset_id) == false){
-            redirect("No asset!", "dashboard.php?clients=add-client");
+            redirect("No asset selected!", "dashboard.php?clients=add-client");
             exit();
         }
         $this->setClient($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $this->ownerid, $client_status, $occupation);
 
-        redirect("Client added successfully!","dashboard.php?clients");
+        redirect("Client added successfully!","dashboard.php?clients=add-client");
     }
     //method updates client information
     public function updateClient($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id){
         if($this->invalidEmail($email) == false){
-            redirect("Invalid Email!", "dashboard.php?clients=add-client");
+            redirect("Invalid Email!", "dashboard.php?clients=update-client&id=".$client_id);
             exit();
         }elseif($this->emptyInput($contact) == false){
-            redirect("Contact cannot be empty!", "dashboard.php?clients=add-client");
+            redirect("Contact cannot be empty!", "dashboard.php?clients=update-client&id=".$client_id);
             exit();
         }
         elseif($this->emptyInput($occupation) == false){
-            redirect("Occupation cannot be empty!", "dashboard.php?clients=add-client");
+            redirect("Occupation cannot be empty!", "dashboard.php?clients=update-client&id=".$client_id);
             exit();
         }
 
         $this->updateClientInfo($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id);
 
-        redirect("Client updated successfully!","dashboard.php?clients");
+        redirect("Client updated successfully!","dashboard.php?clients=update-client&id=".$client_id);
     }
 
     private function emptyInput($input){
@@ -61,7 +61,7 @@ class  ClientContr extends Clients{
         }else{
             $result = true;
         }
-
+        return $result;
     }
 
     // Email validation error handler

@@ -38,7 +38,7 @@
                 </a>
                 <ul id="clients" class="sidebar-dropdown list-unstyled collapse" data-bs-parent="#sidebar">
                     <li class="sidebar-item">
-                        <a href="dashboard.php?clients=add-tenant" class="sidebar-link">Add Client</a>
+                        <a href="dashboard.php?clients=add-client" class="sidebar-link">Add Client</a>
                     </li>
                     <li class="sidebar-item">
                         <a href="dashboard.php?clients" class="sidebar-link">Manage Clients</a>

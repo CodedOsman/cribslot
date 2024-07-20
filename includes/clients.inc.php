@@ -1,7 +1,7 @@
 <?php
 include '../config/app.php';
 
-if(isset($_SERVER['REQUEST_METHOD']) == 'POST'){
+if($_SERVER['REQUEST_METHOD'] == 'POST'){
     if(isset($_POST['add_client'])){
         $ownerid = htmlspecialchars($_POST['ownerid'], ENT_QUOTES, 'UTF-8');
         $client_type = htmlspecialchars($_POST['client_type'], ENT_QUOTES, 'UTF-8');
@@ -13,6 +13,8 @@ if(isset($_SERVER['REQUEST_METHOD']) == 'POST'){
         $assetid = htmlspecialchars($_POST['asset_id'], ENT_QUOTES, 'UTF-8');
         $status = htmlspecialchars($_POST['client_status'], ENT_QUOTES, 'UTF-8');
         $occupation = htmlspecialchars($_POST['occupation'], ENT_QUOTES, 'UTF-8');
+        $username = htmlspecialchars($_POST['username'], ENT_QUOTES, 'UTF-8');
+        //handle file
         $clientphoto = $_FILES['client_image'];
         $photo = $clientphoto['name'];
         $tempName = $clientphoto['tmp_name'];
@@ -21,7 +23,6 @@ if(isset($_SERVER['REQUEST_METHOD']) == 'POST'){
         $fileExt = explode('.', $photo);
         $fileActualExt = strtolower(end($fileExt));
         $allowed = array('jpg', 'jpeg', 'png', 'gif');
-        $username = $_SESSION['auth_user']['user_name'];
 
         include '../classes/dbh.class.php';
         include '../classes/clients.class.php';

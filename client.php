@@ -71,8 +71,10 @@ if (isset($_GET['clients']) && $_GET['clients'] == 'add-client') :
         <div class="header-text mb-3">
             <h5 class="text-center">Add Client</h5>
         </div>
+        <?php include 'message.php'; ?>
         <form action="includes/clients.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
             <input type="text" class="form-control" value="<?php echo $userid ?>" name="ownerid" style="display:none;">
+            <input type="text" class="form-control" value="<?php echo $username ?>" name="username" style="display:none;">
             <div class="input-group mb-3">
                 <select name="client_type" id="client_type" class="form-control form-control-lg fs-6">
                     <option value="">Select Client Type</option>
@@ -131,7 +133,6 @@ if (isset($_GET['clients']) && $_GET['clients'] == 'add-client') :
             <div class="input-group mb-3">
                 <button type="submit" name="add_client" class="btn btn-lg btn-primary w-100 fs-6">Add</button>
             </div>
-            <div class="row"></div>
         </form><!-- upload form ends -->
     </div>
     <!-- form for Client addition ends here-->
