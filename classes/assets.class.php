@@ -149,11 +149,34 @@ class Assets extends Dbh{
 
         if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id))){
             $stmt = null;
-            redirect("Something went wrong!", "dashboard.php?assets=upadte-main-asset");
+            redirect("Something went wrong!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
         }
 
         $stmt = null;
+    }
+    // method update main asset photo
+    protected function updateMainPhoto($photo, $asset_id){
+        $sql = "UPDATE assets SET asset_img=? WHERE asset_id=?";
+        $stmt = $this->connect()->prepare($sql);
+
+        if(!$stmt->execute(array($photo, $asset_id))){
+            $stmt = null;
+            redirect('Could not update asset image', 'dashboard.php?assets=update-main-asset&id='.$asset_id);
+            exit();
+        }
+    }
+
+    // method update main asset photo
+    protected function updateMainVideo($video, $asset_id){
+        $sql = "UPDATE assets SET asset_video=? WHERE asset_id=?";
+        $stmt = $this->connect()->prepare($sql);
+
+        if(!$stmt->execute(array($video, $asset_id))){
+            $stmt = null;
+            redirect('Could not update asset video', 'dashboard.php?assets=update-main-asset&id='.$asset_id);
+            exit();
+        }
     }
     
     //method adds new sub assets to the database
@@ -181,6 +204,30 @@ class Assets extends Dbh{
         }
 
         $stmt = null;
+    }
+
+    // method update sub asset photo
+    protected function updateSubPhoto($photo, $asset_id){
+        $sql = "UPDATE asset_subs SET asset_iamge=? WHERE asset_id=?";
+        $stmt = $this->connect()->prepare($sql);
+
+        if(!$stmt->execute(array($photo, $asset_id))){
+            $stmt = null;
+            redirect('Could not update asset image', 'dashboard.php?assets=update-main-asset&id='.$asset_id);
+            exit();
+        }
+    }
+
+    // method update sub asset photo
+    protected function updateSubVideo($video, $asset_id){
+        $sql = "UPDATE asset_subs SET asset_video=? WHERE asset_id=?";
+        $stmt = $this->connect()->prepare($sql);
+
+        if(!$stmt->execute(array($video, $asset_id))){
+            $stmt = null;
+            redirect('Could not update asset video', 'dashboard.php?assets=update-main-asset&id='.$asset_id);
+            exit();
+        }
     }
 
     // method fetchs categories

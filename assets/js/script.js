@@ -32,15 +32,29 @@ if(isLight()){
 }
 // jquery function to upload profile photo
 $(document).ready(function() {
-    $('#image').on('change', function() {
+    $('#main_image').on('change', function() {
         if (this.files.length > 0) {
-            $('#form').submit();
+            $('#main_img_form').submit();
             console.log('form submitted');
         }else{
             console.log('Input field is empty');
         }
     });
 });
+
+// jquery function to upload main asset video
+$(document).ready(function() {
+    $('#main_video').on('change', function() {
+        if (this.files.length > 0) {
+            $('#main_video_form').submit();
+            console.log('form submitted');
+        }else{
+            console.log('Input field is empty');
+        }
+    });
+});
+
+//jquery function to upload sub asset
 
 const ScrollRevealOption = {
     distance: "50px;",

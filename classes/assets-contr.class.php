@@ -53,6 +53,24 @@ class AssetContr extends Assets {
         redirect("Asset updated successfully", "dashboard.php?assets=update-main-asset&id=".$asset_id);
     }
 
+    public function editMainPhoto($photo, $asset_id){
+        if($this->emptyInput($photo) == false){
+            redirect("Please add an image for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+            exit();
+        }
+        $this->updateMainPhoto($photo, $asset_id);
+        redirect("Asset photo updated successfully", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+    }
+
+    public function editMainVideo($video, $asset_id){
+        if($this->emptyInput($video) == false){
+            redirect("Please add a video for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+            exit();
+        }
+        $this->updateMainVideo($video, $asset_id);
+        redirect("Asset video updated successfully", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+    }
+
 
     public function addSubAsset($asset_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $sub_asset_image, $sub_asset_video, $floor_size){
         //check for errors then populate database
@@ -104,6 +122,24 @@ class AssetContr extends Assets {
         }
         $this->updateSub($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_description, $country, $sub_address, $asset_image, $asset_video, $floor_size, $sub_id);
         redirect("Asset updated successfully", "dashboard.php?assets=update-sub-asset&id=".$sub_id);
+    }
+
+    public function editSubPhoto($photo, $asset_id){
+        if($this->emptyInput($photo) == false){
+            redirect("Please add an image for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+            exit();
+        }
+        $this->updateSubPhoto($photo, $asset_id);
+        redirect("Asset photo updated successfully", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+    }
+
+    public function editSubVideo($video, $asset_id){
+        if($this->emptyInput($video) == false){
+            redirect("Please add a video for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+            exit();
+        }
+        $this->updateSubVideo($video, $asset_id);
+        redirect("Asset video updated successfully", "dashboard.php?assets=update-main-asset&id=".$asset_id);
     }
 
 
