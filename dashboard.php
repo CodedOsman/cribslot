@@ -144,15 +144,20 @@ include("includes/header.inc.php");
                                                 foreach($assetsResult as $asset) { ?>
                                             <tr>
                                                 <td><?php echo $asset['asset_name']; ?></td>
+                                                <?php $main_id = $assets->fetchSubAsset($asset['asset_id']); ?>
                                                 <td>
-                                                    <?php if($asset['category_id'] == 1 ) : ?>
+                                                    <?php if($asset['asset_category_id'] == 1 ) : ?>
                                                     Commercial
-                                                    <?php elseif ($asset['category_id'] == 2) : ?>
+                                                    <?php elseif ($asset['asset_category_id'] == 2) : ?>
                                                     Residential
+                                                    <?php elseif ($asset['asset_category_id'] == 3) : ?>
+                                                    Office
+                                                    <?php elseif ($asset['asset_category_id'] == 4) : ?>
+                                                    Land
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <?php $subsCount = $asset->fetchSubAssets($userid)->rowCount(); ?>
+                                                    <?php $subsCount = $main_id->rowCount(); ?>
                                                     <span class="badge rounded-pill bg-secondary"><?php echo $subsCount; ?></span>
                                                 </td>
                                                 <td>

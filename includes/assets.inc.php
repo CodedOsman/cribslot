@@ -34,6 +34,13 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $vidExt = explode('.', $assetV);
         $vidActualExt = strtolower(end($vidExt));
         $allowed = array('jpg', 'jpeg', 'png', 'gif', 'mp4', 'mov');
+
+        //instantiate classes and populate the database
+        include "../classes/dbh.class.php";
+        include "../classes/assets.class.php";
+        include "../classes/assets-contr.class.php";
+        $cat = new AssetContr($userid);
+
         // process image file
         if (in_array($fileActualExt, $allowed)) {
             if ($fileError === 0) {
@@ -81,17 +88,14 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         //move files to user folder
         if (move_uploaded_file($tempName, $destination)) {
             move_uploaded_file($vidtempName, $viddestination);
+            $cat->addAsset($asset_name, $category_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area);
         } else {
             redirect("Could not upload file", "dashboard.php?assets=upload-main-asset");
             exit();
         }
-        //instantiate classes and populate the database
-        include "../classes/dbh.class.php";
-        include "../classes/assets.class.php";
-        include "../classes/assets-contr.class.php";
-        $cat = new AssetContr($userid);
+        
 
-        $cat->addAsset($asset_name, $category_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area);
+        
 
     }
     // Adding sub asset

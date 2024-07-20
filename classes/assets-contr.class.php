@@ -3,7 +3,7 @@
 class AssetContr extends Assets {
     private $owner_id;
 
-    private function __construct($owner_id){
+    public function __construct($owner_id){
         $this->owner_id = $owner_id;
     }
 
@@ -23,7 +23,7 @@ class AssetContr extends Assets {
             exit();
         }
         if($this->emptyInput($asset_country) == false){
-            redirect("Please add an image for this asset", "dashboard.php?assets=upload-main-asset");
+            redirect("Please add a country for this asset", "dashboard.php?assets=upload-main-asset");
             exit();
         }
         if($this->emptyInput($asset_address) == false){
@@ -49,7 +49,7 @@ class AssetContr extends Assets {
             exit();
         }
         if($this->emptyInput($asset_country) == false){
-            redirect("Please add an image for this asset", "dashboard.php?assets=update-main-asset");
+            redirect("Please add a country for this asset", "dashboard.php?assets=update-main-asset");
             exit();
         }
         if($this->emptyInput($asset_address) == false){
@@ -76,7 +76,7 @@ class AssetContr extends Assets {
             exit();
         }
         if($this->emptyInput($country) == false){
-            redirect("Please add an image for this asset", "dashboard.php?assets=upload-sub-asset");
+            redirect("Please add a country for this asset", "dashboard.php?assets=upload-sub-asset");
             exit();
         }
         if($this->emptyInput($address) == false){
@@ -115,11 +115,11 @@ class AssetContr extends Assets {
 
 
     private function emptyInput($input){
-        if(empty($input)){
-            $result = false;
-        }else{
+        if(!empty($input)){
             $result = true;
+        }else{
+            $result = false;
         }
-
+        return $result;
     }
 } 
