@@ -219,28 +219,8 @@ html[data-bs-theme="light"] .theme-toggle .fa-sun{
     }
 }
 
-/* modal styling */
-div.uploadBtn{
-    width: 200px;
-    height: 100px;
-    background: url('../images/camera.png');
-}
 
-input[type="file"] {
-    visibility: none;
-    width: 100%;
-    height:100%;
-    position:absolute;
-}
-
-.imageUploadedOrNot{
-    display: none;
-}
-
-#blankImg{
-    max-width: 100%;
-}
-
+/* Styling for profile photo */
 .upload{
     width:125px;
     position: relative;

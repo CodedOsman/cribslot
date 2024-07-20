@@ -70,7 +70,14 @@ include("includes/header.inc.php");
                                                     <li class="list-inline-item">
                                                         <p class="mb-2">
                                                             Total Assets 
-                                                            <span class="badge rounded-pill bg-info">0</span>
+                                                            <span class="badge rounded-pill bg-info">
+                                                                <?php
+                                                                $totalMain = $assets->fetchMainAssetsCount($userid);
+                                                                $totalSubs = $assets->fetchSubAssetsCount($userid);
+                                                                $totalCount = $totalMain + $totalSubs;
+                                                                echo $totalCount;
+                                                                ?>
+                                                            </span>
                                                         </p>
                                                     </li>
                                                     <li class="list-inline-item">
@@ -144,7 +151,7 @@ include("includes/header.inc.php");
                                                 foreach($assetsResult as $asset) { ?>
                                             <tr>
                                                 <td><?php echo $asset['asset_name']; ?></td>
-                                                <?php $subsStmt = $assets->fetchSubs($asset['asset_id']); ?>
+                                                <?php $subsCount = $assets->fetchSubsCount($asset['asset_id']); ?>
                                                 <td>
                                                     <?php if($asset['asset_category_id'] == 1 ) : ?>
                                                     Commercial
@@ -157,14 +164,6 @@ include("includes/header.inc.php");
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <?php 
-                                                    if($subsStmt){
-                                                        $subsCount = $subsStmt->rowCount();
-                                                    }else{
-                                                        $subsCount = 0;
-                                                    }
-                                                     
-                                                    ?>
                                                     <span class="badge rounded-pill bg-secondary"><?php echo $subsCount; ?></span>
                                                 </td>
                                                 <td>

@@ -205,6 +205,48 @@
                         <h5 class="text-center">Update your Asset</h5>
                     </div>
                     <?php include 'message.php'; ?>
+                    <div class="row">
+                        <!-- edit main asset image -->
+                        <div class="col-12 col-md-6 d-flex">
+                            <div class="card flex-fill border-0 illustration">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <form action="includes/assets.inc.php" method='POST'  enctype="multipart/form-data">
+                                            <div class="upload row g-0">
+                                                <img src="<?php base_url($profile_photo); ?>"  class="img-responsive img-fluid rounded"/>
+                                                <div class="round">
+                                                    <input type="file" name="asset_image" id="main_image" accept=".jpg, .jpeg, .png">
+                                                    <i class="fa-solid fa-camera"></i>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- edit main asset video -->
+                        <div class="col-12 col-md-6 d-flex">
+                            <div class="card flex-fill border-0 illustration">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <form action="includes/assets.inc.php" method='POST'  enctype="multipart/form-data">
+                                            <div class="upload row g-0">
+                                                <img src="<?php base_url($profile_photo); ?>" class="img-responsive img-fluid rounded"/>
+                                                <div class="round">
+                                                    <input type="file" name="asset_video" id="main_video" accept=".jpg, .jpeg, .png">
+                                                    <i class="fa-solid fa-camera"></i>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit form starts -->
                         <?php
                             $asset_id = $_GET['id'];
@@ -256,14 +298,6 @@
                         <div class="input-group mb-3">
                             <span class="input-group"><small>How many sub assets will be under this asset? </small></span>
                             <input type="text" name="subs" placeholder="Enter a number" value="<?php echo $assetData[0]['number_of_subs']; ?>" class="form-control form-control-lg fs-6">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group"><small>Select an image for your asset</small></span>
-                            <input type="file" name="asset_image" value="<?php echo $assetData[0]['asset_img']; ?>" class="form-control form-control-lg fs-6">
-                        </div>
-                        <div class="input-group mb-3">
-                            <span class="input-group"><small>Select a video not more than 40MB</small></span>
-                            <input type="file" name="asset_video" value="<?php echo $assetData[0]['asset_video']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <textarea name="desc" placeholder="Describe your asset" class="form-control form-control-lg fs-6"><?php echo $assetData[0]['asset_description']; ?></textarea>

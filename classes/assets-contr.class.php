@@ -34,16 +34,9 @@ class AssetContr extends Assets {
         redirect("Asset added successfully", "dashboard.php?assets=upload-main-asset");
     }
 
-    public function updateMainAsset($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors, $floor_size, $asset_id){
+    public function updateMainAsset($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors, $floor_size, $asset_id){
         //check for errors then update data in database
-        if($this->emptyInput($asset_img) == false){
-            redirect("Please add an image for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
-            exit();
-        }
-        if($this->emptyInput($asset_video) == false){
-            redirect("Please add a video for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
-            exit();
-        }
+        
         if($this->emptyInput($asset_description) == false){
             redirect("Please decribe this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
@@ -56,7 +49,7 @@ class AssetContr extends Assets {
             redirect("Please add an address for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
         }
-        $this->updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_size, $asset_id);
+        $this->updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_size, $asset_id);
         redirect("Asset updated successfully", "dashboard.php?assets=update-main-asset&id=".$asset_id);
     }
 

@@ -1,7 +1,7 @@
 <?php
 
 class Assets extends Dbh{
-
+    //method fetches all main assets of a particular user
     protected function getAssetInfo($userid){
         $sql = "SELECT * FROM assets WHERE owner_id=?";
         $stmt = $this->connect()->prepare($sql);
@@ -36,7 +36,7 @@ class Assets extends Dbh{
         $main_asset_id = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $main_asset_id;
     }
-    //method fetches all sub assets of a user referencing the main assets table using the main asset id
+    //method fetches all sub assets of a particular user
     protected function getSubAssetsInfo($userid){
         $sql = "SELECT * FROM asset_subs WHERE owner_id=?";
         $stmt = $this->connect()->prepare($sql);
@@ -105,6 +105,29 @@ class Assets extends Dbh{
         return $assetData;
     }
 
+    //method to fetch a single sub asset from  asset-subs table
+    protected function getAssetSub($assetid){
+        $sql = "SELECT * FROM asset_subs WHERE sub_id=?";
+        $stmt = $this->connect()->prepare($sql);
+        //checking if user has assets in database
+        if(!$stmt->execute(array($assetid))){
+            $stmt = null;
+            redirect("Could not fetch assets! Please try again later.", "dashboard.php?dashboard=");
+            exit();
+        }
+
+        //if data not found, redirect user to user dashboard
+        if($stmt->rowCount() == 0){
+            $stmt = null;
+            return 0;
+            exit();
+        }
+        // if the data is found reference to data
+        $assetData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $assetData;
+    }
+
     // method adds new assets to the database
     protected function setAssetInfo($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $owner_id){
         $sql = "INSERT INTO assets (asset_name, asset_category_id, asset_type_id, number_of_subs, asset_img, asset_video, asset_description, asset_country, asset_address, number_of_rooms, number_of_floors, floor_area, owner_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -120,11 +143,11 @@ class Assets extends Dbh{
     }
 
     // method updates main assets
-    protected function updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id){
-        $sql = "UPDATE assets SET asset_name=?, asset_category_id=?, asset_type_id=?, number_of_subs=?, asset_img=?, asset_video=?, asset_description=?, asset_country=?, asset_address=?, number_of_rooms=?,number_of_floors=?,floor_size=? WHERE asset_id=?";
+    protected function updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id){
+        $sql = "UPDATE assets SET asset_name=?, asset_category_id=?, asset_type_id=?, number_of_subs=?, asset_description=?, asset_country=?, asset_address=?, number_of_rooms=?,number_of_floors=?,floor_size=? WHERE asset_id=?";
         $stmt = $this->connect()->prepare($sql);
 
-        if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id))){
+        if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id))){
             $stmt = null;
             redirect("Something went wrong!", "dashboard.php?assets=upadte-main-asset");
             exit();

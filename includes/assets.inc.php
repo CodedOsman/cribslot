@@ -194,8 +194,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $category_id = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'); 
         $type_id = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8'); 
         $number_of_subs = htmlspecialchars($_POST['subs'], ENT_QUOTES, 'UTF-8'); 
-        $asset_img = $_FILES['asset_img'];
-        $asset_video = $_FILES['asset_video'];
+        #$asset_img = $_FILES['asset_img'];
+        #$asset_video = $_FILES['asset_video'];
         $asset_description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $asset_country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8');
         $asset_address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
@@ -205,22 +205,22 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $userid = $_POST['userid'];
         $username = $_POST['username'];
         //process the files received
-        $asset = $asset_img['name'];
-        $tempName = $asset_img['tmp_name'];
-        $fileError = $asset_img['error'];
-        $imageSize = $asset_img['size'];
-        $fileExt = explode(".", $asset);
-        $fileActualExt = strtolower(end($fileExt));
+        #$asset = $asset_img['name'];
+        #$tempName = $asset_img['tmp_name'];
+        #$fileError = $asset_img['error'];
+        #$imageSize = $asset_img['size'];
+        #$fileExt = explode(".", $asset);
+        #$fileActualExt = strtolower(end($fileExt));
         //process the video file
-        $assetV = $asset_video['name'];
-        $vidtempName = $asset_video['tmp_name'];
-        $vidError = $asset_video['error'];
-        $vidSize = $asset_video['size'];
-        $vidExt = explode('.', $assetV);
-        $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
+        #$assetV = $asset_video['name'];
+        #$vidtempName = $asset_video['tmp_name'];
+        #$vidError = $asset_video['error'];
+        #$vidSize = $asset_video['size'];
+        #$vidExt = explode('.', $assetV);
+        #$vidActualExt = strtolower(end($vidExt));
+        #$allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
         //error handling of files
-        if(in_array($fileActualExt, $allowed)){
+        /*if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
                 if($fileSize < 12000000){
                     $image = uniqid("", true).'.'.$fileActualExt;
@@ -255,17 +255,17 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
             }
         }else{
             redirect("Invalid video type!", "dashboard.php?assets=update-main-asset&id=".$main_id);
-        }
+        }*/
         
         //check if folders exist
 
 
-        if(move_uploaded_file($tempName, $destination)){
+        /*if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
         }else{
             redirect("Could not upload file", "dashboard.php?assets=update-main-asset&id=".$main_id);
             exit();
-        }
+        }*/
 
         include "../classes/dbh.class.php";
         include "../classes/assets.class.php";
@@ -273,7 +273,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cat = new AssetContr($userid);
 
         #adding asset to assets data table
-        $cat->updateMainAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $image, $video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
+        $cat->updateMainAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
         
     }
 
