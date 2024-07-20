@@ -144,7 +144,7 @@ include("includes/header.inc.php");
                                                 foreach($assetsResult as $asset) { ?>
                                             <tr>
                                                 <td><?php echo $asset['asset_name']; ?></td>
-                                                <?php $main_id = $assets->fetchSubAsset($asset['asset_id']); ?>
+                                                <?php $subsStmt = $assets->fetchSubs($asset['asset_id']); ?>
                                                 <td>
                                                     <?php if($asset['asset_category_id'] == 1 ) : ?>
                                                     Commercial
@@ -157,11 +157,20 @@ include("includes/header.inc.php");
                                                     <?php endif; ?>
                                                 </td>
                                                 <td>
-                                                    <?php $subsCount = $main_id->rowCount(); ?>
+                                                    <?php 
+                                                    if($subsStmt){
+                                                        $subsCount = $subsStmt->rowCount();
+                                                    }else{
+                                                        $subsCount = 0;
+                                                    }
+                                                     
+                                                    ?>
                                                     <span class="badge rounded-pill bg-secondary"><?php echo $subsCount; ?></span>
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-info btn-sm">Edit</button>
+                                                    <button type="button" class="btn btn-info btn-sm">
+                                                        <a href="dashboard.php?assets=update-main-asset&id=<?php echo $asset['asset_id']; ?>">Edit</a>
+                                                    </button>
                                                     <button type="button" class="btn btn-danger btn-sm">X</button>
                                                 </td>    
                                             </tr>

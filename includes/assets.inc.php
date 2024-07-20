@@ -227,16 +227,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
                     $destination = $ipath . $image;
                 }else{
-                    redirect("Video file size too large!", "dashboard.php?assets=upload-sub-asset");
+                    redirect("Video file size too large!", "dashboard.php?assets=update-main-asset&id=".$main_id);
                     exit();
                 }
             }else{
-                redirect("There was an error uploading your image!", "dashboard.php?assets=upload-main-asset");
+                redirect("There was an error uploading your image!", "dashboard.php?assets=update-main-asset&id=".$main_id);
                 exit();
                 
             }
         }else{
-            redirect("Invalid file type!", "dashboard.php?assets=upload-main-asset");
+            redirect("Invalid file type!", "dashboard.php?assets=update-main-asset&id=".$main_id);
         }
 
         if(in_array($vidActualExt, $allowed)){
@@ -246,15 +246,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $path = '../profiles/'.$username.$userid.'/assets/videos/';
                     $viddestination = $path . $video;
                 }else{
-                    redirect("Video file size too large!", "dashboard.php?assets=upload-sub-asset");
+                    redirect("Video file size too large!", "dashboard.php?assets=update-main-asset&id=".$main_id);
                     exit();
                 }
             }else{
-                redirect("There was an error uploading your video!", "dashboard.php?assets=upload-main-asset");
+                redirect("There was an error uploading your video!", "dashboard.php?assets=update-main-asset&id=".$main_id);
                 exit();
             }
         }else{
-            redirect("Invalid video type!", "dashboard.php?assets=upload-main-asset");
+            redirect("Invalid video type!", "dashboard.php?assets=update-main-asset&id=".$main_id);
         }
         
         //check if folders exist
@@ -263,7 +263,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
         }else{
-            redirect("Could not upload file", "dashboard.php?assets=upload-main-asset");
+            redirect("Could not upload file", "dashboard.php?assets=update-main-asset&id=".$main_id);
             exit();
         }
 
@@ -321,11 +321,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $destination = $ipath . $image;
                 }
             }else{
-                redirect("Image file size too large!", "dashboard.php?assets=upload-sub-asset");
+                redirect("Image file size too large!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
                 exit();
             }
         }else{
-            redirect("Invalid file type!", "dashboard.php?assets=upload-sub-asset");
+            redirect("Invalid file type!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
         }
 
         if(in_array($vidActualExt, $allowed)){
@@ -335,15 +335,15 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                     $path = '../profiles/'.$username.$userid.'/assets/videos/';
                     $viddestination = $path . $video;
                 }else{
-                    redirect("Video file size too large!", "dashboard.php?assets=upload-sub-asset");
+                    redirect("Video file size too large!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
                     exit();
                 }
             }else{
-                redirect("There was an error uploading your video!", "dashboard.php?assets=upload-sub-asset");
+                redirect("There was an error uploading your video!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
                 exit();
             }
         }else{
-            redirect("Invalid video type!", "dashboard.php?assets=upload-sub-asset");
+            redirect("Invalid video type!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
         }
         
         //check if folders exist
@@ -351,7 +351,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         if(move_uploaded_file($tempName, $destination)){
             move_uploaded_file($vidtempName, $viddestination);
         }else{
-            redirect("Could not upload file", "dashboard.php?assets=upload-sub-asset");
+            redirect("Could not upload file", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
             exit();
         }
 

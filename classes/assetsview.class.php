@@ -43,6 +43,13 @@ class AssetView extends Assets{
 
         return $subAssetData;
     }
+
+    //method gets subs assets under a particular main asset
+    public function fetchSubs($main_id){
+        $subsData = $this->getSubs($main_id);
+
+        return $subsData;
+    }
     
     public function fetchCategories($category_id){
         //method to fetch main asset id

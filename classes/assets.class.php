@@ -36,7 +36,7 @@ class Assets extends Dbh{
         $main_asset_id = $stmt->fetchAll(PDO::FETCH_ASSOC);
         return $main_asset_id;
     }
-    //method fetches sub assets referencing the main assets table using the main asset id
+    //method fetches all sub assets of a user referencing the main assets table using the main asset id
     protected function getSubAssetsInfo($userid){
         $sql = "SELECT * FROM asset_subs WHERE owner_id=?";
         $stmt = $this->connect()->prepare($sql);
@@ -58,6 +58,30 @@ class Assets extends Dbh{
 
         return $subAssetData;
     }
+
+    //method fetches all subs of a particular asset
+    protected function getSubs($mainid){
+        $sql = "SELECT * FROM asset_subs WHERE main_asset_id=?";
+        $stmt = $this->connect()->prepare($sql);
+
+        if(!$stmt->execute(array($mainid))){
+            $stmt = null;
+            redirect("Could not fetch assets! Try again later", "dashboard.php?dashboard=");
+            exit();
+        }
+        
+        //if data not found, redirect user to dashboard
+        if($stmt->rowCount() == 0){
+            $stmt = null;
+            return 0;
+            exit();
+        }
+        // if the data is found reference to data
+        $subAssetData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        return $subAssetData;
+    }
+
     //method to fetch a single asset from main asset table
     protected function getAssetmain($assetid){
         $sql = "SELECT * FROM assets WHERE asset_id=?";

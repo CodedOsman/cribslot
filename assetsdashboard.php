@@ -199,31 +199,32 @@
                         <div class="row"></div>
                     </form><!-- upload form ends -->
                 </div>
-                <?php elseif(isset($_GET['assets']) && $_GET['assets'] == 'update-main-asset') : ?>
+                <?php elseif(isset($_GET['assets']) && $_GET['assets'] = 'update-main-asset') : ?>
                 <div class="row col-12 col-md-12 d-flex bg-subtle shadow">
                     <div class="header-text mb-3">
-                        <h5 class="text-center">Upload new asset</h5>
+                        <h5 class="text-center">Update your Asset</h5>
                     </div>
                     <?php include 'message.php'; ?>
                     <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit form starts -->
                         <?php
                             $asset_id = $_GET['id'];
                             $assetData = $assets->fetchMainAsset($asset_id);
+                            //print_r($assetData);
                             
                         ?>
                         <input type="text" name="userid" value="<?php echo $userid; ?>" style="display:none;">
                         <input type="text" name="username" value="<?php echo $username;?>" style="display:none;">
                         <input type="text" name="asset_id" style="display:none;" value="<?php echo $asset_id; ?>">
                         <div class="input-group mb-3">
-                            <input type="text" name="assetname" placeholder="Name this asset" value="<?php echo $assetData['asset_name']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="assetname" placeholder="Name this asset" value="<?php echo $assetData[0]['asset_name']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group">Asset Category</span>
                             <select name="category" class="form-control form-control-lg fs-6">
                                 <?php
-                                    if($assetData['category_id'] != NULL){
-                                        $catN = $assets->fetchCategories($assetData['category_id']);
-                                        echo '<option value="'.$assetData['category_id'].'">'.$catN.'</option>';
+                                    if($assetData[0]['category_id'] != NULL){
+                                        $catN = $assets->fetchCategories($assetData[0]['category_id']);
+                                        echo '<option value="'.$assetData[0]['category_id'].'">'.$catN['category_name'].'</option>';
                                     }
                                     $category = $assets->defaultCategories();
                                     foreach($category as $cat){
@@ -240,8 +241,8 @@
                             <select name="type" class="form-control form-control-lg fs-6">
                                 <?php
                                     if($assetData['type_id'] != NULL){
-                                        $typeN = $assets->fetchTypes($assetData['type_id']);
-                                        echo '<option value="'.$assetData['type_id'].'">'.$typeN.'</option>';
+                                        $typeN = $assets->fetchTypes($assetData[0]['type_id']);
+                                        echo '<option value="'.$assetData[0]['type_id'].'">'.$typeN.'</option>';
                                     } 
                                     $types = $assets->defaultTypes();
                                     foreach($types as $type){
@@ -254,33 +255,33 @@
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group"><small>How many sub assets will be under this asset? </small></span>
-                            <input type="text" name="subs" placeholder="Enter a number" value="<?php echo $assetData['number_of_subs']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="subs" placeholder="Enter a number" value="<?php echo $assetData[0]['number_of_subs']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group"><small>Select an image for your asset</small></span>
-                            <input type="file" name="asset_image" value="<?php echo $assetData['asset_image']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="file" name="asset_image" value="<?php echo $assetData[0]['asset_img']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group"><small>Select a video not more than 40MB</small></span>
-                            <input type="file" name="asset_video" value="<?php echo $assetData['asset_video']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="file" name="asset_video" value="<?php echo $assetData[0]['asset_video']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <textarea name="desc" placeholder="Describe your asset" value="<?php echo $assetData['asset_description']; ?>" class="form-control form-control-lg fs-6"></textarea>
+                            <textarea name="desc" placeholder="Describe your asset" class="form-control form-control-lg fs-6"><?php echo $assetData[0]['asset_description']; ?></textarea>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="country" placeholder="Country" value="<?php echo $assetData['asset_country']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="country" placeholder="Country" value="<?php echo $assetData[0]['asset_country']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="address" placeholder="Address" value="<?php echo $assetData['asset_address']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="address" placeholder="Address" value="<?php echo $assetData[0]['asset_address']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="rooms" placeholder="Number of rooms" value="<?php echo $assetData['number_of_rooms']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="rooms" placeholder="Number of rooms" value="<?php echo $assetData[0]['number_of_rooms']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="floors" placeholder="Number of floors" value="<?php echo $assetData['number_of_floors']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="floors" placeholder="Number of floors" value="<?php echo $assetData[0]['number_of_floors']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="size" placeholder="Floor Size" value="<?php echo $assetData['floor_area']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="size" placeholder="Floor Size" value="<?php echo $assetData[0]['floor_area']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         
                         <div class="input-group mb-3">
@@ -289,7 +290,7 @@
                         <div class="row"></div>
                     </form><!-- upload form ends -->
                 </div>
-                <?php elseif(isset($_GET['assets']) && $_GET['assets'] == 'update-sub-asset') : ?>
+                <?php elseif(isset($_GET['assets']) && $_GET['assets'] = 'update-sub-asset') : ?>
                     <div class="row col-12 col-md-12 d-flex bg-subtle shadow">
                     <div class="header-text mb-3">
                         <h5 class="text-center">Upload new asset</h5>
@@ -310,7 +311,7 @@
                                 <?php
                                     $main_asset = $assets->fetchMainAssets($userid);
                                     if($assetData['main_asset_id'] != NULL){
-                                        echo '<option value="'.$assetData['main_asset_id'].'">'.$main_asset['asset_name'].'</option>';
+                                        echo '<option value="'.$assetData[0]['main_asset_id'].'">'.$main_asset[0]['asset_name'].'</option>';
                                     }
                                     
                                     foreach($main_asset as $main){
@@ -322,15 +323,15 @@
                             </select>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="assetname" placeholder="Name this asset" value="<?php echo $assetData['sub_name']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="assetname" placeholder="Name this asset" value="<?php echo $assetData[0]['sub_name']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group">Asset Type</span>
                             <select name="type" class="form-control form-control-lg fs-6">
                                 <?php 
                                     if($assetData['type_id'] != NULL){
-                                        $typeN = $assets->fetchTypes($assetData['type_id']);
-                                        echo '<option value="'.$assetData['type_id'].'">'.$typeN.'</option>';
+                                        $typeN = $assets->fetchTypes($assetData[0]['type_id']);
+                                        echo '<option value="'.$assetData[0]['type_id'].'">'.$typeN.'</option>';
                                     }
                                     $types = $assets->defaultTypes();
                                     foreach($types as $type){
@@ -344,35 +345,35 @@
                         
                         <div class="input-group mb-3">
                             <span class="input-group"><small>What floor is this asset? (if it is in a storey building) </small></span>
-                            <input type="text" name="floor" placeholder="Enter a number" value="<?php echo $assetData['floor']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="floor" placeholder="Enter a number" value="<?php echo $assetData[0]['floor']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group"><small>Number of rooms or sections </small></span>
-                            <input type="text" name="rooms" placeholder="Enter a number" value="<?php echo $assetData['number_of_rooms']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="rooms" placeholder="Enter a number" value="<?php echo $assetData[0]['number_of_rooms']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group"><small>Room number / Section label </small></span>
-                            <input type="text" name="roomnum" placeholder="Enter a number" value="<?php echo $assetData['room_number']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="roomnum" placeholder="Enter a number" value="<?php echo $assetData[0]['room_number']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group"><small>Select an image for your asset</small></span>
-                            <input type="file" name="asset_image" value="<?php echo $assetData['asset_image']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="file" name="asset_image" value="<?php echo $assetData[0]['asset_image']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
                             <span class="input-group"><small>Select a video not more than 40MB</small></span>
-                            <input type="file" name="asset_video" value="<?php echo $assetData['asset_video']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="file" name="asset_video" value="<?php echo $assetData[0]['asset_video']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <textarea name="desc" placeholder="Describe your asset" value="<?php echo $assetData['sub_description']; ?>" class="form-control form-control-lg fs-6"></textarea>
+                            <textarea name="desc" placeholder="Describe your asset" value="<?php echo $assetData[0]['sub_description']; ?>" class="form-control form-control-lg fs-6"></textarea>
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="country" placeholder="Country" value="<?php echo $assetData['country']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="country" placeholder="Country" value="<?php echo $assetData[0]['country']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="address" placeholder="Address" value="<?php echo $assetData['sub_address']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="address" placeholder="Address" value="<?php echo $assetData[0]['sub_address']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                         <div class="input-group mb-3">
-                            <input type="text" name="size" placeholder="Floor Size" value="<?php echo $assetData['floor_size']; ?>" class="form-control form-control-lg fs-6">
+                            <input type="text" name="size" placeholder="Floor Size" value="<?php echo $assetData[0]['floor_size']; ?>" class="form-control form-control-lg fs-6">
                         </div>
                             
                         <div class="input-group mb-3">
@@ -431,23 +432,33 @@
                                         <tr>
                                             <td><?php echo $asset['asset_name']; ?></td>
                                             <td>
-                                                <?php if($asset['category_id'] == 1 ) : ?>
+                                                <?php if($asset['asset_category_id'] == 1 ) : ?>
                                                 Commercial
-                                                <?php elseif ($asset['category_id'] == 2) : ?>
+                                                <?php elseif ($asset['asset_category_id'] == 2) : ?>
                                                 Residential
+                                                <?php elseif ($asset['asset_category_id'] == 3) : ?>
+                                                Office
+                                                <?php elseif ($asset['asset_category_id'] == 4) : ?>
+                                                Land
                                                 <?php endif; ?>
                                             </td>
                                             <td>
-                                                <?php $subsCount = $asset->fetchSubAssets($userid)->rowCount(); ?>
+                                                <?php
+                                                $subsStmt = $assets->fetchSubs($asset['asset_id']);
+                                                if($subsStmt){
+                                                    $subsCount = $subsStmt->rowCount();
+                                                }
+                                                else{
+                                                    $subsCount = 0;
+                                                }
+                                                ?>
                                                 <span class="badge rounded-pill bg-secondary"><?php echo $subsCount; ?></span>
-                                                <a href="#">View all</a>
+                                                
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm">
-                                                    <a href="dashboard.php?assets=update-main-asset?id=<?php $asset['asset_id']; ?>">Edit</a>
+                                                    <a href="dashboard.php?assets=update-main-asset&id=<?php echo $asset['asset_id']; ?>">Edit</a>
                                                 </button>
-                                                <button type="button" class="btn btn-info btn-sm">List</button>
-                                                <button type="button" class="btn btn-secondary btn-sm">Unlist</button>
                                                 <button type="button" class="btn btn-danger btn-sm">X</button>
                                             </td>
                                             
@@ -519,10 +530,8 @@
                                             </td>
                                             <td>
                                                 <button type="button" class="btn btn-info btn-sm">
-                                                    <a href="dashboard.php?assets=update-sub-asset?id=<?php $asset['sub_id']; ?>">Edit</a>
+                                                    <a href="dashboard.php?assets=update-sub-asset&id=<?php echo $asset['sub_id']; ?>">Edit</a>
                                                 </button>
-                                                <button type="button" class="btn btn-info btn-sm">List</button>
-                                                <button type="button" class="btn btn-secondary btn-sm">Unlist</button>
                                                 <button type="button" class="btn btn-danger btn-sm">X</button>
                                             </td>
                                         </tr>
