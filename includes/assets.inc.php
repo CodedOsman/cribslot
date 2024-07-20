@@ -33,7 +33,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $vidSize = $asset_video['size'];
         $vidExt = explode('.', $assetV);
         $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jpeg', 'png', 'gif', 'mp4', 'mov');
+        $allowed = array('jpg', 'jpeg', 'png', 'gif', 'mp4', 'mkv');
 
         //instantiate classes and populate the database
         include "../classes/dbh.class.php";
@@ -129,7 +129,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $vidSize = $sub_asset_video['size'];
         $vidExt = explode('.', $sub_vid);
         $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
+        $allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mkv');
         //error handling of files
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
@@ -194,8 +194,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $category_id = htmlspecialchars($_POST['category'], ENT_QUOTES, 'UTF-8'); 
         $type_id = htmlspecialchars($_POST['type'], ENT_QUOTES, 'UTF-8'); 
         $number_of_subs = htmlspecialchars($_POST['subs'], ENT_QUOTES, 'UTF-8'); 
-        #$asset_img = $_FILES['asset_img'];
-        #$asset_video = $_FILES['asset_video'];
         $asset_description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $asset_country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8');
         $asset_address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
@@ -204,47 +202,6 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $floor_area = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
         $userid = $_POST['userid'];
         $username = $_POST['username'];
-        //process the files received
-        #$asset = $asset_img['name'];
-        #
-        //process the video file
-        #$assetV = $asset_video['name'];
-        #$vidtempName = $asset_video['tmp_name'];
-        #$vidError = $asset_video['error'];
-        #$vidSize = $asset_video['size'];
-        #$vidExt = explode('.', $assetV);
-        #$vidActualExt = strtolower(end($vidExt));
-        #$allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
-        //error handling of files
-        /*
-
-        if(in_array($vidActualExt, $allowed)){
-            if($vidError === 0){
-                if($vidSize < 40000000){
-                    $video = uniqid('', true).$fileActualExt;
-                    $path = '../profiles/'.$username.$userid.'/assets/videos/';
-                    $viddestination = $path . $video;
-                }else{
-                    redirect("Video file size too large!", "dashboard.php?assets=update-main-asset&id=".$main_id);
-                    exit();
-                }
-            }else{
-                redirect("There was an error uploading your video!", "dashboard.php?assets=update-main-asset&id=".$main_id);
-                exit();
-            }
-        }else{
-            redirect("Invalid video type!", "dashboard.php?assets=update-main-asset&id=".$main_id);
-        }*/
-        
-        //check if folders exist
-
-
-        /*if(move_uploaded_file($tempName, $destination)){
-            move_uploaded_file($vidtempName, $viddestination);
-        }else{
-            redirect("Could not upload file", "dashboard.php?assets=update-main-asset&id=".$main_id);
-            exit();
-        }*/
 
         include "../classes/dbh.class.php";
         include "../classes/assets.class.php";
@@ -252,25 +209,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $cat = new AssetContr($userid);
 
         #adding asset to assets data table
-        $cat->updateMainAsset($asset_name, $catgory_id, $type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
+        $cat->updateMainAsset($asset_name, $category_id, $type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_area, $main_id);
         
     }
     //update main asset photo
     if(isset($_FILES['asset_image']['name'])){
         $asset_id = $_POST['asset_id'];
-        $user_id = $_POST['userid'];
+        $userid = $_POST['userid'];
         $username = $_POST['username'];
+
         $file = $_FILES['asset_image'];
-        $photo = $_FILES['name'];
-        $tempName = $asset_img['tmp_name'];
-        $fileError = $asset_img['error'];
-        $imageSize = $asset_img['size'];
-        $fileExt = explode(".", $asset);
+        $photo = $file['name'];
+        $tempName = $file['tmp_name'];
+        $fileError = $file['error'];
+        $imageSize = $file['size'];
+        $fileExt = explode(".", $photo);
         $fileActualExt = strtolower(end($fileExt));
         $allowed = array('jpg', 'jpeg', 'png', 'gif');
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
-                if($fileSize < 12000000){
+                if($imageSize < 12000000){
                     $image = uniqid("", true).'.'.$fileActualExt;
                     $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
                     $destination = $ipath . $image;
@@ -282,7 +240,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         $cat = new AssetContr($userid);
 
                         // populate database
-                        $cat->$editMainPhoto($image, $asset_id);
+                        $cat->editMainPhoto($image, $asset_id);
                     }
                 }else{
                     redirect("File size too large!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
@@ -300,19 +258,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //update main asset video
     if(isset($_FILES['asset_video']['name'])){
         $asset_id = $_POST['asset_id'];
-        $user_id = $_POST['userid'];
+        $userid = $_POST['userid'];
         $username = $_POST['username'];
         $file = $_FILES['asset_video'];
-        $photo = $_FILES['name'];
-        $tempName = $asset_img['tmp_name'];
-        $fileError = $asset_img['error'];
-        $imageSize = $asset_img['size'];
-        $fileExt = explode(".", $asset);
+        $photo = $file['name'];
+        $tempName = $file['tmp_name'];
+        $fileError = $file['error'];
+        $videoSize = $file['size'];
+        $fileExt = explode(".", $photo);
         $fileActualExt = strtolower(end($fileExt));
-        $allowed = array('mp4', 'mov');
+        $allowed = array('mp4', 'mkv');
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
-                if($fileSize < 12000000){
+                if($videoSize < 40000000){
                     $video = uniqid("", true).'.'.$fileActualExt;
                     $vpath = '../profiles/'.$username.$userid.'/assets/videos/';
                     $destination = $vpath . $video;
@@ -324,7 +282,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         $cat = new AssetContr($userid);
 
                         // populate database
-                        $cat->$editMainVideo($video, $asset_id);
+                        $cat->editMainVideo($video, $asset_id);
                     }
                 }else{
                     redirect("Video file size too large!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
@@ -343,19 +301,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //update main asset photo
     if(isset($_FILES['sub_image']['name'])){
         $asset_id = $_POST['asset_id'];
-        $user_id = $_POST['userid'];
+        $userid = $_POST['userid'];
         $username = $_POST['username'];
         $file = $_FILES['sub_image'];
-        $photo = $_FILES['name'];
-        $tempName = $asset_img['tmp_name'];
-        $fileError = $asset_img['error'];
-        $imageSize = $asset_img['size'];
-        $fileExt = explode(".", $asset);
+        $subphoto = $file['name'];
+        $tempName = $file['tmp_name'];
+        $fileError = $file['error'];
+        $imageSize = $file['size'];
+        $fileExt = explode(".", $subphoto);
         $fileActualExt = strtolower(end($fileExt));
         $allowed = array('jpg', 'jpeg', 'png', 'gif');
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
-                if($fileSize < 12000000){
+                if($imageSize < 12000000){
                     $image = uniqid("", true).'.'.$fileActualExt;
                     $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
                     $destination = $ipath . $image;
@@ -367,7 +325,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         $cat = new AssetContr($userid);
 
                         // populate database
-                        $cat->$editSubPhoto($image, $asset_id);
+                        $cat->editSubPhoto($image, $asset_id);
                     }
                 }else{
                     redirect("File size too large!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
@@ -385,19 +343,19 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
     //update main asset video
     if(isset($_FILES['sub_video']['name'])){
         $asset_id = $_POST['asset_id'];
-        $user_id = $_POST['userid'];
+        $userid = $_POST['userid'];
         $username = $_POST['username'];
         $file = $_FILES['sub_video'];
-        $photo = $_FILES['name'];
-        $tempName = $asset_img['tmp_name'];
-        $fileError = $asset_img['error'];
-        $imageSize = $asset_img['size'];
-        $fileExt = explode(".", $asset);
+        $subvideo = $file['name'];
+        $tempName = $file['tmp_name'];
+        $fileError = $file['error'];
+        $videoSize = $file['size'];
+        $fileExt = explode(".", $subvideo);
         $fileActualExt = strtolower(end($fileExt));
-        $allowed = array('mp4', 'mov');
+        $allowed = array('mp4', 'mkv');
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
-                if($fileSize < 12000000){
+                if($videoSize < 40000000){
                     $video = uniqid("", true).'.'.$fileActualExt;
                     $vpath = '../profiles/'.$username.$userid.'/assets/videos/';
                     $destination = $vpath . $video;
@@ -409,7 +367,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
                         $cat = new AssetContr($userid);
 
                         // populate database
-                        $cat->$editSubVideo($video, $asset_id);
+                        $cat->editSubVideo($video, $asset_id);
                     }
                 }else{
                     redirect("Video file size too large!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
@@ -438,70 +396,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $description = htmlspecialchars($_POST['desc'], ENT_QUOTES, 'UTF-8');
         $country = htmlspecialchars($_POST['country'], ENT_QUOTES, 'UTF-8'); 
         $address = htmlspecialchars($_POST['address'], ENT_QUOTES, 'UTF-8');
-        $sub_asset_img = $_FILES['asset_img'];
-        $sub_asset_video = $_FILES['asset_video']; 
         $floor_size = htmlspecialchars($_POST['size'], ENT_QUOTES, 'UTF-8');
 
         $userid = $_POST['userid'];
         $username = $_POST['username'];
 
-        // Process the files recieved
-        $sub_img = $sub_asset_img['name'];
-        $tempName = $sub_asset_img['tmp_name'];
-        $fileError = $sub_asset_img['error'];
-        $imageSize = $sub_asset_img['size'];
-        $fileExt = explode(".", $sub_img);
-        $fileActualExt = strtolower(end($fileExt));
-        //handle video file
-        $subV = $sub_asset_video['name'];
-        $vidtempName = $sub_asset_video['tmp_name'];
-        $vidError = $sub_asset_video['error'];
-        $vidSize = $sub_asset_video['size'];
-        $vidExt = explode('.', $subV);
-        $vidActualExt = strtolower(end($vidExt));
-        $allowed = array('jpg', 'jpeg', 'png', 'mp4', 'mov');
-        //error handling of files
-        if(in_array($fileActualExt, $allowed)){
-            if($fileError === 0){
-                if($fileSize < 12000000){
-                    $image = $tempName.$fileActualExt;
-                    $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
-                    $destination = $ipath . $image;
-                }
-            }else{
-                redirect("Image file size too large!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
-                exit();
-            }
-        }else{
-            redirect("Invalid file type!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
-        }
-
-        if(in_array($vidActualExt, $allowed)){
-            if($vidError === 0){
-                if($vidSize < 40000000){
-                    $video = uniqid('', true).$fileActualExt;
-                    $path = '../profiles/'.$username.$userid.'/assets/videos/';
-                    $viddestination = $path . $video;
-                }else{
-                    redirect("Video file size too large!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
-                    exit();
-                }
-            }else{
-                redirect("There was an error uploading your video!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
-                exit();
-            }
-        }else{
-            redirect("Invalid video type!", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
-        }
-        
-        //check if folders exist
-        
-        if(move_uploaded_file($tempName, $destination)){
-            move_uploaded_file($vidtempName, $viddestination);
-        }else{
-            redirect("Could not upload file", "dashboard.php?assets=update-sub-asset&id=".$asset_id);
-            exit();
-        }
 
         include "../classes/dbh.class.php";
         include "../classes/assets.class.php";
@@ -510,7 +409,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         #adding asset to assets data table
         
-        $cat->updateSubAsset($asset_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $image, $video, $floor_size, $asset_id);
+        $cat->updateSubAsset($asset_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $description, $country, $address, $floor_size, $asset_id);
         
     }
 }

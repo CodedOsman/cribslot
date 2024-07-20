@@ -144,7 +144,7 @@ class Assets extends Dbh{
 
     // method updates main assets
     protected function updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id){
-        $sql = "UPDATE assets SET asset_name=?, asset_category_id=?, asset_type_id=?, number_of_subs=?, asset_description=?, asset_country=?, asset_address=?, number_of_rooms=?,number_of_floors=?,floor_size=? WHERE asset_id=?";
+        $sql = "UPDATE assets SET asset_name=?, asset_category_id=?, asset_type_id=?, number_of_subs=?, asset_description=?, asset_country=?, asset_address=?, number_of_rooms=?,number_of_floors=?,floor_area=? WHERE asset_id=?";
         $stmt = $this->connect()->prepare($sql);
 
         if(!$stmt->execute(array($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors,$floor_size, $asset_id))){
@@ -193,11 +193,11 @@ class Assets extends Dbh{
         $stmt = null;
     }
     //method upates sub assets
-    protected function updateSub($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_descrtiption, $country, $sub_address, $asset_image, $sset_video, $floor_size, $sub_id){
-        $sql = "UPDATE asset_subs SET sub_name=?, type_id=?, main_asset_id=?, floor=?, number_of_rooms=?, room_number=?, sub_descrtiption=?, country=?, sub_address=?, asset_image=?, asset_video=?, floor_size=? WHERE sub_id=?";
+    protected function updateSub($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_descrtiption, $country, $sub_address, $floor_size, $sub_id){
+        $sql = "UPDATE asset_subs SET sub_name=?, type_id=?, main_asset_id=?, floor=?, number_of_rooms=?, room_number=?, sub_descrtiption=?, country=?, sub_address=?, floor_size=? WHERE sub_id=?";
         $stmt = $this->connect()->prepare($sql);
 
-        if(!$stmt->execute(array($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_descrtiption, $country, $sub_address, $asset_image, $sset_video, $floor_size, $sub_id))){
+        if(!$stmt->execute(array($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_descrtiption, $country, $sub_address, $floor_size, $sub_id))){
             $stmt = null;
             redirect("Something went wrong! Please try again later.", "dashboard.php?assets=update-sub-asset?id=".$sub_id);
             exit();

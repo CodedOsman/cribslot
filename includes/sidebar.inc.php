@@ -27,7 +27,7 @@
                         <a href="dashboard.php?assets=upload-sub-asset" class="sidebar-link">Upload Sub Asset</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="dashboard.php?assets" class="sidebar-link">View All Asset</a>
+                        <a href="dashboard.php?assets=" class="sidebar-link">Manage Assets</a>
                     </li>
                 </ul>
             </li>
