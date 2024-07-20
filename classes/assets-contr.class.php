@@ -37,27 +37,27 @@ class AssetContr extends Assets {
     public function updateMainAsset($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms,$number_of_floors, $floor_size, $asset_id){
         //check for errors then update data in database
         if($this->emptyInput($asset_img) == false){
-            redirect("Please add an image for this asset", "dashboard.php?assets=update-main-asset");
+            redirect("Please add an image for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
         }
         if($this->emptyInput($asset_video) == false){
-            redirect("Please add a video for this asset", "dashboard.php?assets=update-main-asset");
+            redirect("Please add a video for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
         }
         if($this->emptyInput($asset_description) == false){
-            redirect("Please decribe this asset", "dashboard.php?assets=update-main-asset");
+            redirect("Please decribe this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
         }
         if($this->emptyInput($asset_country) == false){
-            redirect("Please add a country for this asset", "dashboard.php?assets=update-main-asset");
+            redirect("Please add a country for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
         }
         if($this->emptyInput($asset_address) == false){
-            redirect("Please add an address for this asset", "dashboard.php?assets=update-main-asset");
+            redirect("Please add an address for this asset", "dashboard.php?assets=update-main-asset&id=".$asset_id);
             exit();
         }
         $this->updateMain($asset_name, $asset_category_id, $asset_type_id, $number_of_subs, $asset_img, $asset_video, $asset_description, $asset_country, $asset_address, $number_of_rooms, $number_of_floors, $floor_size, $asset_id);
-        redirect("Asset updated successfully", "dashboard.php?assets=update-main-asset");
+        redirect("Asset updated successfully", "dashboard.php?assets=update-main-asset&id=".$asset_id);
     }
 
 
@@ -90,27 +90,27 @@ class AssetContr extends Assets {
     public function updateSubAsset($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_description, $country, $sub_address, $asset_image, $asset_video, $floor_size, $sub_id){
         
         if($this->emptyInput($asset_image) == false){
-            redirect("Please add an image for this asset", "dashboard.php?assets=update-sub-asset");
+            redirect("Please add an image for this asset", "dashboard.php?assets=update-sub-asset&id=".$sub_id);
             exit();
         }
         if($this->emptyInput($asset_video) == false){
-            redirect("Please add a video for this asset", "dashboard.php?assets=update-sub-asset");
+            redirect("Please add a video for this asset", "dashboard.php?assets=update-sub-asset&id=".$sub_id);
             exit();
         }
         if($this->emptyInput($sub_description) == false){
-            redirect("Please decribe this asset", "dashboard.php?assets=update-sub-asset");
+            redirect("Please decribe this asset", "dashboard.php?assets=update-sub-asset&id=".$sub_id);
             exit();
         }
         if($this->emptyInput($country) == false){
-            redirect("Please add an image for this asset", "dashboard.php?assets=update-sub-asset");
+            redirect("Please add an image for this asset", "dashboard.php?assets=update-sub-asset&id=".$sub_id);
             exit();
         }
         if($this->emptyInput($sub_address) == false){
-            redirect("Please add an address for this asset", "dashboard.php?assets=update-sub-asset");
+            redirect("Please add an address for this asset", "dashboard.php?assets=update-sub-asset&id=".$sub_id);
             exit();
         }
         $this->updateSub($sub_name, $type_id, $main_asset_id, $floor, $number_of_rooms, $room_number, $sub_description, $country, $sub_address, $asset_image, $asset_video, $floor_size, $sub_id);
-        redirect("Asset updated successfully", "dashboard.php?assets=update-sub-asset");
+        redirect("Asset updated successfully", "dashboard.php?assets=update-sub-asset&id=".$sub_id);
     }
 
 
