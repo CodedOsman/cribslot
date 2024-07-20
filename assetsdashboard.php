@@ -249,7 +249,7 @@
                                                 <input type="text" value="<?php echo $username; ?>" name="username" style="display:none">
                                                 <img src="<?php base_url($video); ?>" class="img-responsive img-fluid rounded"/>
                                                 <div class="round">
-                                                    <input type="file" name="asset_video" id="main_video" accept=".jpg, .jpeg, .png">
+                                                    <input type="file" name="asset_video" id="main_video" accept=".mp4, .mov">
                                                     <i class="fa-solid fa-camera"></i>
                                                 </div>
                                             </div>
@@ -338,12 +338,64 @@
                         <h5 class="text-center">Upload new asset</h5>
                     </div>
                     <?php include 'message.php'; ?>
-                    <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit sub form starts -->
-                        <?php
+                    <?php
                             $asset_id = $_GET['id'];
                             $assetData = $assets->fetchSubAsset($asset_id);
+                            //print_r($assetData);
+                            $path = 'profiles/' . $username . $userid . '/assets';
+                            $image = $path . '/' . 'photos/' . $assetData[0]['asset_img'];
+                            $video = $path . '/' . 'videos/' . $assetData[0]['asset_video'];
                             
-                        ?>
+                    ?>
+                    <div class="row">
+                        <!-- edit main asset image -->
+                        <div class="col-12 col-md-6 d-flex">
+                            <div class="card flex-fill border-0 illustration">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <form action="includes/assets.inc.php" method='POST' id='sub_img_form'  enctype="multipart/form-data">
+                                            <div class="upload row g-0">
+                                                <input type="text" value="<?php echo $userid; ?>" name="userid" style="display:none">
+                                                <input type="text" value="<?php echo $username; ?>" name="username" style="display:none">
+                                                <input type="text" value="<?php echo $asset_id; ?>" name="asset_id" style="display:none">
+                                                <img src="<?php base_url($image); ?>"  class="img-responsive img-fluid rounded"/>
+                                                <div class="round">
+                                                    <input type="file" name="asset_image" id="sub_image" accept=".jpg, .jpeg, .png">
+                                                    <i class="fa-solid fa-camera"></i>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                        <!-- edit main asset video -->
+                        <div class="col-12 col-md-6 d-flex">
+                            <div class="card flex-fill border-0 illustration">
+                                <div class="card-body">
+                                    <div class="mb-3">
+                                        <form action="includes/assets.inc.php" method='POST' id='sub_video_form' enctype="multipart/form-data">
+                                            <div class="upload row g-0">
+                                                <input type="text" value="<?php echo $userid; ?>" name="userid" style="display:none">
+                                                <input type="text" value="<?php echo $username; ?>" name="username" style="display:none">
+                                                <img src="<?php base_url($video); ?>" class="img-responsive img-fluid rounded"/>
+                                                <div class="round">
+                                                    <input type="file" name="asset_video" id="sub_video" accept=".mp4, .mov">
+                                                    <i class="fa-solid fa-camera"></i>
+                                                </div>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <form action="includes/assets.inc.php" method="POST" enctype="multipart/form-data"><!-- edit sub form starts -->
+                        
                         <input type="text" name="userid" value="<?php echo $userid; ?>" style="display:none;">
                         <input type="text" name="username" value="<?php echo $username;?>" style="display:none;">
                         <input type="text" name="asset_id" style="display:none;" value="<?php echo $asset_id; ?>">

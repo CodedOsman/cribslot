@@ -340,6 +340,91 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         }
     }
 
+    //update main asset photo
+    if(isset($_FILES['sub_image']['name'])){
+        $asset_id = $_POST['asset_id'];
+        $user_id = $_POST['userid'];
+        $username = $_POST['username'];
+        $file = $_FILES['sub_image'];
+        $photo = $_FILES['name'];
+        $tempName = $asset_img['tmp_name'];
+        $fileError = $asset_img['error'];
+        $imageSize = $asset_img['size'];
+        $fileExt = explode(".", $asset);
+        $fileActualExt = strtolower(end($fileExt));
+        $allowed = array('jpg', 'jpeg', 'png', 'gif');
+        if(in_array($fileActualExt, $allowed)){
+            if($fileError === 0){
+                if($fileSize < 12000000){
+                    $image = uniqid("", true).'.'.$fileActualExt;
+                    $ipath = '../profiles/'.$username.$userid.'/assets/photos/';
+                    $destination = $ipath . $image;
+
+                    if(move_uploaded_file($tempName, $destination)){
+                        include "../classes/dbh.class.php";
+                        include "../classes/assets.class.php";
+                        include "../classes/assets-contr.class.php";
+                        $cat = new AssetContr($userid);
+
+                        // populate database
+                        $cat->$editSubPhoto($image, $asset_id);
+                    }
+                }else{
+                    redirect("File size too large!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+                    exit();
+                }
+            }else{
+                redirect("There was an error uploading your image!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+                exit();
+                
+            }
+        }else{
+            redirect("Invalid file type!", "dashboard.php?assets=update-main-asset&id=".$main_id);
+        }
+    }
+    //update main asset video
+    if(isset($_FILES['sub_video']['name'])){
+        $asset_id = $_POST['asset_id'];
+        $user_id = $_POST['userid'];
+        $username = $_POST['username'];
+        $file = $_FILES['sub_video'];
+        $photo = $_FILES['name'];
+        $tempName = $asset_img['tmp_name'];
+        $fileError = $asset_img['error'];
+        $imageSize = $asset_img['size'];
+        $fileExt = explode(".", $asset);
+        $fileActualExt = strtolower(end($fileExt));
+        $allowed = array('mp4', 'mov');
+        if(in_array($fileActualExt, $allowed)){
+            if($fileError === 0){
+                if($fileSize < 12000000){
+                    $video = uniqid("", true).'.'.$fileActualExt;
+                    $vpath = '../profiles/'.$username.$userid.'/assets/videos/';
+                    $destination = $vpath . $video;
+
+                    if(move_uploaded_file($tempName, $destination)){
+                        include "../classes/dbh.class.php";
+                        include "../classes/assets.class.php";
+                        include "../classes/assets-contr.class.php";
+                        $cat = new AssetContr($userid);
+
+                        // populate database
+                        $cat->$editSubVideo($video, $asset_id);
+                    }
+                }else{
+                    redirect("Video file size too large!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+                    exit();
+                }
+            }else{
+                redirect("There was an error uploading your video!", "dashboard.php?assets=update-main-asset&id=".$asset_id);
+                exit();
+                
+            }
+        }else{
+            redirect("Invalid video format!", "dashboard.php?assets=update-main-asset&id=".$main_id);
+        }
+    }
+
 
     if(isset($_POST['update_sub'])){
         $asset_id = htmlspecialchars($_POST['asset_id'], ENT_QUOTES, 'UTF-8');

@@ -54,7 +54,29 @@ $(document).ready(function() {
     });
 });
 
-//jquery function to upload sub asset
+//jquery function to upload sub asset photo
+$(document).ready(function() {
+    $('#sub_image').on('change', function() {
+        if (this.files.length > 0) {
+            $('#sub_img_form').submit();
+            console.log('form submitted');
+        }else{
+            console.log('Input field is empty');
+        }
+    });
+});
+
+// jquery function to upload sub asset video
+$(document).ready(function() {
+    $('#sub_video').on('change', function() {
+        if (this.files.length > 0) {
+            $('#sub_video_form').submit();
+            console.log('form submitted');
+        }else{
+            console.log('Input field is empty');
+        }
+    });
+});
 
 const ScrollRevealOption = {
     distance: "50px;",
