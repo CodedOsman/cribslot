@@ -80,4 +80,14 @@ $(document).ready(function() {
         }
     });
 
+    //function to upload client photo
+    $('#client_image').on('change', function() {
+        if (this.files.length > 0) {
+            $('#client_img_form').submit();
+            console.log('form submitted');
+        }else{
+            console.log('Input field is empty');
+        }
+    });
+
 });
