@@ -212,12 +212,15 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
                 <select name="gender" id="gender" class="form-control form-control-lg fs-6">
                     <?php $gender = $clientinfo[0]['gender'] ?>
                     <?php if ($gender == 'Male') : ?>
+                        <option value="<?php echo $gender; ?>"><?php echo $gender; ?></option>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
                     <?php elseif ($gender == 'Female') : ?>
+                        <option value="<?php echo $gender; ?>"><?php echo $gender; ?></option>
                         <option value="Male">Male</option>
                         <option value="Other">Other</option>
                     <?php elseif ($gender == 'Other') : ?>
+                        <option value="<?php echo $gender; ?>"><?php echo $gender; ?></option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
                     <?php else : ?>
@@ -235,7 +238,6 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
             </div>
             <div class="input-group mb-3">
                 <select name="asset_id" class="form-control form-control-lg fs-6">
-                    <option value="">Select asset</option>
                     <?php
                     $main_asset = $assets->fetchMainAssets($userid);
                     $sub_asset = $assets->fetchSubAssets($userid);

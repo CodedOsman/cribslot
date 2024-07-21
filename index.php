@@ -20,7 +20,7 @@ include("includes/header.inc.php");
 <div class="wrapper main">
     <main>
         <?php include("includes/navbar.inc.php"); ?>
-        <div class="carousel slide" id="myCarousel" data-bs-ride="carousel">
+        <div class="carousel slide mb-5" id="myCarousel" data-bs-ride="carousel">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-current="true" aria-label="Slide 2"></button>
@@ -31,30 +31,31 @@ include("includes/header.inc.php");
                 <div class="carousel-item active">
                     <img src="assets/images/(14).jpg" alt="Slide 1" class="img-responsive d-block w-100">
                     <div class="carousel-caption">
-                        <h5>First Slide</h5>
-                        <p>Some long notes</p>
+                        <h5>Manage your assets on the go!</h5>
+                        <p><a href="signup.php" class="btn btn-warning mt-3">Join Cribslot Now!</a></p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="assets/images/(34).jpg" alt="Slide 2" class="img-responsive d-block w-100">
                     <div class="carousel-caption">
-                        <h5>Second Slide</h5>
-                        <p>Some long notes</p>
-                        <p><a href="#" class="btn btn-warning mt-3">Learn More</a></p>
+                        <h5>Assets  History</h5>
+                        <p>A centralized system to keep track of all your asset engagements</p>
+                        <p><a href="signup.php" class="btn btn-warning mt-3">Join Cribslot Now!</a></p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="assets/images/(34).jpg" alt="Slide 3" class="img-responsive d-block w-100">
                     <div class="carousel-caption">
-                        <h5>Third Slide</h5>
-                        <p>Some long notes</p>
+                        <h5>Lease Agreements in one place</h5>
+                        <p>Know which of your assets in under lease and keep track of lease expiries</p>
+                        <p><a href="signup.php" class="btn btn-warning mt-3">Join Cribslot Now!</a></p>
                     </div>
                 </div>
                 <div class="carousel-item">
                     <img src="assets/images/(34).jpg" alt="Slide 4" class="img-responsive d-block w-100">
                     <div class="carousel-caption">
-                        <h5>Fourth Slide</h5>
-                        <p>Some long notes</p>
+                        <h5>Let us take off your burden!</h5>
+                        <p><a href="signup.php" class="btn btn-warning mt-3">Join Cribslot Now!</a></p>
                     </div>
                 </div>
             </div>
@@ -72,12 +73,15 @@ include("includes/header.inc.php");
                 <div class="row">
                     <div class="col-lg-4 col-md-12 col-12">
                         <div class="about-img">
-                            <img src="assets/images/shutterstock_88694731.0.jpg" alt="" class="img-fluid">
+                            <img src="assets/images/shutterstock_88694731.0.jpg" alt="" class="img-fluid img-responsive">
                         </div>
                     </div>
-                    <div class="col-lg-8 col-md-12 col-12 ps-lg-5 mt-md-5">
-                        <h2>We Provide Best Quality</h2>
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa expedita, provident error quos vel assumenda quasi eveniet dignissimos explicabo ullam est eum laborum fuga, ratione fugit cumque quibusdam ea earum?</p>
+                    <div class="col-lg-8 col-md-12 col-12 ps-lg-5 md-5">
+                        <h2>What we offer</h2>
+                        <p>Cribslot provides you an intuitive centralized platform to manage all your properties with ease. 
+                            Our platform provides you with a leasing system to keep track of all your properties under lease, know which client you have in what property as well as know which lease is near expiry.
+                            A platform where you can easily recall you client's details for easy referencing and communication.
+                        </p>
                         <a href="#" class="btn btn-warning">Learn More</a>
                     </div>
                 </div>
@@ -89,8 +93,9 @@ include("includes/header.inc.php");
                 <div class="row">
                     <div class="col-md-12">
                         <div class="section-header text-center p-5">
-                            <h2>Our Services</h2>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis ea commodi est itaque eligendi modi, provident iusto delectus mollitia quas reiciendis! Consequuntur ad labore totam, molestiae itaque ex dolores repudiandae!</p>
+                            <h2>Our Key Features</h2>
+                            <p>Discover the essential features that make our Asset Management System a powerful tool for managing property, client, and lease records. Designed for efficiency and ease of use, our system ensures that all your asset management needs are met with precision and reliability.
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -98,8 +103,8 @@ include("includes/header.inc.php");
                     <div class="col-12 col-md-12 col-lg-4">
                         <div class="card text-white text-center bg-dark pb-2">
                             <div class="card-body">
-                                <h3 class="card-title">Best Quality</h3>
-                                <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate tempora obcaecati omnis dolorem officia officiis necessitatibus quia veniam iusto facere, praesentium odit ipsum reprehenderit repudiandae hic voluptates quae sapiente rerum.</p>
+                                <h3 class="card-title">Property Records</h3>
+                                <p class="lead">Easily manage and access comprehensive property records. Keep track of property details, ownership history, and related documents all in one place to ensure accurate and up-to-date information.</p>
                                 <button class="btn btn-warning text-dark">Learn More</button>
                             </div>
                         </div>
@@ -107,8 +112,8 @@ include("includes/header.inc.php");
                     <div class="col-12 col-md-12 col-lg-4">
                         <div class="card text-white text-center bg-dark pb-2">
                             <div class="card-body">
-                                <h3 class="card-title">Best Quality</h3>
-                                <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate tempora obcaecati omnis dolorem officia officiis necessitatibus quia veniam iusto facere, praesentium odit ipsum reprehenderit repudiandae hic voluptates quae sapiente rerum.</p>
+                                <h3 class="card-title">Client Records</h3>
+                                <p class="lead">Maintain detailed records of your clients with our intuitive client management system. Track client interactions, manage contact information, and ensure personalized service with ease.</p>
                                 <button class="btn btn-warning text-dark">Learn More</button>
                             </div>
                         </div>
@@ -116,8 +121,8 @@ include("includes/header.inc.php");
                     <div class="col-12 col-md-12 col-lg-4">
                         <div class="card text-white text-center bg-dark pb-2">
                             <div class="card-body">
-                                <h3 class="card-title">Best Quality</h3>
-                                <p class="lead">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Voluptate tempora obcaecati omnis dolorem officia officiis necessitatibus quia veniam iusto facere, praesentium odit ipsum reprehenderit repudiandae hic voluptates quae sapiente rerum.</p>
+                                <h3 class="card-title">Lease Records</h3>
+                                <p class="lead">Streamline lease management with our robust lease record system. Track lease agreements, monitor renewals, and manage lease-related documents efficiently to ensure compliance and organization.</p>
                                 <button class="btn btn-warning text-dark">Learn More</button>
                             </div>
                         </div>
@@ -185,7 +190,7 @@ include("includes/header.inc.php");
                     <div class="col-md-12">
                         <div class="section-header text-center p-5">
                             <h2>Contact Us</h2>
-                            <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Fuga deleniti harum obcaecati aliquid vero tempora excepturi corporis culpa eaque. Sapiente omnis nobis facere voluptas! Soluta in et magni ab adipisci?</p>
+                            <p>Have a message for us? Feel free to reach out to us</p>
                         </div>
                     </div>
                 </div>
@@ -201,7 +206,12 @@ include("includes/header.inc.php");
                                     </div>
                                     <div class="col-md-12">
                                         <div class="mb-3">
-                                            <input type="text" class="form-control" placeholder="Your fullname">
+                                            <input type="text" class="form-control" placeholder="Your email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="mb-3">
+                                            <input type="text" class="form-control" placeholder="Message subject">
                                         </div>
                                     </div>
                                     <div class="col-md-12">

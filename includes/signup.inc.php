@@ -33,6 +33,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     mkdir("../profiles/".$username.$userid."/clients", 0777);
 
     //heading to the front page
-    redirect("Account created successfully!", "signup.php");
+    redirect("Account created successfully! Activate your email to login", "signup.php");
     //header("Location:../index.php?signup=Success");
 }

@@ -16,15 +16,16 @@ class Signup extends Dbh{
             //header("location: ../index.php?error=stmtfailed");
             exit();
         }
-
+        $url = base_url('activate-account.php?token='.$token);
+        echo $url;
         $mail = require  "../config/mailer.php";
 
         $mail->setFrom("oselibas@gmail.com");
-        $mail->addAddress($email);
-        $mail->subject = "ACTIVATE YOUR CRIBSLOT ACCOUNT";
+        $mail->addAddress($email, $username);
+        $mail->Subject = "ACTIVATE YOUR CRIBSLOT ACCOUNT";
         $mail->Body = <<<END
-
-        Click <a href="http://example.com/activate-account.php?token=$token">here</a> to activate your account.
+        
+        Click <a href="$url">here</a> to activate your account.
 
         END;
 
