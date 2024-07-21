@@ -68,8 +68,8 @@
     </div>
 </div><!-- header row ends here -->
 
-<?php 
-if (isset($_GET['clients']) && $_GET['clients'] == 'add-client') : 
+<?php
+if (isset($_GET['clients']) && $_GET['clients'] == 'add-client') :
 ?>
     <!-- form for Client addition starts here-->
     <div class="row col-12 col-md-12 d-flex bg-subtle shadow">
@@ -150,12 +150,43 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
         <div class="header-text mb-3">
             <h5 class="text-center">Edit Client Details</h5>
         </div>
-        <form action="includes/clients.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
-            <?php
+        <?php include 'message.php'; ?>
+        <?php
             $clientid = $_GET['id'];
             $clientinfo = $clients->fetchClientInfo($clientid);
-            ?>
+            $path = 'profiles/'.$username.$userid.'/clients';
+            $image = $path . '/' . $clientinfo[0]['client_photo'];
+        ?>
+        <div class="row">
+            <div class="col-12 col-md-6 d-flex">
+                <div class="card flex-fill border-0 illustration">
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <form action="includes/assets.inc.php" method='POST' id='client_img_form' enctype="multipart/form-data">
+                                <div class="upload row g-0 w-100">
+                                    <input type="text" value="<?php echo $userid; ?>" name="userid" style="display:none">
+                                    <input type="text" value="<?php echo $username; ?>" name="username" style="display:none">
+                                    <input type="text" value="<?php echo $clientid; ?>" name="clientid" style="display:none">
+
+                                    <img src="<?php echo base_url($image); ?>" class="img-responsive img-fluid rounded" />
+                                    <div class="round">
+                                        <input type="file" name="client_image" id="client_image" accept=".jpg, .jpeg, .png">
+                                        <i class="fa-solid fa-camera"></i>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form action="includes/clients.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
+            
             <input type="text" class="form-control" value="<?php echo $userid ?>" name="ownerid" style="display:none;">
+            <input type="text" value="<?php echo $username; ?>" name="username" style="display:none">
+            <input type="text" value="<?php echo $clientid; ?>" name="clientid" style="display:none">
             <div class="input-group mb-3">
                 <select name="client_type" id="client_type" class="form-control form-control-lg fs-6">
                     <?php
@@ -176,10 +207,6 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
             </div>
             <div class="input-group mb-3">
                 <input type="text" name="lastname" placeholder="Enter client last name" value="<?php echo $clientinfo[0]['last_name']; ?>" class="form-control form-control-lg fs-6">
-            </div>
-            <div class="input-group mb-3">
-                <span class="input-group"><small>Add an image of your client</small></span>
-                <input type="file" name="client_image" value="<?php echo $clientinfo[0]['client_photo']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
                 <select name="gender" id="gender" class="form-control form-control-lg fs-6">
@@ -218,11 +245,11 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
                     ?>
                         <option value="<?php echo $mainid; ?>"><?php echo $mainN; ?></option>
                     <?php }
-                    foreach ($sub_asset as $sub){
+                    foreach ($sub_asset as $sub) {
                         $subN = $sub['sub_name'];
                         $subid = $sub['sub_id'];
                     ?>
-                    <option value="<?php echo $subid; ?>"><?php echo $subN; ?></option>
+                        <option value="<?php echo $subid; ?>"><?php echo $subN; ?></option>
                     <?php
                     }
                     ?>
@@ -231,12 +258,13 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
             <div class="input-group mb-3">
                 <select name="client_status" id="client_status" class="form-control form-control-lg fs-6">
                     <?php $status = $clientinfo[0]['client_status']; ?>
-                    <?php if($status == 'tenant') { ?>
-                    <option value="<?php echo $status; ?>">Tenant</option>
-                    <option value="buyer">Buyer</option>
-                    <?php }if($status == 'buyer') {?>
-                    <option value="<?php echo $status; ?>">Buyer</option>
-                    <option value="tenant">Tenant</option>
+                    <?php if ($status == 'tenant') { ?>
+                        <option value="<?php echo $status; ?>">Tenant</option>
+                        <option value="buyer">Buyer</option>
+                    <?php }
+                    if ($status == 'buyer') { ?>
+                        <option value="<?php echo $status; ?>">Buyer</option>
+                        <option value="tenant">Tenant</option>
                     <?php } ?>
                 </select>
             </div>
@@ -287,7 +315,7 @@ else :
                             if ($clientinfo > 0) {
                                 foreach ($clientinfo as $client) {
                                     $clientid = $client['client_id'];
-                                    $clientname = $client['first_name'] .' '. $client['last_name'];
+                                    $clientname = $client['first_name'] . ' ' . $client['last_name'];
 
                                     $assetid = $client['asset_id'];
                                     if ($client['client_status'] != 'tenant') {
@@ -367,7 +395,7 @@ else :
                             if ($clientinfo > 0) {
                                 foreach ($clientinfo as $client) {
                                     $clientid = $client['client_id'];
-                                    $clientname = $client['first_name'] .' '. $client['last_name'];
+                                    $clientname = $client['first_name'] . ' ' . $client['last_name'];
 
                                     $assetid = $client['asset_id'];
                                     if ($client['client_status'] != 'buyer') {

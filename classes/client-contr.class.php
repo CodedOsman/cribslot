@@ -37,7 +37,7 @@ class  ClientContr extends Clients{
         redirect("Client added successfully!","dashboard.php?clients=add-client");
     }
     //method updates client information
-    public function updateClient($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id){
+    public function updateClient($client_type, $first_name, $last_name, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id){
         if($this->invalidEmail($email) == false){
             redirect("Invalid Email!", "dashboard.php?clients=update-client&id=".$client_id);
             exit();
@@ -50,9 +50,15 @@ class  ClientContr extends Clients{
             exit();
         }
 
-        $this->updateClientInfo($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id);
+        $this->updateClientInfo($client_type, $first_name, $last_name, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id);
 
         redirect("Client updated successfully!","dashboard.php?clients=update-client&id=".$client_id);
+    }
+
+    public function editClientPhoto($photo, $clientid){
+        $this->setClientPhoto($photo, $clientid);
+
+        redirect("Client Photo successfully updated!", "dashboard.php?clients=update-client&id=".$clientid);
     }
 
     private function emptyInput($input){

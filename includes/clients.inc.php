@@ -74,16 +74,7 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
         $assetid = htmlspecialchars($_POST['asset_id'], ENT_QUOTES, 'UTF-8');
         $status = htmlspecialchars($_POST['client_status'], ENT_QUOTES, 'UTF-8');
         $occupation = htmlspecialchars($_POST['occupation'], ENT_QUOTES, 'UTF-8');
-        $clientphoto = $_FILES['client_image'];
-        $photo = $_FILES['name'];
-        $tempName = $file['tmp_name'];
-        $fileError = $file['error'];
-        $fileSize = $file['size'];
-        $fileExt = explode('.', $dp);
-        $fileActualExt = strtolower(end($fileExt));
-        $allowed = array('jpg', 'jpeg', 'png', 'gif');
-        $userid = $_SESSION['auth_user']['user_id'];
-        $username = $_SESSION['auth_user']['user_name'];
+        $clientid = htmlspecialchars($_POST['clientid'], ENT_QUOTES, 'UTF-8');
 
         include '..classes/dbh.class.php';
         include '..classes/clients.class.php';
@@ -91,33 +82,51 @@ if($_SERVER['REQUEST_METHOD'] == 'POST'){
 
         $client = new ClientContr($ownerid);
 
+        
+        $client->updateClient($client_type, $first_name, $last_name, $gender, $email, $contact, $assetid, $ownerid, $status, $occupation, $clientid);
+                        
+    }
+
+    if(isset($_FILES['client_image']['name'])){
+        $client_id = $_POST['clientid'];
+        $userid = $_POST['userid'];
+        $username = $_POST['username'];
+
+        $file = $_FILES['client_image'];
+        $photo = $file['name'];
+        $tempName = $file['tmp_name'];
+        $fileError = $file['error'];
+        $imageSize = $file['size'];
+        $fileExt = explode(".", $photo);
+        $fileActualExt = strtolower(end($fileExt));
+        $allowed = array('jpg', 'jpeg', 'png', 'gif');
         if(in_array($fileActualExt, $allowed)){
             if($fileError === 0){
-                if($fileSize < 12000000){
-                    $image = 'client' . uniqid("", true) . '.' . $fileActualExt;
-                    $path = '../profiles/' . $username . $userid . '/clients';
-                    $destination = $path . '/' . $image;
-                    #check if path exists
-                    if(is_dir(dirname($path))){
-                        #check if file was moved
-                        if(move_uploaded_file($tempName, $destination)){
-                            #populate database with the uploaded image
-                            $client->addClientInfo($client_type, $first_name, $last_name, $image, $gender, $email, $contact, $asset_id, $client_status, $occupation);
-                        }else{
-                            redirect("Could not update profile photo!", "dashboard.php?clients=update-client");
-                            exit();
-                        }
-                    }else{
-                        redirect("Could not locate path!", "dashboard.php?clients=update-client");
-                        exit();
+                if($imageSize < 12000000){
+                    $image = uniqid("", true).'.'.$fileActualExt;
+                    $ipath = '../profiles/'.$username.$userid.'/clients';
+                    $destination = $ipath .'/'. $image;
+
+                    if(move_uploaded_file($tempName, $destination)){
+                        include "../classes/dbh.class.php";
+                        include "../classes/assets.class.php";
+                        include "../classes/assets-contr.class.php";
+                        $cat = new ClientContr($userid);
+
+                        // populate database
+                        $cat->editClientPhoto($image, $asset_id);
                     }
+                }else{
+                    redirect("File size too large!", "dashboard.php?clients=update-client&id=".$client_id);
+                    exit();
                 }
             }else{
-                redirect("File size too large!", "dashboard.php?clients=update-client");
+                redirect("There was an error uploading your image!", "dashboard.php?clients=update-client&id=".$client_id);
                 exit();
+                
             }
         }else{
-            redirect("Invalid file type!", "dashboard.php?clients=update-client");
+            redirect("Invalid file type!", "dashboard.php?clients=update-client&id=".$client_id);
         }
     }
 }
