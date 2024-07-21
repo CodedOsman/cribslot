@@ -30,7 +30,12 @@
                                     <li class="list-inline-item">
                                         <p class="mb-2">
                                             Total Clients
-                                            <span class="badge rounded-pill bg-info">0</span>
+                                            <span class="badge rounded-pill bg-info">
+                                                <?php
+                                                $clientCount = $clients->fetchClientsCount($userid);
+                                                echo $clientCount;
+                                                ?>
+                                            </span>
                                         </p>
                                     </li>
                                     <li class="list-inline-item">
@@ -63,8 +68,8 @@
     </div>
 </div><!-- header row ends here -->
 
-<?php
-if (isset($_GET['clients']) && $_GET['clients'] == 'add-client') :
+<?php 
+if (isset($_GET['clients']) && $_GET['clients'] == 'add-client') : 
 ?>
     <!-- form for Client addition starts here-->
     <div class="row col-12 col-md-12 d-flex bg-subtle shadow">
@@ -143,7 +148,7 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
     <!-- form for Client edit starts here-->
     <div class="row col-12 col-md-12 d-flex bg-subtle shadow">
         <div class="header-text mb-3">
-            <h5 class="text-center">Add Client</h5>
+            <h5 class="text-center">Edit Client Details</h5>
         </div>
         <form action="includes/clients.inc.php" method="POST" enctype="multipart/form-data"><!-- upload form starts -->
             <?php
@@ -154,31 +159,31 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
             <div class="input-group mb-3">
                 <select name="client_type" id="client_type" class="form-control form-control-lg fs-6">
                     <?php
-                    if ($clientinfo['client_type'] == 'Individual') {
+                    if ($clientinfo[0]['client_type'] == 'Individual') {
                     ?>
-                        <option value="<?php echo $clientinfo['client_type']; ?>"><?php echo $clientinfo['client_type']; ?></option>
+                        <option value="<?php echo $clientinfo[0]['client_type']; ?>"><?php echo $clientinfo[0]['client_type']; ?></option>
                         <option value="Company">Company</option>
                     <?php
                     } elseif ($clientinfo['client_type'] == 'Company') { ?>
-                        <option value="<?php echo $clientinfo['client_type']; ?>"><?php echo $clientinfo['client_type']; ?></option>
+                        <option value="<?php echo $clientinfo[0]['client_type']; ?>"><?php echo $clientinfo[0]['client_type']; ?></option>
                         <option value="Individual">Individual</option>
                     <?php }
                     ?>
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="firstname" placeholder="Enter client first name" value="<?php echo $clientinfo['first_name']; ?>" class="form-control form-control-lg fs-6">
+                <input type="text" name="firstname" placeholder="Enter client first name" value="<?php echo $clientinfo[0]['first_name']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="lastname" placeholder="Enter client last name" value="<?php echo $clientinfo['last_name']; ?>" class="form-control form-control-lg fs-6">
+                <input type="text" name="lastname" placeholder="Enter client last name" value="<?php echo $clientinfo[0]['last_name']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
                 <span class="input-group"><small>Add an image of your client</small></span>
-                <input type="file" name="client_image" value="<?php echo $clientinfo['client_photo']; ?>" class="form-control form-control-lg fs-6">
+                <input type="file" name="client_image" value="<?php echo $clientinfo[0]['client_photo']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
                 <select name="gender" id="gender" class="form-control form-control-lg fs-6">
-                    <?php $gender = $clientinfo['gender'] ?>
+                    <?php $gender = $clientinfo[0]['gender'] ?>
                     <?php if ($gender == 'Male') : ?>
                         <option value="Female">Female</option>
                         <option value="Other">Other</option>
@@ -196,10 +201,10 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="email" placeholder="Enter client email" value="<?php echo $clientinfo['email']; ?>" class="form-control form-control-lg fs-6">
+                <input type="text" name="email" placeholder="Enter client email" value="<?php echo $clientinfo[0]['email']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="contact" placeholder="Enter client contact" value="<?php echo $clientinfo['contact']; ?>" class="form-control form-control-lg fs-6">
+                <input type="text" name="contact" placeholder="Enter client contact" value="<?php echo $clientinfo[0]['contact']; ?>" class="form-control form-control-lg fs-6">
             </div>
             <div class="input-group mb-3">
                 <select name="asset_id" class="form-control form-control-lg fs-6">
@@ -225,7 +230,7 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
             </div>
             <div class="input-group mb-3">
                 <select name="client_status" id="client_status" class="form-control form-control-lg fs-6">
-                    <?php $status = $clientinfo['client_status']; ?>
+                    <?php $status = $clientinfo[0]['client_status']; ?>
                     <?php if($status == 'tenant') { ?>
                     <option value="<?php echo $status; ?>">Tenant</option>
                     <option value="buyer">Buyer</option>
@@ -236,7 +241,7 @@ elseif (isset($_GET['clients']) && $_GET['clients'] == 'update-client') :
                 </select>
             </div>
             <div class="input-group mb-3">
-                <input type="text" name="occupation" placeholder="Client occupation" value="<?php echo $clientinfo['occupation']; ?>" class="form-control form-control-lg fs-6">
+                <input type="text" name="occupation" placeholder="Client occupation" value="<?php echo $clientinfo[0]['occupation']; ?>" class="form-control form-control-lg fs-6">
             </div>
 
             <div class="input-group mb-3">
@@ -281,8 +286,8 @@ else :
                             $clientinfo = $clients->fetchClients($userid);
                             if ($clientinfo > 0) {
                                 foreach ($clientinfo as $client) {
-                                    $clientid = $client['id'];
-                                    $clientname = $client['first_name'] . $client['last_name'];
+                                    $clientid = $client['client_id'];
+                                    $clientname = $client['first_name'] .' '. $client['last_name'];
 
                                     $assetid = $client['asset_id'];
                                     if ($client['client_status'] != 'tenant') {
@@ -290,7 +295,7 @@ else :
                                     }
                                     $assetinfo = $assets->fetchMainAsset($assetid);
                                     if ($assetinfo > 0) {
-                                        $assetname = $assetinfo['asset_name'];
+                                        $assetname = $assetinfo[0]['asset_name'];
                                     } else {
                                         $assetinfo = $assets->fetchSubAsset($assetid);
                                         if ($assetinfo > 0) {
@@ -310,7 +315,7 @@ else :
                                         <td><?php echo $client_State; ?></td>
                                         <td>
                                             <button class="btn btn-small bg-warning">
-                                                <a href="dashboard.php?clients=update-client?id=<?php echo $clientid; ?>">Edit</a>
+                                                <a href="dashboard.php?clients=update-client&id=<?php echo $clientid; ?>">Edit</a>
                                             </button>
                                             <button class="btn btn-small bg-warning">X</button>
                                         </td>
@@ -361,8 +366,8 @@ else :
                             $clientinfo = $clients->fetchClients($userid);
                             if ($clientinfo > 0) {
                                 foreach ($clientinfo as $client) {
-                                    $clientid = $client['id'];
-                                    $clientname = $client['first_name'] . $client['last_name'];
+                                    $clientid = $client['client_id'];
+                                    $clientname = $client['first_name'] .' '. $client['last_name'];
 
                                     $assetid = $client['asset_id'];
                                     if ($client['client_status'] != 'buyer') {
@@ -370,7 +375,7 @@ else :
                                     }
                                     $assetinfo = $assets->fetchMainAsset($assetid);
                                     if ($assetinfo > 0) {
-                                        $assetname = $assetinfo['asset_name'];
+                                        $assetname = $assetinfo[0]['asset_name'];
                                     } else {
                                         $assetinfo = $assets->fetchSubAsset($assetid);
                                         if ($assetinfo > 0) {
@@ -390,7 +395,7 @@ else :
                                         <td><?php echo $client_State; ?></td>
                                         <td>
                                             <button class="btn btn-small bg-warning">
-                                                <a href="dashboard.php?clients=update-client?id=<?php echo $clientid; ?>">Edit</a>
+                                                <a href="dashboard.php?clients=update-client&id=<?php echo $clientid; ?>">Edit</a>
                                             </button>
                                             <button class="btn btn-small bg-warning">X</button>
                                         </td>

@@ -5,12 +5,12 @@ class Clients extends Dbh{
 
     //method adds client information to database
     protected function setClient($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation){
-        $sql = "INSERT INTO clients (first_name, last_name, client_photo, gender, email, contact, asset_id, owner_id, client_status, occupation) VALUES(?,?,?,?,?,?,?,?,?,?)";
+        $sql = "INSERT INTO clients (client_type, first_name, last_name, client_photo, gender, email, contact, asset_id, owner_id, client_status, occupation) VALUES(?,?,?,?,?,?,?,?,?,?,?)";
         $stmt = $this->connect()->prepare($sql);
 
         if(!$stmt->execute(array($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation))){
             $stmt = null;
-            redirect("Something went wrong! Could not add client", "dashboard.php?dashboard=");
+            redirect("Something went wrong! Could not add client", "dashboard.php?clients=add-client");
             exit();
         }
 
@@ -24,7 +24,7 @@ class Clients extends Dbh{
 
         if(!$stmt->execute(array($client_type, $first_name, $last_name, $client_photo, $gender, $email, $contact, $asset_id, $owner_id, $client_status, $occupation, $client_id))){
             $stmt = null;
-            redirect("Something went wrong! Could not update client info", "dashboard.php?dashboard=");
+            redirect("Something went wrong! Could not update client info", "dashboard.php?clients=update-client&id=".$client_id);
             exit();
         }
 
@@ -42,7 +42,8 @@ class Clients extends Dbh{
             exit();
         }
 
-        $stmt = null;
+        $clientData = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $clientData;
     }
 
     //method fetches clients of a particular owner
@@ -56,8 +57,8 @@ class Clients extends Dbh{
             exit();
         }
 
-
-        $stmt = null;
+        $clients = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $clients;
     }
 
 }

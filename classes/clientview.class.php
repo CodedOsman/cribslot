@@ -13,4 +13,10 @@ class  ClientView extends Clients{
 
         return $clients;
     }
+    //method counts the number of clients an owner has
+    public function fetchClientsCount($ownerid){
+        $clients = $this->getClients($ownerid);
+
+        return count($clients);
+    }
 }
