@@ -30,10 +30,10 @@ class Login extends Dbh{
         }
         //selecting user data from database if password verified with the email/username
         elseif($checkPwd == true){
-            $sql = "SELECT * FROM users WHERE username=? OR email=? AND activate=NULL";
+            $sql = "SELECT * FROM users WHERE username=? OR email=? AND activate=?";
             $stmt = $this->connect()->prepare($sql);
-
-            if(!$stmt->execute(array($email, $email))){
+            $active = NULL;
+            if(!$stmt->execute(array($email, $email, $active))){
                 $stmt = null;
                 redirect("Something went wrong! Please try again.", "login.php");
                 exit();

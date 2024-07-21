@@ -25,7 +25,7 @@ class Signup extends Dbh{
         $mail->Subject = "ACTIVATE YOUR CRIBSLOT ACCOUNT";
         $mail->Body = <<<END
         
-        Click <a href="$url">here</a> to activate your account.
+        Click <a href="http://localhost/cribslot/activate-account.php?token=$token">here</a> to activate your account.
 
         END;
 
@@ -48,35 +48,27 @@ class Signup extends Dbh{
             exit();
         }
 
-        if($stmt->rowCount() > 0){
-            $userinfo =  $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $userid = $userinfo[0]['userid'];
-            $sql = "UPDATE users SET activate=NULL WHERE userid = ?";
-            $stmt = $this->connect()->prepare($sql);
-
-            if(!$stmt->execute(array($userid))){
-                redirect("Could not verify token", "signup.php");
-                exit();
-            }
-            return $token = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            $stmt = null;
+        if($stmt->rowCount() == 0){
+            redirect("Create an account first", "signup.php");
             exit();
-        }else{
-            die('Token not found');
         }
+        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $user;
+        $stmt = null;
     }
 
+    //method activates user account
     protected function Activate($userid){
-        $sql = "UPDATE users SET activate=NULL WHERE userid =?";
+        $sql = "UPDATE users SET activate=? WHERE userid =?";
         $stmt = $this->connect()->prepare($sql);
-
-        if(!$stmt->execute(array($userid))){
+        $active = NULL;
+        if(!$stmt->execute(array($active, $userid))){
             $stmt = null;
-            redirect("Could not activate email", "signup.php");
+            redirect("Could not activate email!", "signup.php");
         }
 
         $stmt = null;
-        redirect("You can login now", "login.php");
+        redirect("You can login now!", "login.php");
     }
 
     // validate user input if exists in database
