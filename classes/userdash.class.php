@@ -107,6 +107,133 @@ class UserDash extends Dbh{
         $stmt = null;
     }
 
+    protected function deleteProfile($userid){
+        $sql = "SELECT * FROM profiles WHERE profile_id=?";
+        $stmt = $this->connect()->prepare($sql);
+        if(!$stmt->execute(array($userid))){
+            $stmt = null;
+            redirect("Could not delete account!", "dashboard.php?profile");
+            exit();
+        }
+
+        if($stmt->rowCount() > 0){
+            $sql = "DELETE FROM profiles WHERE profile_id = ?";
+            $stmt = $this->connect()->prepare($sql);
+            if(!$stmt->execute(array($userid))){
+                $stmt = null;
+                redirect("Could not delete account!", "dashboard.php?profile");
+                exit();
+            }
+
+            $stmt = null;
+            return true;
+        }else{
+            $stmt = null;
+            return false;
+        }
+        
+    }
+    protected function deleteMainAssets($userid){
+        $sql = "SELECT * FROM assets WHERE owner_id = ?";
+        
+        $stmt = $this->connect()->prepare($sql);
+        if(!$stmt->execute(array($userid))){
+            $stmt = null;
+            redirect("Could not delete account!", "dashboard.php?profile");
+            exit();
+        }
+
+        if($stmt->rowCount() > 0){
+            $sql = "DELETE FROM assets WHERE owner_id = ?";
+            $stmt = $this->connect()->prepare($sql);
+            if(!$stmt->execute(array($userid))){
+                $stmt = null;
+                redirect("Could not delete account!", "dashboard.php?profile");
+                exit();
+            }
+
+            $stmt = null;
+            return true;
+        }else{
+            $stmt = null;
+            return false;
+        }
+    }
+    protected function deleteSubAssets($userid){
+        $sql = "SELECT * FROM asset_subs WHERE owner_id = ?";
+        
+        $stmt = $this->connect()->prepare($sql);
+        if(!$stmt->execute(array($userid))){
+            $stmt = null;
+            redirect("Could not delete account!", "dashboard.php?profile");
+            exit();
+        }
+
+        if($stmt->rowCount() > 0){
+            $sql = "DELETE FROM asset_subs WHERE owner_id = ?";
+            $stmt = $this->connect()->prepare($sql);
+            if(!$stmt->execute(array($userid))){
+                $stmt = null;
+                redirect("Could not delete account!", "dashboard.php?profile");
+                exit();
+            }
+            $stmt = null;
+            return true;
+        }else{
+            $stmt = null;
+            return false;
+        }
+    }
+    protected function deleteClients($userid){
+        $sql = "SELECT * FROM clients WHERE owner_id = ?";
+        
+        $stmt = $this->connect()->prepare($sql);
+        if(!$stmt->execute(array($userid))){
+            $stmt = null;
+            redirect("Could not delete account!", "dashboard.php?profile");
+            exit();
+        }
+
+        if($stmt->rowCount() > 0){
+            $sql = "DELETE FROM clients WHERE owner_id = ?";
+            $stmt = $this->connect()->prepare($sql);
+            if(!$stmt->execute(array($userid))){
+                $stmt = null;
+                redirect("Could not delete account!", "dashboard.php?profile");
+                exit();
+            }
+
+            $stmt = null;
+            return true;
+        }else{
+            $stmt = null;
+            return false;
+        }
+    }
+    protected function deleteUser($userid){
+        $sql = "SELECT * FROM users WHERE userid = ?";
+        
+        $stmt = $this->connect()->prepare($sql);
+        if(!$stmt->execute(array($userid))){
+            $stmt = null;
+            redirect("Could not delete account!", "dashboard.php?profile");
+            exit();
+        }
+
+        if($stmt->rowCount() > 0){
+            $sql = "DELETE FROM users WHERE userid = ?";
+            $stmt = $this->connect()->prepare($sql);
+            if(!$stmt->execute(array($userid))){
+                $stmt = null;
+                redirect("Could not delete account!", "dashboard.php?profile");
+                exit();
+            }
+        }else{
+            $stmt = null;
+            return false;
+        }
+    }
+
     protected function setPassword($old_pwd, $new_pwd, $userid){
         $sql = "SELECT pwd FROM users WHERE userid=?";
         $stmt = $this->connect()->prepare($sql);

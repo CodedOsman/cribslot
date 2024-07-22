@@ -35,6 +35,24 @@ class UserDashContr extends UserDash{
         $this->setProfilePhoto($photo, $this->userid);
     }
 
+    public function deleteUser($userid){
+        if($this->deleteProfile($userid)){
+            if($this->deleteMainAssets($userid)){
+                $this->deleteSubAssets($userid);
+                $this->deleteClients($userid);
+            }
+            
+            $this->deleteUser($userid);
+
+            redirect("Account deleted! Create an account to use this platform", "login.php");
+            exit();
+        }else{
+            redirect("Could not delete account 1", "dashboard.php?profile");
+            exit();
+        }
+        
+    }
+
     public function updatePwd($oldPwd, $newPwd, $cnewPwd){
         //check if passwords match
         if($this->pwdMatch($newPwd, $cnewPwd) == false){

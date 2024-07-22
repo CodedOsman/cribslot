@@ -34,6 +34,8 @@ include("includes/header.inc.php");
                     <h4>Settings Dashboard</h4>
                     <?php elseif(isset($_GET['assets'])) :?>
                     <h4>Assets Dashboard</h4>
+                    <?php elseif(isset($_GET['clients'])) :?>
+                        <h4>Clients Dashboard</h4>
                     <?php endif; ?>
                 </div>
                 <?php if(isset($_GET['profile']) || isset($_GET['change_password'])) : ?>
@@ -82,14 +84,10 @@ include("includes/header.inc.php");
                                                     </li>
                                                     <li class="list-inline-item">
                                                         <p class="mb-2">
-                                                            Listed
-                                                            <span class="badge rounded-pill bg-success">0</span>
-                                                        </p>
-                                                    </li>
-                                                    <li class="list-inline-item">
-                                                        <p class="mb-2">
-                                                            Not Listed
-                                                            <span class="badge rounded-pill bg-secondary">0</span>
+                                                            Total Clients
+                                                            <span class="badge rounded-pill bg-success">
+                                                                <?php echo $clients->fetchClientsCount($userid);?>
+                                                            </span>
                                                         </p>
                                                     </li>
                                                 </ul>

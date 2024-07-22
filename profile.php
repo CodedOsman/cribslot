@@ -23,13 +23,13 @@
                     </form>
                 </div>
                 <h4 style="text-align:center;">
-                    <?php echo $profile_info->fetchUserName($_SESSION['auth_user']['user_id']); ?>
+                    <?php echo $profile_info->fetchUserName($userid); ?>
                     <a href="">
                         <i class="fa-solid fa-pen-to-square"></i>
                     </a>
                 </h4>
                 <p class="text-muted" style="text-align:center;">
-                    <?php echo $profile_info->fetchEmail($_SESSION['auth_user']['user_id']); ?>
+                    <?php echo $profile_info->fetchEmail($userid); ?>
                 </p>
                 
 
@@ -41,7 +41,7 @@
                         <a href="dashboard.php?change_password" class="sidebar-link text-secondary">Change Password</a>
                     </li>
                     <li class="sidebar-item">
-                        <a href="#" class="sidebar-link text-secondary">Delete Account</a>
+                        <a href="delete-account.php?id=<?php echo $userid;?>&username=<?php echo $username; ?>" class="sidebar-link text-secondary">Delete Account</a>
                     </li>
                 </ul>
             </div>

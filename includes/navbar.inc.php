@@ -32,7 +32,11 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+            <?php if ($profile_photo == NULL) :?>
+            <img src="assets/images/profile_picture.png" class="avatar img-fluid rounded" alt="profile-photo"/>
+            <?php else :?>
             <img src="<?= $profile_photo; ?>" class="avatar img-fluid rounded" alt="profile-photo"/>
+            <?php endif; ?>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
             <a href="<?= base_url('dashboard.php?dashboard'); ?>" class="dropdown-item">Dashboard</a>
