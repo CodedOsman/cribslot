@@ -16,8 +16,8 @@ class Signup extends Dbh{
             //header("location: ../index.php?error=stmtfailed");
             exit();
         }
-        $url = base_url('activate-account.php?token='.$token);
-        echo $url;
+        #$url = base_url('activate-account.php?token='.$token);
+        #echo $url;
         $mail = require  "../config/mailer.php";
 
         $mail->setFrom("oselibas@gmail.com");

@@ -1,5 +1,10 @@
 <?php
 include("config/app.php");
+
+if (!isset($_SESSION['authenticated']) === true) {
+    redirect("Login to access this page!", "login.php");
+}
+
 include('classes/auth.class.php');
 include("classes/dbh.class.php");
 include("classes/userdash.class.php");
