@@ -5,8 +5,9 @@ class Login extends Dbh{
     //method to retreive user from database
     protected function getUser($email, $pwd){
         //statement to select password matching the given email
-        $sql = "SELECT pwd FROM users WHERE username=? OR email=?";
+        $sql = "SELECT * FROM users WHERE username=? OR email=?";
         $stmt = $this->connect()->prepare($sql);
+        $active = NULL;
         //check if there is any result from the given data
         if(!$stmt->execute(array($email, $email))) {
             $stmt  = null;
@@ -19,10 +20,12 @@ class Login extends Dbh{
             redirect("User does not exist! Create an account", "login.php");
             exit();
         }
+        $userinfo = $stmt->fetchAll(PDO::FETCH_ASSOC);
         //storing the fetched password into a variable
-        $pwdhashed = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $pwdhashed = $userinfo[0]["pwd"];
+        $activated = $userinfo[0]['activate'];
         //verifying the hashed password with the given password
-        $checkPwd = password_verify($pwd, $pwdhashed[0]["pwd"]);
+        $checkPwd = password_verify($pwd, $pwdhashed);
         if($checkPwd == false){
             $stmt = null;
             redirect("Invalid password! Please check and try again.", "login.php");
@@ -30,10 +33,14 @@ class Login extends Dbh{
         }
         //selecting user data from database if password verified with the email/username
         elseif($checkPwd == true){
-            $sql = "SELECT * FROM users WHERE username=? OR email=? AND activate=?";
+            //check if user is activated
+            if($activated !== NULL){
+                redirect('You have to activate your account! Check your email', 'login.php');
+                exit();
+            }
+            $sql = "SELECT * FROM users WHERE username=? OR email=?";
             $stmt = $this->connect()->prepare($sql);
-            $active = NULL;
-            if(!$stmt->execute(array($email, $email, $active))){
+            if(!$stmt->execute(array($email, $email))){
                 $stmt = null;
                 redirect("Something went wrong! Please try again.", "login.php");
                 exit();

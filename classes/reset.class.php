@@ -4,6 +4,7 @@ class Reset extends Dbh
 {
     protected function setReset($email)
     {
+        include_once '../config/app.php';
         $sql = "SELECT * FROM users WHERE email=?";
         $stmt = $this->connect()->prepare($sql);
 
@@ -16,10 +17,10 @@ class Reset extends Dbh
         if ($stmt->rowCount() > 0) {
             $token = bin2hex(random_bytes(16));
             $token_hash = hash("sha256", $token);
-            $sql = "INSERT INTO users (reset_hash) WHERE email=?";
+            $sql = "UPDATE users SET reset_hash=? WHERE email=?";
             $stmt = $this->connect()->prepare($sql);
 
-            if (!$stmt->execute(array($email))) {
+            if (!$stmt->execute(array($token_hash, $email))) {
                 $stmt = null;
                 redirect("Something went wrong! Try again later", 'forgot-password.php');
                 exit();
@@ -82,16 +83,31 @@ class Reset extends Dbh
     }
 
     protected function SetNewPwd($pwd, $email){
-        $sql = "UPDATE users SET pwd=? WHERE email=? AND reset_hash=?";
+        $sql = "SELECT * FROM users WHERE email=?";
+        
         $stmt = $this->connect()->prepare($sql);
         $hash = NULL;
         $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
-        if(!$stmt->execute(array($hash_pwd, $email, $hash))){
+        if(!$stmt->execute(array($email))){
             $stmt = null;
             redirect("Something went wrong! Try again", "forgot-password.php?reset");
             exit();
         }
-        $stmt = null;
-        redirect("Password reset successfully! Login Now!", "login.php");
+        if($stmt->rowCount() > 0){
+            $info = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            $clear = $info[0]['reset_hash'];
+
+            if($clear !== NULL){
+                $sql = "UPDATE users SET pwd=? WHERE email=? AND reset_hash=?";
+                if(!$stmt->execute(array($hash_pwd, $email, $hash))){
+                    $stmt = null;
+                    redirect("Something went wrong! Try again", "forgot-password.php?reset");
+                    exit();
+                }
+                $stmt = null;
+                redirect("Password reset successfully! Login Now!", "login.php");
+            }
+        }
+        
     }
 }
