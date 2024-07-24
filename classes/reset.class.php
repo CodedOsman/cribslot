@@ -63,8 +63,12 @@ class Reset extends Dbh
             redirect("Create an account first", "signup.php");
             exit();
         }
-        $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $user;
+        if($user = $stmt->fetchAll(PDO::FETCH_ASSOC)){
+            return $user;
+        }
+        else{
+            return null;
+        }
         $stmt = null;
     }
 
@@ -83,12 +87,12 @@ class Reset extends Dbh
     }
 
     protected function SetNewPwd($pwd, $email){
-        $sql = "SELECT * FROM users WHERE email=?";
+        $sql = "SELECT * FROM users WHERE email=? AND reset_hash=?";
         
         $stmt = $this->connect()->prepare($sql);
         $hash = NULL;
         $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
-        if(!$stmt->execute(array($email))){
+        if(!$stmt->execute(array($email, $hash))){
             $stmt = null;
             redirect("Something went wrong! Try again", "forgot-password.php?reset");
             exit();
@@ -98,8 +102,8 @@ class Reset extends Dbh
             $clear = $info[0]['reset_hash'];
 
             if($clear !== NULL){
-                $sql = "UPDATE users SET pwd=? WHERE email=? AND reset_hash=?";
-                if(!$stmt->execute(array($hash_pwd, $email, $hash))){
+                $sql = "UPDATE users SET pwd=? WHERE email=?";
+                if(!$stmt->execute(array($hash_pwd, $email))){
                     $stmt = null;
                     redirect("Something went wrong! Try again", "forgot-password.php?reset");
                     exit();

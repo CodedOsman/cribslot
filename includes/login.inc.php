@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include '../classes/reset.class.php';
         include '../classes/reset-contr.class.php';
 
-        $reset = new resetContr();
+        $reset = new ResetContr();
 
         $reset->sendReset($email);
     }
@@ -40,8 +40,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         include '../classes/reset.class.php';
         include '../classes/reset-contr.class.php';
 
-        $reset = new resetContr();
+        $reset = new ResetContr();
 
         $reset->resetPwd($newPwd, $cnewPwd, $email);
     }
 }
+

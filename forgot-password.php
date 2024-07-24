@@ -12,13 +12,14 @@ if (isset($_GET['token'])){
     include 'classes/reset.class.php';
     include 'classes/reset-contr.class.php';
 
-    $reset = new resetContr();
+    $reset = new ResetContr();
 
     $user = $reset->getToken($hash_token);
 
-    if($user == null){
+    if($user === null){
+        echo $hash_token;
         die('Token not found');
-        redirect('', "login.php");
+        
     }
 
     $prep = $reset->prepPwd($user[0]['email']);
@@ -50,13 +51,23 @@ include("includes/header.inc.php");
                         <?php include "message.php"; ?>
                     </div>
                     <?php if (isset($_GET['reset'])) : ?>
-                        <form action="includes/login.inc.php" method="POST"><!-- login form starts -->
+                        <form action="includes/login.inc.php" method="POST" enctype="multipart/form-data"><!-- login form starts -->
                         <input type="text" name="email" value="<?php echo $_GET['email']; ?>" style="display:none" class="form-control form-control-lg fs-6">
                             <div class="input-group mb-3">
-                                <input type="text" name="newPwd" placeholder="Enter your new password" class="form-control form-control-lg fs-6">
+                                <input type="password" name="newPwd" id="pwd" placeholder="Enter your new password" class="form-control form-control-lg fs-6">
+                                
+                                <span class="input-group-text" id="pass_toggle" onclick="password_show_hide();">
+                                    <i class="fas fa-eye" id="show_eye"></i>
+                                    <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                                </span>
+                                
                             </div>
                             <div class="input-group mb-3">
-                                <input type="text" name="cNewPwd" placeholder="Confirm your new password" class="form-control form-control-lg fs-6">
+                                <input type="password" name="cNewPwd" id="pwd" placeholder="Confirm your new password" class="form-control form-control-lg fs-6">
+                                <span class="input-group-text" id="pass_toggle" onclick="password_show_hide();">
+                                    <i class="fas fa-eye" id="show_eye"></i>
+                                    <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                                </span>
                             </div>
 
                             <div class="input-group mb-3">
@@ -65,7 +76,7 @@ include("includes/header.inc.php");
                             <div class="row">
                                 <small>
                                     Don't have an account?
-                                    <a href="<?= base_url('signup.php') ?>">Register Now</a>
+                                    <a href="<?= base_url('signup.php'); ?>">Register Now</a>
                                 </small>
                             </div>
                         </form><!-- login form ends -->
@@ -84,7 +95,7 @@ include("includes/header.inc.php");
                             <div class="row">
                                 <small>
                                     Don't have an account?
-                                    <a href="<?= base_url('signup.php') ?>">Register Now</a>
+                                    <a href="<?= base_url('signup.php'); ?>">Register Now</a>
                                 </small>
                             </div>
                         </form><!-- login form ends -->

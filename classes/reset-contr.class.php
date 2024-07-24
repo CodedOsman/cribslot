@@ -1,6 +1,6 @@
 <?php
 
-class resetContr extends Reset{
+class ResetContr extends Reset{
 
     public function sendReset($email){
         if(!$this->emptyInput($email)){
@@ -28,7 +28,13 @@ class resetContr extends Reset{
     }
 
     public function getToken($token){
-        $this->getResetToken($token);
+        if(!$this->emptyInput($token)){
+            redirect('', 'login.php');
+        }else{
+            $user = $this->getResetToken($token);
+            return $user;
+        }
+        
     }
 
     public function prepPwd($email){
