@@ -90,22 +90,39 @@ $(document).ready(function () {
         }
     });
 
+    //function to toggle password visibility
+    $('#pass_toggle').on('click', function () {
+        var show_eye = $('#show_eye');
+        var hide_eye = $('#hide_eye');
+        hide_eye.classListremove('d-none');
+        if($('#pwd').type === 'password'){
+            $('#pwd').type = "text";
+            show_eye.style.display = 'none';
+            hide_eye.style.display = 'block';
+        }else{
+            $('#pwd').type = 'password';
+            show_eye.style.display = 'block';
+            hide_eye.style.display = 'none';
+        }
+    });
+
+    //function to toggle password visibility
+    $('#cpass_toggle').on('click', function () {
+        var show_eye = $('#show_eye');
+        var hide_eye = $('#hide_eye');
+        hide_eye.classListremove('d-none');
+        if($('#cpwd').type === 'password'){
+            $('#cpwd').type = "text";
+            show_eye.style.display = 'none';
+            hide_eye.style.display = 'block';
+        }else{
+            $('#cpwd').type = 'password';
+            show_eye.style.display = 'block';
+            hide_eye.style.display = 'none';
+        }
+    });
 
 
 });
 
-function password_show_hide() {
-    var x = document.getElementById("pwd");
-    var show_eye = document.getElementById("show_eye");
-    var hide_eye = document.getElementById("hide_eye");
-    hide_eye.classList.remove("d-none");
-    if (x.type === "password") {
-        x.type = "text";
-        show_eye.style.display = "none";
-        hide_eye.style.display = "block";
-    } else {
-        x.type = "password";
-        show_eye.style.display = "block";
-        hide_eye.style.display = "none";
-    }
-}
+

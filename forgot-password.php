@@ -56,15 +56,15 @@ include("includes/header.inc.php");
                             <div class="input-group mb-3">
                                 <input type="password" name="newPwd" id="pwd" placeholder="Enter your new password" class="form-control form-control-lg fs-6">
                                 
-                                <span class="input-group-text" id="pass_toggle" onclick="password_show_hide();">
+                                <span class="input-group-text" id="pass_toggle">
                                     <i class="fas fa-eye" id="show_eye"></i>
                                     <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
                                 </span>
                                 
                             </div>
                             <div class="input-group mb-3">
-                                <input type="password" name="cNewPwd" id="pwd" placeholder="Confirm your new password" class="form-control form-control-lg fs-6">
-                                <span class="input-group-text" id="pass_toggle" onclick="password_show_hide();">
+                                <input type="password" name="cNewPwd" id="cpwd" placeholder="Confirm your new password" class="form-control form-control-lg fs-6">
+                                <span class="input-group-text" id="cpass_toggle">
                                     <i class="fas fa-eye" id="show_eye"></i>
                                     <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
                                 </span>

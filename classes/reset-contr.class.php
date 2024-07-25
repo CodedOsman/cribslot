@@ -23,7 +23,8 @@ class ResetContr extends Reset{
             redirect('Passwords do not match!', 'forgot-password.php');
             exit();
         }else{
-            $this->SetNewPwd($newPwd, $email);
+            $hash_pwd = password_hash($newPwd, PASSWORD_DEFAULT);
+            $this->SetNewPwd($hash_pwd, $email);
         }
     }
 

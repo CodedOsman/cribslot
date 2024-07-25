@@ -73,7 +73,7 @@ class Reset extends Dbh
     }
 
     protected function PrepNewPwd($email){
-        $sql = "UPDATE users SET reset_hash=? WHERE userid =?";
+        $sql = "UPDATE users SET reset_hash=? WHERE email=?";
         $stmt = $this->connect()->prepare($sql);
         $active = NULL;
         if(!$stmt->execute(array($active, $email))){
@@ -87,12 +87,12 @@ class Reset extends Dbh
     }
 
     protected function SetNewPwd($pwd, $email){
-        $sql = "SELECT * FROM users WHERE email=? AND reset_hash=?";
+        include_once '../config/app.php';
+        $sql = "SELECT * FROM users WHERE email=?";
         
         $stmt = $this->connect()->prepare($sql);
-        $hash = NULL;
-        $hash_pwd = password_hash($pwd, PASSWORD_DEFAULT);
-        if(!$stmt->execute(array($email, $hash))){
+        
+        if(!$stmt->execute(array($email))){
             $stmt = null;
             redirect("Something went wrong! Try again", "forgot-password.php?reset");
             exit();
@@ -100,17 +100,25 @@ class Reset extends Dbh
         if($stmt->rowCount() > 0){
             $info = $stmt->fetchAll(PDO::FETCH_ASSOC);
             $clear = $info[0]['reset_hash'];
-
-            if($clear !== NULL){
+            if($clear === NULL){
                 $sql = "UPDATE users SET pwd=? WHERE email=?";
-                if(!$stmt->execute(array($hash_pwd, $email))){
+                if(!$stmt->execute(array($pwd, $email))){
                     $stmt = null;
                     redirect("Something went wrong! Try again", "forgot-password.php?reset");
                     exit();
                 }
                 $stmt = null;
                 redirect("Password reset successfully! Login Now!", "login.php");
+                exit();
+            }else{
+                $stmt = null;
+                redirect('Could not set your password', 'forgot-password.php?reset=reset-password&email='.$email);
+                exit();
             }
+        }else{
+            $stmt = null;
+            redirect('Could not set your password,Try again!', 'forgot-password.php?reset=reset-password&email='.$email);
+            exit();
         }
         
     }
