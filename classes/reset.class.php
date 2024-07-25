@@ -102,6 +102,7 @@ class Reset extends Dbh
             $clear = $info[0]['reset_hash'];
             if($clear === NULL){
                 $sql = "UPDATE users SET pwd=? WHERE email=?";
+                $stmt = $this->connect()->prepare($sql);
                 if(!$stmt->execute(array($pwd, $email))){
                     $stmt = null;
                     redirect("Something went wrong! Try again", "forgot-password.php?reset");
