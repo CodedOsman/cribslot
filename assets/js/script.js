@@ -94,31 +94,31 @@ $(document).ready(function () {
     $('#pass_toggle').on('click', function () {
         var show_eye = $('#show_eye');
         var hide_eye = $('#hide_eye');
-        hide_eye.classListremove('d-none');
-        if($('#pwd').type === 'password'){
-            $('#pwd').type = "text";
-            show_eye.style.display = 'none';
-            hide_eye.style.display = 'block';
+        hide_eye.removeClass('d-none');
+        if($('#pwd').attr('type') === 'password'){
+            $('#pwd').attr('type', 'text');
+            show_eye.hide();
+            hide_eye.show();
         }else{
-            $('#pwd').type = 'password';
-            show_eye.style.display = 'block';
-            hide_eye.style.display = 'none';
+            $('#pwd').attr('type', 'password');
+            show_eye.show();
+            hide_eye.hide();
         }
     });
 
     //function to toggle password visibility
     $('#cpass_toggle').on('click', function () {
-        var show_eye = $('#show_eye');
-        var hide_eye = $('#hide_eye');
-        hide_eye.classListremove('d-none');
-        if($('#cpwd').type === 'password'){
-            $('#cpwd').type = "text";
-            show_eye.style.display = 'none';
-            hide_eye.style.display = 'block';
+        var show_eye = $('#cshow_eye');
+        var hide_eye = $('#chide_eye');
+        hide_eye.removeClass('d-none');
+        if($('#cpwd').attr('type') === 'password'){
+            $('#cpwd').attr('type', 'text');
+            show_eye.hide();
+            hide_eye.show();
         }else{
-            $('#cpwd').type = 'password';
-            show_eye.style.display = 'block';
-            hide_eye.style.display = 'none';
+            $('#cpwd').attr('type', 'password');
+            show_eye.show();
+            hide_eye.hide();
         }
     });
 

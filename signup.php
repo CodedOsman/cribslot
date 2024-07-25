@@ -37,8 +37,8 @@
                     <div class="input-group mb-1">
                         <input type="password" name="pwdRepeat" id='cpwd' placeholder="Confirm your password" class="form-control form-control-lg fs-6">
                         <span class="input-group-text" id="cpass_toggle">
-                            <i class="fas fa-eye" id="show_eye"></i>
-                            <i class="fas fa-eye-slash d-none" id="hide_eye"></i>
+                            <i class="fas fa-eye" id="cshow_eye"></i>
+                            <i class="fas fa-eye-slash d-none" id="chide_eye"></i>
                         </span>
                     </div>
                     <div class="input-group mb-5 d-flex justify-content-between">
